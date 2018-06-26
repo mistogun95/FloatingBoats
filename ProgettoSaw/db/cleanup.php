@@ -1,10 +1,10 @@
 <?php
 
-    /*include "CleanUpDatabase/clean_table_Tags.php";
     include "CleanUpDatabase/clean_table_Posts.php";
+    include "CleanUpDatabase/clean_table_Tags.php";
     include "CleanUpDatabase/clean_table_Users.php";
     include "CleanUpDatabase/clean_db.php";
-    */
+    
     $path = '../ImmaginiCaricate';
     $path_all_files = $path.'/*.*';
     echo $path_all_files;
