@@ -18,9 +18,9 @@
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
     
     if(!$con->query($query))
-        echo("Errore creazione tabella</br>");
+        echo("Errore creazione tabella Users</br>");
     else 
-        echo("Tabella User creata con successo</br>");
+        echo("La tabella Users creata con successo</br>");
 
     mysqli_close($con);
 ?>

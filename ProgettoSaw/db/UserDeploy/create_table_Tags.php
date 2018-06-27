@@ -10,7 +10,7 @@
     if(!$con->query($query))
         echo("Errore creazione tabella</br>");
     else 
-        echo("Tabella User creata con successo</br>");
+        echo("Tabella Tags creata con successo</br>");
 
     mysqli_close($con);
 ?>

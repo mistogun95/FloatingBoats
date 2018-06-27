@@ -13,20 +13,20 @@
     {
         if(!unlink($path_all_files))
         {
-            echo 'NON è stato possibile cancellarei i files all\'interno della cartella<br>';
-
+            echo 'NON è stato possibile cancellare i files all\'interno della cartella<br>';
             $flag = 0;
+            break;
         }
     }
 
     if($flag)
     {
         if(!rmdir($path)) {
-            echo 'NON è stato possibile cancellare la cartella<br>';
+            echo "NON è stato possibile cancellare la cartella".$path."<br>";
         }
         else
         {
-            echo 'La cartella è stata cancellata<br>';
+            echo 'La cartella'.$path.' è stata cancellata<br>';
         }
     }
     

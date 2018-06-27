@@ -1,7 +1,7 @@
 <?php
     session_start();
     
-    include "../db/mysql_credentials.php"; //non metto il ../db perchè viene lanciato da una pagina in root.
+    include "db/mysql_credentials.php"; //non metto il ../db perchè viene lanciato da una pagina in root.
     //da fare con i dati di sessione o con il login
     /*$password = "Ciao";  
     $name = "zio";
