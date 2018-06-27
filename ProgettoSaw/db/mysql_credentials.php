@@ -1,7 +1,7 @@
 <?php
 
-    $mysql_user = "felix";
-    $mysql_db = "ProgettoSaw";
+    $mysql_user = "phpmyadmin";
+    $mysql_db = "Es4";
     $mysql_server = "localhost";
     $mysql_pass = "ciao";
 

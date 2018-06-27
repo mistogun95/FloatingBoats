@@ -19,7 +19,7 @@
             <ul class = "navbar-nav">
                 <li class="nav-item"><a class="nav-link" href="#AboutUs">AboutUs</a></li>
                 <li class="nav-item"><a class="nav-link" href="#contatti">Contattaci</a></li>
-                <li class="nav-item"><a class="nav-link" href="php_files/get_data_profile.php">Profilo</a></li>
+                <li class="nav-item"><a class="nav-link" href="php_files/profile.php">Profilo</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Messaggi</a></li>
             </ul>
             <ul class="navbar-nav ml-auto">
