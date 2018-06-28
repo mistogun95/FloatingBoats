@@ -1,5 +1,7 @@
 <?php
 
+    include "CleanUpDatabase/clean_table_mes.php";
+    include "CleanUpDatabase/clean_table_private_chat.php";
     include "CleanUpDatabase/clean_table_Posts.php";
     include "CleanUpDatabase/clean_table_Tags.php";
     include "CleanUpDatabase/clean_table_Users.php";
