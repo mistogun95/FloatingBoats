@@ -17,18 +17,9 @@
         `Coordinata Sud` FLOAT(11) DEFAULT NULL,
         `Citta` varchar(50) NOT NULL,
         `Username Autore` varchar(50) NOT NULL,
-        `Tag1` varchar(50),
-        `Tag2` varchar(50),
-        `Tag3` varchar(50),
-        `Tag4` varchar(50),
-        `Tag5` varchar(50),
+        `Tag` varchar(100),
         PRIMARY KEY (`ID`),
-        FOREIGN KEY (`Username Autore`) REFERENCES Users(username),
-        FOREIGN KEY (`Tag1`) REFERENCES Tags(Name),
-        FOREIGN KEY (`Tag2`) REFERENCES Tags(Name),
-        FOREIGN KEY (`Tag3`) REFERENCES Tags(Name),
-        FOREIGN KEY (`Tag4`) REFERENCES Tags(Name),
-        FOREIGN KEY (`Tag5`) REFERENCES Tags(Name)
+        FOREIGN KEY (`Username Autore`) REFERENCES Users(username)
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
     
     if(!$con->query($query))
