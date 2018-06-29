@@ -21,6 +21,7 @@
                 <li class="nav-item"><a class="nav-link" href="#contatti">Contattaci</a></li>
                 <li class="nav-item"><a class="nav-link" href="php_files/profile.php">Profilo</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Messaggi</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Attività</a></li>
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link" href="Logout.php">Logout</a></li>
@@ -35,18 +36,6 @@
                 <div class = "title">
                     <h1 class = "greatTitle">Enjoy your Passion</h1>
                 </div>  
-                <?php
-			        session_start();
-
-			        $name = $_SESSION['name'];
-                    $surname = $_SESSION['surname'];
-                    $username = $_SESSION['username'];
-
-			        echo "<label class='userDate'><b>Nome</b></label><br>";
-                    echo "<label class='userDate' id='name'><b>$name</b></label><br><br>";
-                    echo "<label class='userDate'><b>Cognome</b></label><br>";
-			        echo "<label class='userDate' id='surname'><b>$surname</b></label><br>";
-                ?>
             </div>
         </div>
 

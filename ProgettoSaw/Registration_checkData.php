@@ -79,7 +79,7 @@
         if(!$stmt->execute())
             $message = "EXECUTE!!! <br/>";
         else
-        {//TOGLIERA GLI ECHO DI PROVA...
+        {
             if(strlen($var_name_file) > 0)
             {
                 $var_complete_path_new_image = $var_directory.$username.".".$var_tipo_immagine;

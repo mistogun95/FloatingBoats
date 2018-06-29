@@ -14,6 +14,7 @@
         `Facebook` varchar(256),
         `Instagram` varchar(256),
         `Twitter` varchar(256),
+        `Interessi` varchar(256),
          PRIMARY KEY (`Username`)
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
     

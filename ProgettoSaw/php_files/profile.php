@@ -1,26 +1,24 @@
+<?php 
+    include "../db/mysql_credentials.php";
+    ini_set('display_errors','On');
+?>
 <?php
     session_start();
     
-    include "../db/mysql_credentials.php"; //non metto il ../db perchè viene lanciato da una pagina in root.
-    //da fare con i dati di sessione o con il login
-    /*$password = "Ciao";  
-    $name = "zio";
-    $surname = "zio";*/
-    $username = $_SESSION['username'];//presumendo di aver già fatto il login e di aver settato bene le session
-                      //prendo per buono lo username!!
-    //echo "<h3>PROFILOOO</h3>";
+    
+    include "../db/mysql_credentials.php"; 
+
+    $username = $_SESSION['username'];
+    
     $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
     if ($conn->connect_error) {
         $message = "Conn ERORR!! <br/>";
-        //die("Connection failed: " . mysqli_connect_error());
     }
     else
     {
-        //echo "<h3>DENTRO ELSE</h3><br>";
         $stmt = $conn->prepare("SELECT FlagFoto, Citta, AboutMe, LinkWebSite, Facebook, Instagram, Twitter, Name, Surname FROM Users WHERE Username=?");
-        //echo "<h3>DOPO PREPARE</h3><br>";
         $stmt->bind_param("s",$username);
-        //echo "<h3>DOPO LA BIND PARAM</h3><br>";
+        
         if(!$stmt->execute())
         {
             echo "<script type='text/javascript'>alert('Execute Error');</script>";
@@ -28,37 +26,22 @@
             $conn->close();
             header("Refresh:0; URL=Homepage.html");
         }
-        //echo "<h3>DOPO EXECUTE<br></h3>";
+        
         $stmt->bind_result($var_FlagFoto, $var_Citta, $var_AboutMe, $var_LinkWebSite, $var_Facebook, $var_Instagram, $var_Twitter, $var_Name, $var_Surname);
-        //echo "DOPO BIND<br>";
         $stmt->fetch();
-        //echo "DOPO FETCH()<br>";
         
         if(isset($var_Name) && isset($var_Surname) )
         {
-            // echo "dentro isset <br>";
-            
-            // echo"<br>--$var_FlagFoto--<br>";
-            // echo"<br>--$var_Citta--<br>";
-            // //echo"<br>--$var_FlagFoto--<br>";
-            // echo"<br>--$var_AboutMe--<br>";
-            // echo"<br>--$var_LinkWebSite--<br>";
-            // echo"<br>--$var_Instagram--<br>";
-            // echo"<br>--$var_Twitter--<br>";
-            // echo"<br>--$var_Name--<br>";
-            // echo"<br>--$var_Surname--<br>";
             if($var_FlagFoto == 1)
             {
-                $var_tipo_immagine = array("png", "jpg", "ico");
-                $var_directory = "ImmaginiCaricate/";
-//                $var_directory.$username.".".$var_tipo_immagine
+                $var_tipo_immagine = array("png", "jpg", "jpeg");
+                $var_directory = "../ImmaginiCaricate/";
+
                 for ($i = 0; $i < 3; $i++) 
                 {
                     $var_complete_path_new_image = $var_directory.$username.".".$var_tipo_immagine[$i];
                     if(file_exists($var_complete_path_new_image))
                     {
-                        //echo"<br>--IMMAGINEEEEEEEEEE--<br>";
-                        //echo '<img src="' . $var_complete_path_new_image . '">';
                         break;
                     }
 
@@ -67,18 +50,8 @@
             }
             else//carico la foto di deafult
             {
-                $var_complete_path_new_image = "../Immagini/default.png";
-                //echo '<img src="' . $var_complete_path_default_image . '">';
+                $var_complete_path_new_image = "../ImmaginiCaricate/default.png";
             }
-            // $_SESSION['città'] = $var_Citta;
-            // $_SESSION['aboutme'] = $var_AboutMe;
-            // $_SESSION['web'] = $var_LinkWebSite;
-            // $_SESSION['instagram'] = $var_Instagram;
-            // $_SESSION['twitter'] = $var_Twitter;
-            // $_SESSION['name'] = $var_Name;
-            // $_SESSION['surname'] = $var_Surname;
-            // $_SESSION['immagine'] = $var_complete_path_new_image;
-            //echo $var_complete_path_default_image;
 
         }
         else 
@@ -88,9 +61,8 @@
         
         $stmt->close();
         $conn->close();
-        
-        //header("Refresh:0; URL=OK.html");
     }
+
     
 
     //echo "<label class='userPresent'><b>$message</b></label><br>";
@@ -121,7 +93,7 @@
                 <li class="nav-item"><a class="nav-link" href="#">Messaggi</a></li>
             </ul>
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a class="nav-link" href="Logout.php">Logout</a></li>
+                <li class="nav-item"><a class="nav-link" href="../Logout.php">Logout</a></li>
             </ul>
         </nav>
         
@@ -132,14 +104,20 @@
                         <div class = "card-body">
                             <div class = "row">
                                 <div class = "col-md-12 text-center">
-                                    <img src = <?php echo '"'.$var_complete_path_new_image.'"'?> alt = "avatar" class="mx-auto d-block" >
+                                    <img src = <?php echo '"'.$var_complete_path_new_image.'"'?> alt = "avatar" class="mx-auto d-block" style="width:260px;" >
                                     <label><h4>Profilo Utente</h4></label>
 		                            <hr>
                                 </div>
                             </div>
                             <div class = "row">
                                 <div class = "col-md-12">
-                                    <form action="updateProfile.php" method="POST">
+                                    <form action="updateProfile.php" method="POST" enctype="multipart/form-data">
+                                        <div class = "form-group row">
+                                            <label id = "immagine" class = "col-4 col-form-label">Cambia immagine di profilo</label>
+                                            <div class = "col-8">
+                                                <input type="file" name="fileDaCaricare" id="fileDaCaricare">
+                                            </div> 
+                                        </div>
                                         <div class = "form-group row">
                                             <label id = "username" class = "col-4 col-form-label">Username</label>
                                             <div class = "col-8">
@@ -187,6 +165,41 @@
                                             <div class = "col-8">
                                                 <input name = "cittàIn" placeholder = "città di provenienza" class = "form-control here" type = "text" value = <?php echo '"'.$var_Citta.'"'?>>
                                             </div> 
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="publicinfo" class="col-4 col-form-label">Interessi</label> 
+                                            <div class = "col-8">
+                                                <div class="form-check">
+                                                    <label class="form-check-label">
+                                                        <input type="checkbox" class="form-check-input" name="check1" value="Balneazione" id = "check1">Balneazione
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <label class="form-check-label">
+                                                        <input type="checkbox" class="form-check-input" name="check2" value="Barca solo motore" id = "check2">Barca solo motore
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <label class="form-check-label">
+                                                        <input type="checkbox" class="form-check-input" name="check3" value="Immersione" id = "check3">Immersione
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <label class="form-check-label">
+                                                        <input type="checkbox" class="form-check-input" name="check4" value="Paesaggio" id = "check4">Paesaggio
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <label class="form-check-label">
+                                                        <input type="checkbox" class="form-check-input" name="check5" value="Pesca" id = "check5">Pesca
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <label class="form-check-label">
+                                                        <input type="checkbox" class="form-check-input" name="check6" value="Vela" id = "check6">Vela
+                                                    </label>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="publicinfo" class="col-4 col-form-label">Descrizione</label> 
