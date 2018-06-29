@@ -6,7 +6,6 @@
         `ID` int(11) NOT NULL AUTO_INCREMENT,
         `Utente1` varchar(50) NOT NULL,
         `Utente2` varchar(50) NOT NULL,
-        `ID_Chat_Privata` int(11) DEFAULT NULL,
         PRIMARY KEY (`ID`),
         FOREIGN KEY (`Utente1`) REFERENCES Users(username),
         FOREIGN KEY (`Utente2`) REFERENCES Users(username)
