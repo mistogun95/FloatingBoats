@@ -1,6 +1,44 @@
 <?php
+    function spachetta($string)
+    {
+        $s = trim($string); //tolgo gli spazi e gli acapo.
+        $array_s = explode(" ", $s);
+        $array_string_to_replace = array("_","!","?",".",",","'");
+        if(count($array_s)<=0)
+            return false;
+        $array_result = array();            
+        foreach($array_s as $value)
+        {
+            foreach($array_string_to_replace as $value_reaplace)
+                $value = str_replace($value_reaplace,"",$value);
+            if($value == "")
+                continue;
+            if (!ctype_alpha($value))
+                return false;
+            $array_result[]=$value;
+        }
+        if(count($array_result)==0)
+            return false;
+        return $array_result;
+    }
     session_start();
-$array = array("pesca","vela");//trim htmlspecialchar ecc da fare
+    $var_flag_titolo=1;
+    $var_flag_tag = null;
+    if(isset($var_flag_titolo))
+    {
+        $var_search = "Titolo";
+        $var_get_post_title = "franchino visione botta";
+
+        $array = spachetta($var_get_post_title);
+        echo "flag_titolo settata<br>";
+    }
+    if(isset($var_flag_tag))
+    {
+        $var_search = "Tag";
+        $array = array("pesca","vela");//trim htmlspecialchar ecc da fare
+        echo "flag_tag settata<br>";
+    }
+
     if(!isset($array))
     {
         //echo "array non definito<br>";
@@ -22,16 +60,11 @@ $array = array("pesca","vela");//trim htmlspecialchar ecc da fare
     }
     else
     {
-//SELECT ID,Titolo,COUNT(*) FROM Posts WHERE Tag LIKE '%vela%' GROUP BY ID,Titolo
-//SELECT ID, Titolo, count(Tag LIKE '%vela%' or Tag Like '%paesaggio%') AS numeroDiTagContenuti FROM Posts WHERE Tag LIKE '%vela%' or Tag Like '%paesaggio%' GROUP BY ID,Titolo
-
-//SELECT ID, Titolo,Descrizione, COUNT(*) as priority from ( SELECT ID, Titolo, Descrizione 
-    //FROM Posts WHERE Tag like '%immersione%' UNION ALL SELECT ID, Titolo, Descrizione FROM Posts WHERE Tag like '%pesca%' ) as t GROUP BY ID,Titolo,Descrizione ORDER by priority DESC
         
-    echo "array -> ".$var_array_size."<br><br>";
+        echo "array -> ".$var_array_size."<br><br>";
         if($var_array_size == 1)
         {
-            $var_final_query=" SELECT ID,Titolo,Descrizione FROM Posts WHERE Tag LIKE '%".$array[0]."%' GROUP BY ID,Titolo,Descrizione ";
+            $var_final_query=" SELECT ID,Titolo,Descrizione FROM Posts WHERE $var_search LIKE '%".$array[0]."%' GROUP BY ID,Titolo,Descrizione ";
         }
         else
         {
@@ -41,11 +74,11 @@ $array = array("pesca","vela");//trim htmlspecialchar ecc da fare
             {
                 if($i==0)
                 {
-                    $var_final_query = $var_start_query_moreThan1.$var_start_query." Tag LIKE '%".$array[$i]."%' ";
+                    $var_final_query = $var_start_query_moreThan1.$var_start_query." $var_search LIKE '%".$array[$i]."%' ";
                     $var_many_vars_to_bind_param ="s";
                     continue;
                 }
-                $var_final_query = $var_final_query." UNION ALL ".$var_start_query." Tag LIKE '%".$array[$i]."%' ";
+                $var_final_query = $var_final_query." UNION ALL ".$var_start_query." $var_search LIKE '%".$array[$i]."%' ";
             }
             $var_final_query= $var_final_query." ) as tmp_table GROUP BY ID,Titolo,Descrizione ORDER by priority DESC";
         }

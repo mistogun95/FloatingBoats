@@ -15,6 +15,11 @@
     include "UserDeploy/seed_table_Tags.php";
     include "UserDeploy/create_table_Posts.php";
     include "UserDeploy/seed_table_Posts.php";
+    include "UserDeploy/create_table_private_chat.php";
+    include "UserDeploy/seed_table_private_chat.php";
+    include "UserDeploy/create_table_mes.php";
+    include "UserDeploy/seed_table_mes.php";
+        
     
 
 ?>
