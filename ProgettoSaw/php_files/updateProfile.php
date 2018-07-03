@@ -13,30 +13,37 @@
     $aboutMe = filter_var(htmlspecialchars(trim($_POST['descrizione'])), FILTER_SANITIZE_STRING);
     $città = filter_var(htmlspecialchars(trim($_POST['cittàIn'])), FILTER_SANITIZE_STRING);
     $facebook = filter_var(htmlspecialchars(trim($_POST['faceIn'])), FILTER_SANITIZE_STRING);
-    $checkBox = "";
-    
-    if (isset($_POST['check1']))
-        $checkBox = $_POST['check1'].",";
-    if (isset($_POST['check2']))
-        $checkBox = $checkBox.$_POST['check2'].",";
-    if (isset($_POST['check3']))
-        $checkBox = $checkBox.$_POST['check3'].",";
-    if (isset($_POST['check4']))
-        $checkBox = $checkBox.$_POST['check4'].",";
-    if (isset($_POST['check5']))
-        $checkBox = $checkBox.$_POST['check5'].",";
-    if (isset($_POST['check6']))
-        $checkBox = $checkBox.$_POST['check6'];
-
-    // $facebookRegex = "/(?:https?:\/\/)?(?:www\.)?facebook\.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[\w\-]*\/)*([\w\-\.]*)/";
-    // $twitterRegex = "/(?:http:\/\/)?(?:www\.)?twitter\.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[\w\-]*\/)*([\w\-]*)/";
-    // //$instagramRegex = "/(https?:\/\/www\.)?instagram\.com(\/p\/\w+\/?)/";
 
     $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
     if ($conn->connect_error) {
         $message1 = "KO";
     }
     else $message1 = "OK";
+    
+    $stmtCheck = $conn->prepare("SELECT Interessi FROM Users WHERE Username=?");
+    $stmtCheck->bind_param("s", $oldUsername);
+    $stmtCheck->execute();
+    $stmtCheck->bind_result($checkBox);
+    $stmtCheck->fetch();
+    $stmtCheck->close();
+    
+    if (isset($_POST['check1']) && !strpos($checkBox, $_POST['check1']))
+        $checkBox = $_POST['check1'].",";
+    if (isset($_POST['check2']) && !strpos($checkBox, $_POST['check2']))
+        $checkBox = $checkBox.$_POST['check2'].",";
+    if (isset($_POST['check3']) && !strpos($checkBox, $_POST['check3']))
+        $checkBox = $checkBox.$_POST['check3'].",";
+    if (isset($_POST['check4']) && !strpos($checkBox, $_POST['check4']))
+        $checkBox = $checkBox.$_POST['check4'].",";
+    if (isset($_POST['check5']) && !strpos($checkBox, $_POST['check5']))
+        $checkBox = $checkBox.$_POST['check5'].",";
+    if (isset($_POST['check6']) && !strpos($checkBox, $_POST['check6']))
+        $checkBox = $checkBox.$_POST['check6'];
+
+    // $facebookRegex = "/(?:https?:\/\/)?(?:www\.)?facebook\.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[\w\-]*\/)*([\w\-\.]*)/";
+    // $twitterRegex = "/(?:http:\/\/)?(?:www\.)?twitter\.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[\w\-]*\/)*([\w\-]*)/";
+    // //$instagramRegex = "/(https?:\/\/www\.)?instagram\.com(\/p\/\w+\/?)/";
+
     $stmtUser = $conn->prepare("SELECT Username FROM Users WHERE Username=?");
     $stmtUser->bind_param("s", $oldUsername);
     $stmtUser->execute();
