@@ -118,7 +118,7 @@ ini_set('display_errors','On');
                     <p class="card-text"><?php echo "Instagram: ".$var_Instagram?></p>
                     <p class="card-text"><?php echo "Twitter: ".$var_Twitter?></p>
                     <p class="card-text"><?php echo "Interessi: ".$var_interessi?></p>
-                    <a href="php_files/profile.php" class="btn btn-primary">Modifica Profilo</a>
+                    <a href="php_files/profile.php?interessi_Get=<?php echo $var_interessi ?>" class="btn btn-primary">Modifica Profilo</a>
                 </div>
             </div>
       
