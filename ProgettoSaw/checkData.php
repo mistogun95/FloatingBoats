@@ -13,7 +13,7 @@
 
 <body class=bodyData>
     
-	<nav class="navbar navbar-expand-lg bg-info navbar-light sticky-top">
+ 	<nav class="navbar navbar-expand-lg bg-info navbar-light sticky-top">
     	<a class="navbar-brand" href="Homepage.html">
         	<img src="Immagini/logo1.png" alt="logo" style="width:60px;">
     	</a>
@@ -29,7 +29,7 @@
             	Registrati
         	</button>
     	</ul>
-    </nav>
+    </nav> 
     
     <div class="Data_div">
     <?php

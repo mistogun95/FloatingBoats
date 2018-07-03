@@ -14,7 +14,7 @@
     $città = filter_var(htmlspecialchars(trim($_POST['cittàIn'])), FILTER_SANITIZE_STRING);
     $facebook = filter_var(htmlspecialchars(trim($_POST['faceIn'])), FILTER_SANITIZE_STRING);
     $checkBox = "";
-    $continue = TRUE;
+    
     if (isset($_POST['check1']))
         $checkBox = $_POST['check1'].",";
     if (isset($_POST['check2']))
@@ -149,7 +149,7 @@
         }
     }
     echo "<label class='userPresent'><b>$message</b></label><br>";
-    header( "refresh:0;url=profile.php" );
+    header( "refresh:0;url=../HomepagePersonale.php" );
     echo "<a class='signIn' href='profile.php'>Clicca qui per tornare alla homepage(se il tuo browser non supporta il reindirizzamento automatico)</a>";
     
     function removePhoto($var_flag_foto, $var_name_file, $var_directory, $oldUsername)

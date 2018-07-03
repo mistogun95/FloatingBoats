@@ -69,6 +69,8 @@
     //header( "refresh:0;url=profile.php" );
     //echo "<a class='signIn' href='../HomepagePersonale.php'>Clicca qui per tornare alla homepage(se il tuo browser non supporta il reindirizzamento automatico)</a>";
 ?>
+    
+
 <!DOCTYPE html>
 <html>
     <head>

@@ -1,9 +1,13 @@
 <?php
     include "db/mysql_credentials.php";
+    include "../db/mysql_credentials.php";
+    ini_set('display_errors','On');
     $password = filter_var(htmlspecialchars(trim($_POST['password'])), FILTER_SANITIZE_STRING);
     $name = filter_var(htmlspecialchars(trim($_POST['name'])), FILTER_SANITIZE_STRING);
     $surname = filter_var(htmlspecialchars(trim($_POST['surname'])), FILTER_SANITIZE_STRING);
     $username = filter_var(htmlspecialchars(trim($_POST['username'])), FILTER_SANITIZE_STRING);
+    $message = "";
+    $message1 = "";
 
     $uppercase = preg_match('@[A-Z]@', $password);
     $lowercase = preg_match('@[a-z]@', $password);
@@ -11,7 +15,7 @@
     $specialChars = preg_match('@[^\w]@', $password);
 
     $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
-    if ($conn->connection_error) {
+    if ($conn->connect_error) {
         $message1 = "KO";
         //die("Connection failed: " . mysqli_connect_error());
     }
@@ -62,12 +66,12 @@
             $var_flag_foto = 1;
             if($var_tipo_immagine != "jpg" && $var_tipo_immagine != "png" && $var_tipo_immagine != "jpeg")
             {
-                echo "<h3>Tipo Sbagliato</h3>";
+                $message = "<h3>Tipo Sbagliato</h3>";
                 $var_flag_image = 0;
             }
             if($_FILES["fileDaCaricare"]["size"] > 1000000)
             {
-                echo "File troppo lungo!!";
+                $message = "File troppo lungo!!";
                 $var_flag_image = 0;
             }
         }
@@ -85,14 +89,14 @@
                 $var_complete_path_new_image = $var_directory.$username.".".$var_tipo_immagine;
                 if(file_exists($var_complete_path_new_image))
                 {
-                    echo "Error il file Esiste!!!!<br>";
+                    $message = "Error il file Esiste!!!!<br>";
                 }
                 else
                 {
                     if(move_uploaded_file($_FILES["fileDaCaricare"]["tmp_name"], $var_complete_path_new_image))
-                        echo "Il file".basename($_FILES["fileDaCaricare"]["name"])." è stato caricato con il nome $surname.$var_tipo_immagine nella cartella -> $var_directory.";
+                        $message = "Il file".basename($_FILES["fileDaCaricare"]["name"])." è stato caricato con il nome $surname.$var_tipo_immagine nella cartella -> $var_directory.";
                     else
-                        echo "Qualcosa è andato storto.";
+                        $message = "Qualcosa è andato storto.";
                 }
             }
             
