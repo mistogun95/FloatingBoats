@@ -87,7 +87,7 @@ ini_set('display_errors','On');
                 <li class="nav-item"><a class="nav-link" href="#contatti">Contattaci</a></li>
                 <li class="nav-item"><a class="nav-link" data-toggle="modal" href="#myModal">Profilo</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Messaggi</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Attività</a></li>
+                <li class="nav-item"><a class="nav-link" data-toggle="modal" href="#myModal2">Attività</a></li>
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link" href="Logout.php">Logout</a></li>
@@ -102,7 +102,7 @@ ini_set('display_errors','On');
       
             <!-- Modal Header -->
             <div class="modal-header card">
-            <img class="card-img-top" src=<?php echo '"'.$var_complete_path_new_image.'"'?> alt="Card image" style="width:100%">
+                <img class="card-img-top" src=<?php echo '"'.$var_complete_path_new_image.'"'?> alt="Card image" style="width:100%">
             </div>
       
             <!-- Modal body -->
@@ -130,6 +130,78 @@ ini_set('display_errors','On');
         </div>
     </div>
 
+      <!-- The Modal -->
+      <div class="modal fade bs-example-modal-lg scrollmenu" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="classInfo" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <form class="containerform" action="profile.php" method="POST">
+      
+            <!-- Modal Header -->
+            <div class="modal-header">
+            </div>
+      
+            <!-- Modal body -->
+            <div class="modal-body table-responsive">
+            <table class = "tabel table-hover table-bordered personalTable">
+            <thead>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>Nome Barca</th>
+                    <th>Titolo</th>
+                    <th>Numero Posti Barca</th>
+                    <th>Data Inizio</th>
+                    <th>Data Fine</th>
+                    <th>Luogo di Ritrovo</th>
+                    <th>Spesa totale viaggio</th>
+                    <th>Descrizione</th>
+                    <th>Strumentazione richiesta</th>
+                    <th>Coordinata Nord</th>
+                    <th>Coordinata Sud</th>
+                    <th>Città</th>
+                </tr>
+                <?php
+                    $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
+                    $query = "SELECT Nomebarca,Titolo,NumeroPostiBarca,DataInizio,DataFine,LuogoDiRitrovo,SpesaViaggioTotale,Descrizione,StrumentazioneRichiesta,CoordinataNord,CoordinataSud,Citta FROM Posts WHERE UsernameAutore=?";
+                    $stmt = $conn->prepare($query);
+                    $stmt->bind_param("s", $username);
+                    $stmt->execute();
+                    $stmt->bind_result($NomeB, $Titol, $NPosti, $Inizio, $Fine, $Ritrovo, $Spesa, $Descr, $Strumentazione, $CNord, $CSud, $citta);
+                    while($stmt->fetch())
+                    {
+                        
+                        echo "<tr>";
+                        echo "<td>".$NomeB."</td>";
+                        echo "<td>".$Titol."</td>";
+                        echo "<td>".$NPosti."</td>";
+                        echo "<td>".$Inizio."</td>";
+                        echo "<td>".$Fine."</td>";
+                        echo "<td>".$Ritrovo."</td>";
+                        echo "<td>".$Spesa."</td>";
+                        echo "<td>".$Descr."</td>";
+                        echo "<td>".$Strumentazione."</td>";
+                        echo "<td>".$CNord."</td>";
+                        echo "<td>".$CSud."</td>";
+                        echo "<td>".$citta."</td>";
+                        echo "</tr>";
+
+                    }
+                    $stmt->close();
+                    $conn->close();
+                ?>
+            </tbody>
+        </table>
+            </div>
+      
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <a href="php_files/inserisciAttività.php" class="btn btn-primary">Inserisci Attività</a>
+            </div>
+        </form>
+          </div>
+        </div>
+    </div>
+
         <div class = "MainDiv">
             <div class = "LogoDiv">
             </div>
@@ -145,9 +217,12 @@ ini_set('display_errors','On');
             <h3 class="margin">Che cosa puoi fare con noi?</h3>
             <p>Condividi la tua passione per il mare e tutto ciò che lo riguarda con la possibilità di metterti in contatto con altri appassionati comincia cercando qualcosa che possa essere di tuo interesse e unisciti a noi!!!</p>
 
-            <form class="example" action="/action_page.php" style="margin:auto;max-width:300px">
+            <form class="example" action="php_files/get_tags_of_search.php" style="margin:auto;max-width:300px" method="POST">
                 <input type="text" placeholder="Search.." name="search2">
                 <button type="submit"><i class="fa fa-search"></i></button>
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" value="" name="checkBoxTag">Ricerca per Tag
+                </label>
             </form>
         </div>
 

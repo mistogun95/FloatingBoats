@@ -3,10 +3,10 @@
 
     include "mysql_credentials.php";
     $con = mysqli_connect($mysql_server, $mysql_user, $mysql_pass, $mysql_db) or die ("Errore Connessione al Database");
-    $query = "INSERT INTO `Posts` (`Nome barca`, `Titolo`, `Numero Posti Barca`,
-                `Data Inizio`, `Data Fine`, `Luogo Di Ritrovo`, `Spesa Viaggio Totale`,
-                `Descrizione`, `Strumentazione Richiesta`, `Coordinata Nord`, `Coordinata Sud`,
-                `Citta`, `Username Autore`,`Tag`) VALUES
+    $query = "INSERT INTO `Posts` (`Nomebarca`, `Titolo`, `NumeroPostiBarca`,
+                `DataInizio`, `DataFine`, `LuogoDiRitrovo`, `SpesaViaggioTotale`,
+                `Descrizione`, `StrumentazioneRichiesta`, `CoordinataNord`, `CoordinataSud`,
+                `Citta`, `UsernameAutore`,`Tag`) VALUES
     
     ('luna','Pesca immersione la bella vita','8','2018-06-15','2018-06-16','marina di sestri',
     '180','piccola gita per pescare','boccaglio,pinne','45.60','36.88','Genova','zio','pesca, immersione'),

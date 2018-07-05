@@ -22,21 +22,31 @@
         return $array_result;
     }
     session_start();
-    $var_flag_titolo=1;
-    $var_flag_tag = null;
+    if (isset($_POST["checkBoxTag"]))
+    {
+        $var_flag_titolo=null;
+        $var_flag_tag = 1;  
+    }
+    else
+    {
+        $var_flag_titolo = 1;
+        $var_flag_tag = null;
+    }
+    $array_Id = array();
     if(isset($var_flag_titolo))
     {
         $var_search = "Titolo";
-        $var_get_post_title = "franchino visione botta";
+        $var_get_post_title = $_POST['search2']; //inserire qua il post
+        // echo "<br>".$var_get_post_title;
 
         $array = spachetta($var_get_post_title);
-        echo "flag_titolo settata<br>";
+        // echo "flag_titolo settata<br>";
     }
     if(isset($var_flag_tag))
     {
         $var_search = "Tag";
-        $array = array("pesca","vela");//trim htmlspecialchar ecc da fare
-        echo "flag_tag settata<br>";
+        $array = array($_POST['search2']);//trim htmlspecialchar ecc da fare post per tag
+        // echo "flag_tag settata<br>";
     }
 
     if(!isset($array))
@@ -52,7 +62,7 @@
         echo "<script type='text/javascript'>alert('array vuoto');</script>";
         header("Refresh:0; URL=Homepage.html");
     }
-    include "db/mysql_credentials.php";
+    include "../db/mysql_credentials.php";
     $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
     if ($conn->connect_error) {
         echo "<script type='text/javascript'>alert('connection error');</script>";
@@ -61,7 +71,7 @@
     else
     {
         
-        echo "array -> ".$var_array_size."<br><br>";
+        // echo "array -> ".$var_array_size."<br><br>";
         if($var_array_size == 1)
         {
             $var_final_query=" SELECT ID,Titolo,Descrizione FROM Posts WHERE $var_search LIKE '%".$array[0]."%' GROUP BY ID,Titolo,Descrizione ";
@@ -69,7 +79,7 @@
         else
         {
             $var_start_query = "SELECT ID, Titolo, Descrizione FROM Posts WHERE ";
-            $var_start_query_moreThan1 =" SELECT ID, Titolo,Descrizione, COUNT(*) as priority from ( " ;
+            $var_start_query_moreThan1 =" SELECT ID, Titolo,Descrizione, COUNT(*)  as priority from ( " ;
             for($i=0; $i<$var_array_size; $i++)
             {
                 if($i==0)
@@ -84,9 +94,9 @@
         }
         $stmt = $conn->prepare($var_final_query);
 
-        echo "query -><br>".$var_final_query."<br><br>";
-        echo "bind_param -> ".$var_many_vars_to_bind_param."<br><br>";
-        echo "prima della execute<br>";
+        // echo "query -><br>".$var_final_query."<br><br>";
+        // echo "bind_param -> ".$var_many_vars_to_bind_param."<br><br>";
+        // echo "prima della execute<br>";
         if(!$stmt->execute())
         {
             echo "<script type='text/javascript'>alert('Execute Error');</script>";
@@ -95,29 +105,112 @@
             header("Refresh:0; URL=Homepage.html");
         }
         if($var_array_size == 1)
-        {echo "dentro if<br>";
+        {
             $stmt->bind_result($var_ID, $var_Titolo,$Descrizione);
             while($stmt->fetch())
             {
                 if(isset($var_ID) && isset($var_Titolo) )
                 {
-                    echo $var_ID."---".$var_Titolo."---".$Descrizione."<br>";
+                    $array_Id[] = $var_ID;
                 }
             }
         }
         else
-        {echo "dentro else<br>";
+        {
             $stmt->bind_result($var_ID, $var_Titolo,$Descrizione,$var_count);
             while($stmt->fetch())
             {
                 if(isset($var_ID) && isset($var_Titolo) )
                 {
-                    echo $var_ID."---".$var_Titolo."---".$Descrizione."---".$var_count."<br>";
+                    $array_Id[] = $var_ID;
                 }
             }
-        }
+        }   
         $stmt->close();
         $conn->close();
     }
 ?>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+	    <meta name ="homepage" content ="homepage here" />
+	    <meta name ="" content ="" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="profileStyle.css"/>
+    </head>
+    <body class>
+        <nav class="navbar navbar-expand-lg bg-info navbar-light sticky-top">
+            <a class="navbar-brand" href="../HomepagePersonale.php">
+                <img src="../Immagini/logo1.png" alt="logo" style="width:60px;">
+            </a>
+            <ul class = "navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="#AboutUs">AboutUs</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contatti">Contattaci</a></li>
+                <li class="nav-item"><a class="nav-link" href="php_files/get_data_profile.php">Profilo</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Messaggi</a></li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../Logout.php">Logout</a></li>
+            </ul>
+        </nav>
+        <table class = "tabel table-hover table-bordered personalTable">
+            <thead>
+                <tr>
+                    <th>Nome Barca</th>
+                    <th>Titolo</th>
+                    <th>Numero Posti Barca</th>
+                    <th>Data Inizio</th>
+                    <th>Data Fine</th>
+                    <th>Luogo di Ritrovo</th>
+                    <th>Spesa totale viaggio</th>
+                    <th>Descrizione</th>
+                    <th>Strumentazione richiesta</th>
+                    <th>Coordinata Nord</th>
+                    <th>Coordinata Sud</th>
+                    <th>Città</th>
+                    <th>Autore post</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
+                    $query = "SELECT Nomebarca,Titolo,NumeroPostiBarca,DataInizio,DataFine,LuogoDiRitrovo,SpesaViaggioTotale,Descrizione,StrumentazioneRichiesta,CoordinataNord,CoordinataSud,Citta,UsernameAutore FROM Posts WHERE ID=?";
+                    $stmt = $conn->prepare($query);
+                    foreach($array_Id as $Id)
+                    {
+                        $stmt->bind_param("i", $Id);
+                        $stmt->execute();
+                        $stmt->bind_result($NomeB, $Titol, $NPosti, $Inizio, $Fine, $Ritrovo, $Spesa, $Descr, $Strumentazione, $CNord, $CSud, $citta, $autore);
+                        $stmt->fetch();
+                        
+                        echo "<tr>";
+                        echo "<td>".$NomeB."</td>";
+                        echo "<td>".$Titol."</td>";
+                        echo "<td>".$NPosti."</td>";
+                        echo "<td>".$Inizio."</td>";
+                        echo "<td>".$Fine."</td>";
+                        echo "<td>".$Ritrovo."</td>";
+                        echo "<td>".$Spesa."</td>";
+                        echo "<td>".$Descr."</td>";
+                        echo "<td>".$Strumentazione."</td>";
+                        echo "<td>".$CNord."</td>";
+                        echo "<td>".$CSud."</td>";
+                        echo "<td>".$citta."</td>";
+                        echo "<td>".$autore."</td>";
+                        echo "<td><a href=\"visualizzaAttivita.php?id_post=$Id\" class=\"btn btn-primary\">Visualizza pagina Attività</a></td>";
+                        echo "</tr>";
+
+                    }
+                    $stmt->close();
+                    $conn->close();
+                ?>
+            </tbody>
+        </table>
+    </body>
+</html>
 
