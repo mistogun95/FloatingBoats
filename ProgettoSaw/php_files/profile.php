@@ -60,6 +60,24 @@
         }
         
         $stmt->close();
+
+        $stmt = $conn->prepare("SELECT * FROM Tags");
+
+        if(!$stmt->execute())
+        {
+            echo "<script type='text/javascript'>alert('Execute Error');</script>";
+            $stmt->close();
+            $conn->close();
+            header("Refresh:0; URL=Homepage.html");
+        }
+        $stmt->bind_result($var_Name_Tags);
+        $array_tags_names = array();
+        while($stmt->fetch())
+        {
+            $array_tags_names[] = $var_Name_Tags;
+        }
+
+        $stmt->close();
         $conn->close();
     }
 
@@ -171,36 +189,61 @@
                                         <div class="form-group row">
                                             <label for="publicinfo" class="col-4 col-form-label">Interessi</label> 
                                             <div class = "col-8">
-                                                <div class="form-check">
-                                                    <label class="form-check-label">
-                                                        <input type="checkbox" class="form-check-input" name="check1" value="Balneazione" id = "check1">Balneazione
-                                                    </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <label class="form-check-label">
-                                                        <input type="checkbox" class="form-check-input" name="check2" value="Barca solo motore" id = "check2">Barca solo motore
-                                                    </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <label class="form-check-label">
-                                                        <input type="checkbox" class="form-check-input" name="check3" value="Immersione" id = "check3">Immersione
-                                                    </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <label class="form-check-label">
-                                                        <input type="checkbox" class="form-check-input" name="check4" value="Paesaggio" id = "check4">Paesaggio
-                                                    </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <label class="form-check-label">
-                                                        <input type="checkbox" class="form-check-input" name="check5" value="Pesca" id = "check5">Pesca
-                                                    </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <label class="form-check-label">
-                                                        <input type="checkbox" class="form-check-input" name="check6" value="Vela" id = "check6">Vela
-                                                    </label>
-                                                </div>
+                                                <?php
+                                                    if(isset($_GET['interessi_Get'])){
+                                                        $interessi_Get = $_GET['interessi_Get']; //some_value
+                                                        echo "<br><br>interessi:".$interessi_Get."-->fine<br><br>";
+                                                    }
+                                                    $array_s = explode(",", $interessi_Get);
+                                                    //$contatore=1;
+                                                    $result_interessi = array();
+                                                    foreach($array_s as $value)
+                                                    {
+                                                        //echo "count ->".strlen(trim($value))."<br><br><br>";
+                                                        if(strlen(htmlspecialchars(trim($value)))>0)
+                                                        {
+                                                            $result_interessi[] = htmlspecialchars(trim($value));
+                                                            /*echo "<div class=\"form-check\">
+                                                                    <label class=\"form-check-label\">
+                                                                        <input type=\"checkbox\" class=\"form-check-input\" name=\"check".$contatore."\" value=\"".$value."\" checked id = \"check1\" checked>".$value."
+                                                                    </label>
+                                                                </div>";
+                                                            //echo "<br>".$contatore."<br><br><br>";
+                                                            */
+                                                        }
+                                                        //$contatore++;
+                                                    }
+                                                    echo "<br>count array interessi ->>".count($result_interessi)."<br>";
+                                                    foreach($array_s as $value)
+                                                        echo "<br>result_interessi -->".$value."<br>";
+                                                    echo "<br>ALL TAGS :)<br>";
+                                                    $contatore=1;
+                                                    
+                                                    foreach($array_tags_names as $value)
+                                                    {
+                                                        $flag_presente = false;
+                                                        echo "<br>cont ".$contatore." TAG -> ".$value."<br>";
+                                                       if(in_array($value,$result_interessi) )
+                                                       {
+                                                            $flag_presente = true;
+                                                            echo "<br>CONTATOREEEEEEEEEE ".$contatore."<br>";
+                                                       }
+                                                        echo  "<div class=\"form-check\">
+                                                                <label class=\"form-check-label\">
+                                                                    <input type=\"checkbox\" class=\"form-check-input\" name=\"check".$contatore."\" value=\"".$value."\"";
+                                                        if($flag_presente)
+                                                            echo " checked";
+                                                        echo " id = \"check".$contatore."\""; 
+                                                        echo ">".$value."
+                                                        </label>
+                                                        </div>";
+                                                        $contatore++;
+                                                        //echo "<br>cont ".$contatore++."<br>";
+                                                    }
+                                                    echo "<br> heppa";
+
+
+                                                ?>
                                             </div>
                                         </div>
                                         <div class="form-group row">
