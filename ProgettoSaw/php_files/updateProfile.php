@@ -133,6 +133,21 @@
             $query = "UPDATE Users SET Username=?, Name=?, Surname=?, FlagFoto=?, Citta=?, AboutMe=?, linkWebSite=?, Facebook=?, Instagram=?, Twitter=?, Interessi=? WHERE Username=?";
             $stmt = $conn->prepare($query);
             $stmt->bind_param("sssissssssss",$username, $name, $surname, $var_flag_foto, $città, $aboutMe, $webSite, $facebook, $instagram, $twitter, $checkBox, $userResult);
+            if ($var_name_file === "")
+            {
+                $arrayType = array("jpg", "png", "jpeg");
+                for ($i=0; $i < 3; $i++)
+                {
+                    if(file_exists($var_directory.$oldUsername.".".$arrayType[$i]))
+                    {
+                        if(rename($var_directory.$oldUsername.".".$arrayType[$i], $var_directory.$username.".".$arrayType[$i]))
+                        {
+                            $var_flag_foto = 1;
+                            echo "Nome aggiornato con successo";
+                        }
+                    }
+                }
+            }
             if(!$stmt->execute())
                 $message = "EXECUTE!!! <br/>";
             $_SESSION['username'] = $username;
@@ -156,7 +171,7 @@
         }
     }
     echo "<label class='userPresent'><b>$message</b></label><br>";
-    header( "refresh:0;url=../HomepagePersonale.php" );
+    //header( "refresh:0;url=../HomepagePersonale.php" );
     echo "<a class='signIn' href='profile.php'>Clicca qui per tornare alla homepage(se il tuo browser non supporta il reindirizzamento automatico)</a>";
     
     function removePhoto($var_flag_foto, $var_name_file, $var_directory, $oldUsername)
