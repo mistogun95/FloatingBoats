@@ -81,12 +81,6 @@
         $stmt->close();
         $conn->close();
     }
-
-    
-
-    echo "<label class='userPresent'><b>$message</b></label><br>";
-    header( "refresh:0;url=profile.php" );
-    echo "<a class='signIn' href='../HomepagePersonale.php'>Clicca qui per tornare alla homepage(se il tuo browser non supporta il reindirizzamento automatico)</a>";
 ?>
     
 
