@@ -122,9 +122,9 @@
 
         if($oldUsername === $username)
         {
-            $query = "UPDATE Users SET Name=?, Surname=?, Citta=?, AboutMe=?, linkWebSite=?, Facebook=?, Instagram=?, Twitter=?, Interessi=? WHERE Username=?";
+            $query = "UPDATE Users SET Name=?, Surname=?, FlagFoto=?, Citta=?, AboutMe=?, linkWebSite=?, Facebook=?, Instagram=?, Twitter=?, Interessi=? WHERE Username=?";
             $stmt = $conn->prepare($query);
-            $stmt->bind_param("ssssssssss", $name, $surname, $città, $aboutMe, $webSite, $facebook, $instagram, $twitter, $checkBox, $userResult);
+            $stmt->bind_param("ssissssssss", $name, $surname, $var_flag_foto, $città, $aboutMe, $webSite, $facebook, $instagram, $twitter, $checkBox, $userResult);
             if(!$stmt->execute())
                 $message = "EXECUTE!!! <br/>";
             $stmt->close();
@@ -133,9 +133,9 @@
         }
         else 
         {
-            $query = "UPDATE Users SET Username=?, Name=?, Surname=?, Citta=?, AboutMe=?, linkWebSite=?, Facebook=?, Instagram=?, Twitter=?, Interessi=? WHERE Username=?";
+            $query = "UPDATE Users SET Username=?, Name=?, Surname=?, FlagFoto=?, Citta=?, AboutMe=?, linkWebSite=?, Facebook=?, Instagram=?, Twitter=?, Interessi=? WHERE Username=?";
             $stmt = $conn->prepare($query);
-            $stmt->bind_param("sssssssssss",$username, $name, $surname, $città, $aboutMe, $webSite, $facebook, $instagram, $twitter, $checkBox, $userResult);
+            $stmt->bind_param("sssissssssss",$username, $name, $surname, $var_flag_foto, $città, $aboutMe, $webSite, $facebook, $instagram, $twitter, $checkBox, $userResult);
             if(!$stmt->execute())
                 $message = "EXECUTE!!! <br/>";
             $_SESSION['username'] = $username;
