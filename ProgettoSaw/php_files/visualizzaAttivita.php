@@ -10,30 +10,27 @@
     $stmt->execute();
     $stmt->bind_result($NomeB, $Titol, $NPosti, $Inizio, $Fine, $Ritrovo, $Spesa, $Descr, $Strumentazione, $CNord, $CSud, $citta, $autore);
     $stmt->fetch();
-    echo $NomeB;
 ?>
 
 <!DOCTYPE html>
 <html>
     <head>
     </head>
-    <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
-    <script type="text/javascript">
-            function maps()
+    <body>
+        <div id="googleMap" style="width:100%;height:400px;"></div>
+        <script>
+            function myMap() 
             {
-                var lat = "<?php echo $CNord; ?>";
-                var lon = "<?php echo $CSud; ?>";
-                var zoom = 13;
-
-                var lonLat = new OpenLayers.LonLat (lon, lat)
-                                .transform (
-                                    new OpenLayers.Projection("EPSG:4326"), 
-                                    map.getProjectionObject()
-                                );
+                var CNord = "<?php echo $CNord ?>";
+                var CSud = "<?php echo $CSud ?>";
+                var mapProp= {
+                    center:new google.maps.LatLng(CNord, CSud),
+                    zoom:5,
+                };
+                var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
             }
         </script>
-    <body onload="maps()">
-        <span style="font-family: Arial; font-weight: bold;">Esempio di mappa OSM</span>
-        <div style="width:100%; height:95%" id="map"></div>
+
+        <script src="https://maps.googleapis.com/maps/api/js?key=&callback=myMap"></script>
     </body>
 </html>
