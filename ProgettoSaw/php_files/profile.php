@@ -190,59 +190,39 @@
                                             <label for="publicinfo" class="col-4 col-form-label">Interessi</label> 
                                             <div class = "col-8">
                                                 <?php
-                                                    if(isset($_GET['interessi_Get'])){
-                                                        $interessi_Get = $_GET['interessi_Get']; //some_value
-                                                        echo "<br><br>interessi:".$interessi_Get."-->fine<br><br>";
-                                                    }
+                                                    if(isset($_GET['interessi_Get']))
+                                                        $interessi_Get = $_GET['interessi_Get'];
+                                                    else
+                                                        exit(header("Location: ../Homepage.html"));
+                                                    if(isset($interessi_Get))
+                                                        exit(header("Location: ../Homepage.html"));
                                                     $array_s = explode(",", $interessi_Get);
-                                                    //$contatore=1;
                                                     $result_interessi = array();
                                                     foreach($array_s as $value)
                                                     {
-                                                        //echo "count ->".strlen(trim($value))."<br><br><br>";
                                                         if(strlen(htmlspecialchars(trim($value)))>0)
                                                         {
                                                             $result_interessi[] = htmlspecialchars(trim($value));
-                                                            /*echo "<div class=\"form-check\">
-                                                                    <label class=\"form-check-label\">
-                                                                        <input type=\"checkbox\" class=\"form-check-input\" name=\"check".$contatore."\" value=\"".$value."\" checked id = \"check1\" checked>".$value."
-                                                                    </label>
-                                                                </div>";
-                                                            //echo "<br>".$contatore."<br><br><br>";
-                                                            */
                                                         }
-                                                        //$contatore++;
                                                     }
-                                                    echo "<br>count array interessi ->>".count($result_interessi)."<br>";
-                                                    foreach($array_s as $value)
-                                                        echo "<br>result_interessi -->".$value."<br>";
-                                                    echo "<br>ALL TAGS :)<br>";
                                                     $contatore=1;
-                                                    
+                                                    //$array
                                                     foreach($array_tags_names as $value)
                                                     {
                                                         $flag_presente = false;
-                                                        echo "<br>cont ".$contatore." TAG -> ".$value."<br>";
-                                                       if(in_array($value,$result_interessi) )
-                                                       {
+                                                        if(in_array($value,$result_interessi) )
                                                             $flag_presente = true;
-                                                            echo "<br>CONTATOREEEEEEEEEE ".$contatore."<br>";
-                                                       }
                                                         echo  "<div class=\"form-check\">
                                                                 <label class=\"form-check-label\">
-                                                                    <input type=\"checkbox\" class=\"form-check-input\" name=\"check".$contatore."\" value=\"".$value."\"";
+                                                                    <input type=\"checkbox\" class=\"form-check-input\" name=\"check[]\" value=\"".$value."\"";
                                                         if($flag_presente)
-                                                            echo " checked";
-                                                        echo " id = \"check".$contatore."\""; 
-                                                        echo ">".$value."
+                                                            echo " checked=\"true\"";
+                                                        echo " id = \"check".$contatore."\">";
+                                                        echo $value."
                                                         </label>
                                                         </div>";
                                                         $contatore++;
-                                                        //echo "<br>cont ".$contatore++."<br>";
                                                     }
-                                                    echo "<br> heppa";
-
-
                                                 ?>
                                             </div>
                                         </div>

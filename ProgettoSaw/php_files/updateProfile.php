@@ -13,7 +13,9 @@
     $aboutMe = filter_var(htmlspecialchars(trim($_POST['descrizione'])), FILTER_SANITIZE_STRING);
     $città = filter_var(htmlspecialchars(trim($_POST['cittàIn'])), FILTER_SANITIZE_STRING);
     $facebook = filter_var(htmlspecialchars(trim($_POST['faceIn'])), FILTER_SANITIZE_STRING);
-
+    /*$numbers_of_tags = filter_var(htmlspecialchars(trim($_POST['numbers_of_tags'])), FILTER_SANITIZE_STRING);
+    if(isset($numbers_of_tags))
+        echo "<br>numbers of tags ->>".$numbers_of_tags."<br>";*/
     $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
     if ($conn->connect_error) {
         $message1 = "KO";
@@ -26,19 +28,17 @@
     $stmtCheck->bind_result($checkBox);
     $stmtCheck->fetch();
     $stmtCheck->close();
-    
-    if (isset($_POST['check1']) && !strpos($checkBox, $_POST['check1']))
-        $checkBox = $_POST['check1'].",";
-    if (isset($_POST['check2']) && !strpos($checkBox, $_POST['check2']))
-        $checkBox = $checkBox.$_POST['check2'].",";
-    if (isset($_POST['check3']) && !strpos($checkBox, $_POST['check3']))
-        $checkBox = $checkBox.$_POST['check3'].",";
-    if (isset($_POST['check4']) && !strpos($checkBox, $_POST['check4']))
-        $checkBox = $checkBox.$_POST['check4'].",";
-    if (isset($_POST['check5']) && !strpos($checkBox, $_POST['check5']))
-        $checkBox = $checkBox.$_POST['check5'].",";
-    if (isset($_POST['check6']) && !strpos($checkBox, $_POST['check6']))
-        $checkBox = $checkBox.$_POST['check6'];
+    $cont=1;
+    $var_checks = $_POST['check'];
+    echo "<br>VARI CHECK<br>";
+    $checkBox_to_insert="";
+    foreach($var_checks as $value)
+    {
+        echo "<br> value:".$value;
+        $checkBox_to_insert =$checkBox_to_insert.$value.",";
+    }
+    echo "<br>FIN CHECK<br>";
+    //echo "<br>stampa dei nuovi interessi: ".$checkBox_to_insert."<br>";
 
     // $facebookRegex = "/(?:https?:\/\/)?(?:www\.)?facebook\.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[\w\-]*\/)*([\w\-\.]*)/";
     // $twitterRegex = "/(?:http:\/\/)?(?:www\.)?twitter\.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[\w\-]*\/)*([\w\-]*)/";
@@ -121,7 +121,7 @@
         {
             $query = "UPDATE Users SET Name=?, Surname=?, FlagFoto=?, Citta=?, AboutMe=?, linkWebSite=?, Facebook=?, Instagram=?, Twitter=?, Interessi=? WHERE Username=?";
             $stmt = $conn->prepare($query);
-            $stmt->bind_param("ssissssssss", $name, $surname, $var_flag_foto, $città, $aboutMe, $webSite, $facebook, $instagram, $twitter, $checkBox, $userResult);
+            $stmt->bind_param("ssissssssss", $name, $surname, $var_flag_foto, $città, $aboutMe, $webSite, $facebook, $instagram, $twitter, $checkBox_to_insert, $userResult);
             if(!$stmt->execute())
                 $message = "EXECUTE!!! <br/>";
             $stmt->close();
@@ -156,7 +156,7 @@
         }
     }
     echo "<label class='userPresent'><b>$message</b></label><br>";
-    header( "refresh:0;url=../HomepagePersonale.php" );
+    //header( "refresh:0;url=../HomepagePersonale.php" );
     echo "<a class='signIn' href='profile.php'>Clicca qui per tornare alla homepage(se il tuo browser non supporta il reindirizzamento automatico)</a>";
     
     function removePhoto($var_flag_foto, $var_name_file, $var_directory, $oldUsername)
