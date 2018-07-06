@@ -42,7 +42,7 @@
 
     // $facebookRegex = "/(?:https?:\/\/)?(?:www\.)?facebook\.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[\w\-]*\/)*([\w\-\.]*)/";
     // $twitterRegex = "/(?:http:\/\/)?(?:www\.)?twitter\.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[\w\-]*\/)*([\w\-]*)/";
-    // //$instagramRegex = "/(https?:\/\/www\.)?instagram\.com(\/p\/\w+\/?)/";
+    //$instagramRegex = "/(https?:\/\/www\.)?instagram\.com(\/p\/\w+\/?)/";
 
     $stmtUser = $conn->prepare("SELECT Username FROM Users WHERE Username=?");
     $stmtUser->bind_param("s", $oldUsername);
