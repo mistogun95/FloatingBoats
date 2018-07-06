@@ -29,15 +29,18 @@
     $stmtCheck->fetch();
     $stmtCheck->close();
     $cont=1;
-    $var_checks = $_POST['check'];
-    echo "<br>VARI CHECK<br>";
-    $checkBox_to_insert="";
-    foreach($var_checks as $value)
+    if(isset($_POST['check']))
     {
-        echo "<br> value:".$value;
-        $checkBox_to_insert =$checkBox_to_insert.$value.",";
+        $var_checks = $_POST['check'];
+        //echo "<br>VARI CHECK<br>";
+        $checkBox_to_insert="";
+        foreach($var_checks as $value)
+        {
+            //echo "<br> value:".$value;
+            $checkBox_to_insert =$checkBox_to_insert.filter_var(htmlspecialchars(trim($value))).",";
+        }
+        //echo "<br>FIN CHECK<br>";
     }
-    echo "<br>FIN CHECK<br>";
     //echo "<br>stampa dei nuovi interessi: ".$checkBox_to_insert."<br>";
 
     // $facebookRegex = "/(?:https?:\/\/)?(?:www\.)?facebook\.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[\w\-]*\/)*([\w\-\.]*)/";
@@ -172,7 +175,7 @@
     }
     echo "<label class='userPresent'><b>$message</b></label><br>";
     //header( "refresh:0;url=../HomepagePersonale.php" );
-    echo "<a class='signIn' href='profile.php'>Clicca qui per tornare alla homepage(se il tuo browser non supporta il reindirizzamento automatico)</a>";
+    echo "<a class='signIn' href='../HomepagePersonale.php'>Clicca qui per tornare alla homepage(se il tuo browser non supporta il reindirizzamento automatico)</a>";
     
     function removePhoto($var_flag_foto, $var_name_file, $var_directory, $oldUsername)
     {
