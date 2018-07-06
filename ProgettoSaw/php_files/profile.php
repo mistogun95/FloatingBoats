@@ -190,12 +190,16 @@
                                             <label for="publicinfo" class="col-4 col-form-label">Interessi</label> 
                                             <div class = "col-8">
                                                 <?php
-                                                    if(isset($_GET['interessi_Get']))
-                                                        $interessi_Get = $_GET['interessi_Get'];
+                                                    if(!isset($_GET['interessi_Get']))
+                                                    {
+                                                        $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
+                                                        include "get_interessi_of_user.php";
+                                                        $interessi_Get = get_Interessi_query_of_user($username, $conn);
+                                                    }
                                                     else
-                                                        exit(header("Location: ../Homepage.html"));
-                                                    if(isset($interessi_Get))
-                                                        exit(header("Location: ../Homepage.html"));
+                                                        $interessi_Get = $_GET['interessi_Get'];
+                                                    if(!isset($interessi_Get))
+                                                        header( "refresh:0;url=../HomepagePersonale.php" );
                                                     $array_s = explode(",", $interessi_Get);
                                                     $result_interessi = array();
                                                     foreach($array_s as $value)
