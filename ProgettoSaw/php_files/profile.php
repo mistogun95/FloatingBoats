@@ -1,3 +1,4 @@
+
 <?php 
     include "../db/mysql_credentials.php";
     ini_set('display_errors','On');
