@@ -13,7 +13,9 @@
     $aboutMe = filter_var(htmlspecialchars(trim($_POST['descrizione'])), FILTER_SANITIZE_STRING);
     $città = filter_var(htmlspecialchars(trim($_POST['cittàIn'])), FILTER_SANITIZE_STRING);
     $facebook = filter_var(htmlspecialchars(trim($_POST['faceIn'])), FILTER_SANITIZE_STRING);
-
+    /*$numbers_of_tags = filter_var(htmlspecialchars(trim($_POST['numbers_of_tags'])), FILTER_SANITIZE_STRING);
+    if(isset($numbers_of_tags))
+        echo "<br>numbers of tags ->>".$numbers_of_tags."<br>";*/
     $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
     if ($conn->connect_error) {
         $message1 = "KO";
@@ -39,6 +41,7 @@
         $checkBox = $checkBox.$_POST['check5'].",";
     if (isset($_POST['check6']) && !strpos($checkBox, $_POST['check6']))
         $checkBox = $checkBox.$_POST['check6'];
+    
 
     // $facebookRegex = "/(?:https?:\/\/)?(?:www\.)?facebook\.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[\w\-]*\/)*([\w\-\.]*)/";
     // $twitterRegex = "/(?:http:\/\/)?(?:www\.)?twitter\.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[\w\-]*\/)*([\w\-]*)/";

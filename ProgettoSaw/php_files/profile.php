@@ -192,8 +192,10 @@
                                                 <?php
                                                     if(isset($_GET['interessi_Get'])){
                                                         $interessi_Get = $_GET['interessi_Get']; //some_value
-                                                        echo "<br><br>interessi:".$interessi_Get."-->fine<br><br>";
+                                                        //echo "<br><br>interessi:".$interessi_Get."-->fine<br><br>";
                                                     }
+                                                    else
+                                                        header( "refresh:0;url=../HomepagePersonale.php" );
                                                     $array_s = explode(",", $interessi_Get);
                                                     //$contatore=1;
                                                     $result_interessi = array();
@@ -213,34 +215,34 @@
                                                         }
                                                         //$contatore++;
                                                     }
-                                                    echo "<br>count array interessi ->>".count($result_interessi)."<br>";
-                                                    foreach($array_s as $value)
+                                                    //echo "<br>count array interessi ->>".count($result_interessi)."<br>";
+                                                   /*foreach($array_s as $value)
                                                         echo "<br>result_interessi -->".$value."<br>";
-                                                    echo "<br>ALL TAGS :)<br>";
+                                                    echo "<br>ALL TAGS :)<br>";*/
                                                     $contatore=1;
                                                     
                                                     foreach($array_tags_names as $value)
                                                     {
                                                         $flag_presente = false;
-                                                        echo "<br>cont ".$contatore." TAG -> ".$value."<br>";
+                                                        //echo "<br>cont ".$contatore." TAG -> ".$value."<br>";
                                                        if(in_array($value,$result_interessi) )
                                                        {
                                                             $flag_presente = true;
-                                                            echo "<br>CONTATOREEEEEEEEEE ".$contatore."<br>";
+                                                            //echo "<br>CONTATOREEEEEEEEEE ".$contatore."<br>";
                                                        }
                                                         echo  "<div class=\"form-check\">
                                                                 <label class=\"form-check-label\">
                                                                     <input type=\"checkbox\" class=\"form-check-input\" name=\"check".$contatore."\" value=\"".$value."\"";
                                                         if($flag_presente)
                                                             echo " checked";
-                                                        echo " id = \"check".$contatore."\""; 
+                                                        echo " id = \"check".$contatore."\"";
                                                         echo ">".$value."
                                                         </label>
                                                         </div>";
                                                         $contatore++;
                                                         //echo "<br>cont ".$contatore++."<br>";
                                                     }
-                                                    echo "<br> heppa";
+                                                    //echo "<input type=\"hidden\" name=\"numbers_of_tags\" value=\"".$contatore. "\" />";
 
 
                                                 ?>
