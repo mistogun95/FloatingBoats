@@ -86,7 +86,7 @@ ini_set('display_errors','On');
                 <li class="nav-item"><a class="nav-link" href="#AboutUs">AboutUs</a></li>
                 <li class="nav-item"><a class="nav-link" href="#contatti">Contattaci</a></li>
                 <li class="nav-item"><a class="nav-link" data-toggle="modal" href="#myModal">Profilo</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Messaggi</a></li>
+                <li class="nav-item"><a class="nav-link" href="FilePerChat/chat.php">Messaggi</a></li>
                 <li class="nav-item"><a class="nav-link" data-toggle="modal" href="#myModal2">Attività</a></li>
             </ul>
             <ul class="navbar-nav ml-auto">

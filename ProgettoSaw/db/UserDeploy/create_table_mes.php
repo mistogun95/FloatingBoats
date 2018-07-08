@@ -4,7 +4,7 @@
     $con = mysqli_connect($mysql_server, $mysql_user, $mysql_pass, $mysql_db) or die ("Errore Connessione al Database");
     $query = "CREATE TABLE `mes` (
         `ID` int(11) NOT NULL AUTO_INCREMENT,
-        `Username Autore` varchar(50) NOT NULL,
+        `Username_Autore` varchar(50) NOT NULL,
         `ID_Private_Chat` int(11) NOT NULL,
         `Data` date NOT NULL,
         `Contenuto` varchar(256) NOT NULL,

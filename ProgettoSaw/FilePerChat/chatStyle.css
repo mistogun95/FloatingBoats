@@ -1,0 +1,12 @@
+#CHAT
+{
+background: #F2F4DE;
+width: 400px;
+height: 250px;
+overflow: Auto;
+}
+#MSG
+{
+position: Absolute;
+visibility: Hidden;
+}
