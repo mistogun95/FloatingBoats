@@ -12,6 +12,7 @@
         <link rel="stylesheet" type="text/css" href="profileStyle.css"/>
     </head>
     <body class>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhnvNJTfDyfVn08mAufLn9p1SA-DdhlXo&callback=myMap"></script>
         <nav class="navbar navbar-expand-lg bg-info navbar-light sticky-top">
             <a class="navbar-brand" href="../HomepagePersonale.php">
                 <img src="../Immagini/logo1.png" alt="logo" style="width:60px;">
