@@ -1,10 +1,9 @@
 <?php
 session_start();
-echo session_status();
-if(!isset($_SESSION['name']) && !isset($_SESSION['surname']))
+if(!isset($_SESSION['username']))
 {
-    header("Location: ./Registration.html");
+    header("Location: /Homepage.html");
 }
 else
-    header("Location: ./login.php");
+    header("Location: /HomepagePersonale.php");
 ?>

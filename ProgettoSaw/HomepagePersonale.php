@@ -4,7 +4,7 @@ ini_set('display_errors','On');
     error_reporting(E_ALL);
     
     
-    include "db/mysql_credentials.php"; 
+    include "db/mysql_credentials.php";
 
     $username = $_SESSION['username'];
     
@@ -86,8 +86,24 @@ ini_set('display_errors','On');
                 <li class="nav-item"><a class="nav-link" href="#AboutUs">AboutUs</a></li>
                 <li class="nav-item"><a class="nav-link" href="#contatti">Contattaci</a></li>
                 <li class="nav-item"><a class="nav-link" data-toggle="modal" href="#myModal">Profilo</a></li>
-                <li class="nav-item"><a class="nav-link" href="FilePerChat/chat.php">Messaggi</a></li>
                 <li class="nav-item"><a class="nav-link" data-toggle="modal" href="#myModal2">Attività</a></li>
+                <li class="nav-item">
+                <div class="dropdown">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                        Messaggi
+                    </button>
+                    <div class="dropdown-menu">
+                        <?php
+                            include "db/mysql_credentials.php";
+                            include "FilePerChat/take_user_in_contact.php";
+                            $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
+                            take_user_in_contact($username, $conn);
+                            $conn->close();
+                        ?>
+                        <a class="nav-link" href="FilePerChat/chat.php?userContact=">Nuova conversazione</a>
+                    </div>
+                </div> 
+                </li>
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link" href="Logout.php">Logout</a></li>
@@ -258,3 +274,4 @@ ini_set('display_errors','On');
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 </body>
 </html> 
+

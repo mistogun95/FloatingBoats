@@ -6,7 +6,7 @@
     $number    = preg_match('@[0-9]@', $password);
     $specialChars = preg_match('@[^\w]@', $password);
 
-    if($name === "")
+    if($password === "")
         $returnName = "";
     else if(!$uppercase || !$lowercase || !$number || !$specialChars || strlen($password) < 8)
         $returnName = "KO";

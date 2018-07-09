@@ -1,12 +1,12 @@
 <?php
     ini_set('display_errors','On');
     error_reporting(E_ALL);
-    include "../db/mysql_credentials.php"; 
     session_start();
     if(!isset($_SESSION["username"]))
         header("Refresh:0; URL=Homepage.html");
     else 
         $user1 = stripslashes($_SESSION["username"]);
+    include "../db/mysql_credentials.php"; 
     $user2 = $_POST["username_chat"];
     $mex = $_POST["messaggio"];
     echo "<br>".$mex;
@@ -38,13 +38,13 @@
             $Id_chat1 = take_chat_id($user1, $user2, $conn);
             send_message($user1, $Id_chat1, $mex, $conn);
             $conn->close();
-            header("Refresh:0; URL=chat.php");
+            header("Refresh:0; URL=chat.php?userContact=".$user2);
         }
         else
         {
             send_message($user1, $Id_chat, $mex, $conn);
             $conn->close();
-            header("Refresh:0; URL=chat.php");
+            header("Refresh:0; URL=chat.php?userContact=".$user2);
         }
     }
 
@@ -56,7 +56,7 @@
 
         if(!$stmt2->execute())
         {
-            echo "<script type='text/javascript'>alert('Execute Error1');</script>";
+            echo "<script type='text/javascript'>alert('Utente non Presente');</script>";
             $stmt2->close();
             $conn->close();
             header("Refresh:0; URL=../HomepagePersonale.php");
@@ -67,7 +67,7 @@
 
     function take_chat_id($user1, $user2, $conn)
     {
-        $stmt = $conn->prepare("SELECT ID FROM private_chat WHERE Utente1=? OR Utente2=?");
+        $stmt = $conn->prepare("SELECT ID FROM private_chat WHERE Utente1=? AND Utente2=?");
         $stmt->bind_param("ss", $user1, $user);
 
         if(!$stmt->execute())
@@ -101,4 +101,5 @@
 
         $stmt->close();
     }
+
 ?>
