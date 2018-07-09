@@ -31,13 +31,31 @@
     $cont=1;
     if(isset($_POST['check']))
     {
-        $var_checks = $_POST['check'];
-        //echo "<br>VARI CHECK<br>";
-        $checkBox_to_insert="";
-        foreach($var_checks as $value)
+        include "get_in_array_data_strings.php";
+        $var_name_attribute="Name";
+        $var_name_table="Tags";
+        $var_array_of_all_tags=get_in_array_data_strings($conn, $var_name_attribute, $var_name_table, false);//false per non fare la close su $conn
+        //echo "Prima del forearch -> var_array_of_all_tags<br>";
+        if($var_array_of_all_tags)
         {
-            //echo "<br> value:".$value;
-            $checkBox_to_insert =$checkBox_to_insert.filter_var(htmlspecialchars(trim($value))).",";
+            /*foreach($var_array_of_all_tags as $value)
+            {
+                echo $value."<br>";
+            }*/
+            //echo "Dopo del forearch -> var_array_of_all_tags<br>";
+
+            $var_checks = $_POST['check'];
+            $checkBox_to_insert="";
+            foreach($var_checks as $value)
+            {
+                $var_tmp = filter_var(htmlspecialchars(trim($value)));
+                if(in_array($var_tmp,$var_array_of_all_tags))//ecito che qulacuno mi mandi valori non giusti.
+                    $checkBox_to_insert =$checkBox_to_insert.$var_tmp.",";
+            }
+        }
+        else
+        {
+            echo "<br>c'è stato un errore di connesione col db durante l'aggiornamento degli interessi.<br>";
         }
         //echo "<br>FIN CHECK<br>";
     }

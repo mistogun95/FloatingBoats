@@ -3,7 +3,7 @@
     error_reporting(E_ALL);
     session_start();
     if(!isset($_SESSION["username"]))
-        header("Refresh:0; URL=Homepage.html");
+        header("Refresh:0; URL=../Homepage.html");
     else 
         $user1 = stripslashes($_SESSION["username"]);
     include "../db/mysql_credentials.php"; 
@@ -22,9 +22,9 @@
 
         if(!$stmt->execute())
         {
-            echo "<script type='text/javascript'>alert('Execute Error4');</script>";
             $stmt->close();
             $conn->close();
+            echo "<script type='text/javascript'>alert('Execute Error4');</script>";
             header("Refresh:0; URL=../HomepagePersonale.php");
         }
 

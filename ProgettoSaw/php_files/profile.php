@@ -189,12 +189,12 @@
                                                     {
                                                         $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
                                                         include "get_interessi_of_user.php";
-                                                        $interessi_Get = get_Interessi_query_of_user($username, $conn);
+                                                        $interessi_Get = get_Interessi_query_of_user($username, $conn);//la funzione chiude tutto stmt e conn con la close.
+                                                        /*if($interessi_Get == null)//non serve tanto il null viene gestito dalle funzioni dopo senza probelmi.
+                                                            $interessi_Get ="";*/
                                                     }
                                                     else
                                                         $interessi_Get = $_GET['interessi_Get'];
-                                                    if(!isset($interessi_Get))
-                                                        header( "refresh:0;url=../HomepagePersonale.php" );
                                                     $array_s = explode(",", $interessi_Get);
                                                     $result_interessi = array();
                                                     foreach($array_s as $value)
@@ -205,11 +205,10 @@
                                                         }
                                                     }
                                                     $contatore=1;
-                                                    //$array
                                                     foreach($array_tags_names as $value)
                                                     {
                                                         $flag_presente = false;
-                                                        if(in_array($value,$result_interessi) )
+                                                        if(in_array($value,$result_interessi) ) //cosi evito possibili "infezioni" dal GET
                                                             $flag_presente = true;
                                                         echo  "<div class=\"form-check\">
                                                                 <label class=\"form-check-label\">

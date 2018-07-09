@@ -1,5 +1,6 @@
 <?php
     ini_set('display_errors','On');
+<<<<<<< HEAD
     error_reporting(E_ALL); 
     session_start();
     if(!isset($_SESSION["username"]))
@@ -9,6 +10,14 @@
         $user = stripslashes($_SESSION["username"]);
         $user2 = $_GET['userContact'];
     }
+=======
+    error_reporting(E_ALL);
+    session_start();
+    if(!isset($_SESSION["username"]))
+        header("Refresh:0; URL=../Homepage.html");
+    else 
+        $user = stripslashes($_SESSION["username"]);
+>>>>>>> 124f604b222080a394aaa1cf217b292956675eea
     include "../db/mysql_credentials.php"; 
 ?>
 
