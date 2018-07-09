@@ -31,13 +31,20 @@
     $cont=1;
     if(isset($_POST['check']))
     {
+        include "get_in_array_data_strings.php";
+        get_in_array_data_strings($conn,"Name", "Tags", false);
+        foreach($var_checks as $value)
+        {
+            
+        }
         $var_checks = $_POST['check'];
         //echo "<br>VARI CHECK<br>";
         $checkBox_to_insert="";
         foreach($var_checks as $value)
         {
-            //echo "<br> value:".$value;
-            $checkBox_to_insert =$checkBox_to_insert.filter_var(htmlspecialchars(trim($value))).",";
+            $var_tmp = filter_var(htmlspecialchars(trim($value)));
+            if(in_array($var_tmp,$interessi_of_user))
+                $checkBox_to_insert =$checkBox_to_insert.$var_tmp.",";
         }
         //echo "<br>FIN CHECK<br>";
     }

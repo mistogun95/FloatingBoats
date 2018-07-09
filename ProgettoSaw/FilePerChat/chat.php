@@ -1,12 +1,12 @@
 <?php
     ini_set('display_errors','On');
     error_reporting(E_ALL);
-    include "../db/mysql_credentials.php"; 
     session_start();
     if(!isset($_SESSION["username"]))
-        header("Refresh:0; URL=Homepage.html");
+        header("Refresh:0; URL=../Homepage.html");
     else 
         $user = stripslashes($_SESSION["username"]);
+    include "../db/mysql_credentials.php"; 
 ?>
 
 <html>
