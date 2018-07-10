@@ -1,4 +1,4 @@
-<li class="nav-item"><a class="nav-link" href="php_files/visualizzaAttivitàProprieUtente.php?username=<?php echo $username ?>">Attività</a></li>
+<li class="nav-item"><a class="nav-link" href="php_files/visualizzaAttivitaProprieUtente.php?username=<?php echo $username ?>">Attività</a></li>
 <!DOCTYPE html>
 <html>
     <head>

@@ -21,13 +21,13 @@
         <script>
             function myMap() 
             {
-                var myCenter = new google.maps.LatLng(44.4073105,8.9340325);
+                var myCenter = new google.maps.LatLng(<?php echo $CNord; ?>,<?php echo $CSud; ?>);
                 var mapCanvas = document.getElementById("googleMap");
-                var mapOptions = {center: myCenter, zoom: 12, disableDefaultUI: true, mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU, position: google.maps.ControlPosition.TOP_CENTER}};
+                var mapOptions = {center: myCenter, zoom: 16, disableDefaultUI: true, mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU, position: google.maps.ControlPosition.TOP_CENTER}};
                 var map = new google.maps.Map(mapCanvas, mapOptions);
                 var marker = new google.maps.Marker({position:myCenter/*, animation:google.maps.Animation.BOUNCE, icon:'../Immagini/logo.png'*/});
-                /*marker.setMap(map);
-                var infowindow = new google.maps.InfoWindow({
+                marker.setMap(map);
+                /*var infowindow = new google.maps.InfoWindow({
                     content:"PESCALI TUTTI"
                 });*/
                 /*
