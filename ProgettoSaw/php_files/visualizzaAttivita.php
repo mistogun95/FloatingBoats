@@ -25,7 +25,7 @@
                 var mapCanvas = document.getElementById("googleMap");
                 var mapOptions = {center: myCenter, zoom: 16, disableDefaultUI: true, mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU, position: google.maps.ControlPosition.TOP_CENTER}};
                 var map = new google.maps.Map(mapCanvas, mapOptions);
-                var marker = new google.maps.Marker({position:myCenter, animation:google.maps.Animation.BOUNCE/*, icon:'../Immagini/logo.png'*/});
+                var marker = new google.maps.Marker({position:myCenter,animation:google.maps.Animation.BOUNCE/*, icon:'../Immagini/logo.png'*/});
                 marker.setMap(map);
                 /*var infowindow = new google.maps.InfoWindow({
                     content:"PESCALI TUTTI"
