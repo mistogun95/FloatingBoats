@@ -3,7 +3,7 @@
 
     include "mysql_credentials.php";
     $con = mysqli_connect($mysql_server, $mysql_user, $mysql_pass, $mysql_db) or die ("Errore Connessione al Database");
-    $query = "INSERT INTO `mes` (`Username Autore`, `ID_Private_Chat`, `Data`, `Contenuto`) VALUES
+    $query = "INSERT INTO `mes` (`Username_Autore`, `ID_Private_Chat`, `Data`, `Contenuto`, `Letto`) VALUES
     ('zio', '1', '2018-07-01', 'ciao, ci sei?', 0),
     ('kaio', '1', '2018-07-01', 'si ci sono, dimmi tutto.', 0),
     ('zio', '1', '2018-07-01', 'niente volevo solo salutarti', 0),

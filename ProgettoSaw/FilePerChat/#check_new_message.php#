@@ -12,20 +12,11 @@ function check_new_message($user1, $conn)
 
     foreach($Id_chats as $Id_chat)
     {
-        if(!$stmt = $conn->prepare($query))
-        {
-            echo "<script type='text/javascript'>alert('Execute prepare');</script>";
-            header("Refresh:0; URL=../HomepagePersonale.php");
-        }
-        if(!$stmt->bind_param("ii", $Id_chat, $b))
-        {
-            echo "<script type='text/javascript'>alert('Execute bind_param');</script>";
-            $stmt->close();
-            header("Refresh:0; URL=../HomepagePersonale.php");
-        }
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("ii", $Id_chat, $b);
         if(!$stmt->execute())
         {
-            echo "<script type='text/javascript'>alert('Execute execute');</script>";
+            echo "<script type='text/javascript'>alert('Execute Error2');</script>";
             $stmt->close();
             header("Refresh:0; URL=../HomepagePersonale.php");
         }
