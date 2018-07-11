@@ -20,7 +20,7 @@
     $coordinateN = filter_var(htmlspecialchars(trim($_POST['coordinateNIn'])), FILTER_SANITIZE_STRING);
     $coordinateS = filter_var(htmlspecialchars(trim($_POST['coordinateSIn'])), FILTER_SANITIZE_STRING);
     $tags = "";
-    $regexDate = '/^[0-9]{4}\/[0-9]{1,2}\/[0-9]{1,2}$/';
+    $regexDate = '/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/';
     echo $start."<br>";
     echo $end."<br>";
 
@@ -55,17 +55,17 @@
     else
     {
         $stmt = $conn->prepare("INSERT INTO Posts (Nomebarca, Titolo, NumeroPostiBarca, DataInizio, DataFine, LuogoDiRitrovo, SpesaViaggioTotale, Descrizione, StrumentazioneRichiesta, CoordinataNord, CoordinataSud, Citta, UsernameAutore, Tag) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-        $stmt->bind_param("ssssssssssssss", $boat, $title, $seats, $start, $end, $place, $totalCost, $description, $instrumentation, $coordinateN, $coordinateS, $città, $username, $tags);
+        $stmt->bind_param("sssssssssiisss", $boat, $title, $seats, $start, $end, $place, $totalCost, $description, $instrumentation, $coordinateN, $coordinateS, $città, $username, $tags);
         if(!$stmt->execute())
         {
             echo "<script type='text/javascript'>alert('Execute Error');</script>";
             $stmt->close();
             $conn->close();
-            header("Refresh:0; URL=HomepagePersonale.php");
+            //header("Refresh:0; URL=HomepagePersonale.php");
         }
         $stmt->close(); 
     }
-    header( "refresh:0;url=../HomepagePersonale.php" );
+    //header( "refresh:0;url=../HomepagePersonale.php" );
     $conn->close();
     
 ?>

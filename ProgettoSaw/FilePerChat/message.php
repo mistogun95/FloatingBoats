@@ -6,8 +6,11 @@
         header("Refresh:0; URL=../Homepage.html");
     else 
         $user1 = stripslashes($_SESSION["username"]);
-    include "../db/mysql_credentials.php"; 
-    $user2 = $_POST["username_chat"];
+    include "../db/mysql_credentials.php";
+    if ($_GET["userContact"] != "")
+        $user2 = $_GET["userContact"];
+    else 
+        $user2 = $_POST["username_chat"];
     $mex = $_POST["messaggio"];
     echo "<br>".$mex;
 
@@ -36,6 +39,7 @@
         {
             set_private_chat($conn, $user1, $user2);
             $Id_chat1 = take_chat_id($user1, $user2, $conn);
+            echo $Id_chat;
             send_message($user1, $Id_chat1, $mex, $conn);
             $conn->close();
             header("Refresh:0; URL=chat.php?userContact=".$user2);
@@ -43,6 +47,7 @@
         else
         {
             send_message($user1, $Id_chat, $mex, $conn);
+            echo "chat_presente";
             $conn->close();
             header("Refresh:0; URL=chat.php?userContact=".$user2);
         }
@@ -68,7 +73,7 @@
     function take_chat_id($user1, $user2, $conn)
     {
         $stmt = $conn->prepare("SELECT ID FROM private_chat WHERE Utente1=? AND Utente2=?");
-        $stmt->bind_param("ss", $user1, $user);
+        $stmt->bind_param("ss", $user1, $user2);
 
         if(!$stmt->execute())
         {

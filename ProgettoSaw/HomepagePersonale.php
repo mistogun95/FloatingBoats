@@ -118,7 +118,7 @@ ini_set('display_errors','On');
       
             <!-- Modal Header -->
             <div class="modal-header card">
-                <img class="card-img-top" src=<?php echo '"'.$var_complete_path_new_image.'"'?> alt="Card image" style="width:100%">
+                <img class="card-img-top" src=<?php echo '"'.$var_complete_path_new_image.'"'?> alt="Avatar" style="width:100%">
             </div>
       
             <!-- Modal body -->
