@@ -4,11 +4,11 @@
     include "../db/mysql_credentials.php";
     $id = $_GET["id_post"];
     $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
-    $query = "SELECT Nomebarca,Titolo,NumeroPostiBarca,DataInizio,DataFine,LuogoDiRitrovo,SpesaViaggioTotale,Descrizione,StrumentazioneRichiesta,CoordinataNord,CoordinataSud,Citta,UsernameAutore FROM Posts WHERE ID=?";
+    $query = "SELECT Nomebarca,Titolo,NumeroPostiBarca,DataInizio,DataFine,LuogoDiRitrovo,SpesaViaggioTotale,Descrizione,StrumentazioneRichiesta,Latitudine,Longitudine,Citta,UsernameAutore FROM Posts WHERE ID=?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("i", $id);
     $stmt->execute();
-    $stmt->bind_result($NomeB, $Titol, $NPosti, $Inizio, $Fine, $Ritrovo, $Spesa, $Descr, $Strumentazione, $CNord, $CSud, $citta, $autore);
+    $stmt->bind_result($NomeB, $Titol, $NPosti, $Inizio, $Fine, $Ritrovo, $Spesa, $Descr, $Strumentazione, $Latitudine, $Longitudine, $citta, $autore);
     $stmt->fetch();
 ?>
 
@@ -21,7 +21,7 @@
         <script>
             function myMap() 
             {
-                var myCenter = new google.maps.LatLng(<?php echo $CNord; ?>,<?php echo $CSud; ?>);
+                var myCenter = new google.maps.LatLng(<?php echo $Latitudine; ?>,<?php echo $Longitudine; ?>);
                 var mapCanvas = document.getElementById("googleMap");
                 var mapOptions = {center: myCenter, zoom: 16, disableDefaultUI: true, mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU, position: google.maps.ControlPosition.TOP_CENTER}};
                 var map = new google.maps.Map(mapCanvas, mapOptions);

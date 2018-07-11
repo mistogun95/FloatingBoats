@@ -170,8 +170,8 @@
                     <th>Spesa totale viaggio</th>
                     <th>Descrizione</th>
                     <th>Strumentazione richiesta</th>
-                    <th>Coordinata Nord</th>
-                    <th>Coordinata Sud</th>
+                    <th>Latitudine</th>
+                    <th>Longitudine</th>
                     <th>Città</th>
                     <th>Autore post</th>
                 </tr>
@@ -179,13 +179,13 @@
             <tbody>
                 <?php
                     $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
-                    $query = "SELECT Nomebarca,Titolo,NumeroPostiBarca,DataInizio,DataFine,LuogoDiRitrovo,SpesaViaggioTotale,Descrizione,StrumentazioneRichiesta,CoordinataNord,CoordinataSud,Citta,UsernameAutore FROM Posts WHERE ID=?";
+                    $query = "SELECT Nomebarca,Titolo,NumeroPostiBarca,DataInizio,DataFine,LuogoDiRitrovo,SpesaViaggioTotale,Descrizione,StrumentazioneRichiesta,Latitudine,Longitudine,Citta,UsernameAutore FROM Posts WHERE ID=?";
                     $stmt = $conn->prepare($query);
                     foreach($array_Id as $Id)
                     {
                         $stmt->bind_param("i", $Id);
                         $stmt->execute();
-                        $stmt->bind_result($NomeB, $Titol, $NPosti, $Inizio, $Fine, $Ritrovo, $Spesa, $Descr, $Strumentazione, $CNord, $CSud, $citta, $autore);
+                        $stmt->bind_result($NomeB, $Titol, $NPosti, $Inizio, $Fine, $Ritrovo, $Spesa, $Descr, $Strumentazione, $Latitudine, $Longitudine, $citta, $autore);
                         $stmt->fetch();
                         
                         echo "<tr>";
@@ -198,8 +198,8 @@
                         echo "<td>".$Spesa."</td>";
                         echo "<td>".$Descr."</td>";
                         echo "<td>".$Strumentazione."</td>";
-                        echo "<td>".$CNord."</td>";
-                        echo "<td>".$CSud."</td>";
+                        echo "<td>".$Latitudine."</td>";
+                        echo "<td>".$Longitudine."</td>";
                         echo "<td>".$citta."</td>";
                         echo "<td>".$autore."</td>";
                         echo "<td><a href=\"visualizzaAttivita.php?id_post=$Id\" class=\"btn btn-primary\">Visualizza pagina Attività</a></td>";

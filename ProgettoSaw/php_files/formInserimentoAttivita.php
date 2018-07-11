@@ -134,15 +134,15 @@
                                             </div> 
                                         </div>
                                         <div class = "form-group row">
-                                            <label id = "coordinateN" class = "col-4 col-form-label">Coordinata Nord</label>
+                                            <label id = "Latitudine" class = "col-4 col-form-label">Latitudine</label>
                                             <div class = "col-8">
-                                                <input name = "coordinateNIn" placeholder = "Coordinata Nord" class = "form-control here" type = "text">
+                                                <input name = "Latitudine" placeholder = "Latitudine" class = "form-control here" type = "text">
                                             </div> 
                                         </div>
                                         <div class = "form-group row">
-                                            <label id = "coordinateS" class = "col-4 col-form-label">Coordinata Sud</label>
+                                            <label id = "Longitudine" class = "col-4 col-form-label">Longitudine</label>
                                             <div class = "col-8">
-                                                <input name = "coordinateSIn" placeholder = "Coordinata Sud" class = "form-control here" type = "text">
+                                                <input name = "Longitudine" placeholder = "Longitudine" class = "form-control here" type = "text">
                                             </div> 
                                         </div>
                                         <div class="form-group row">
