@@ -129,6 +129,8 @@
         $stmt->close();
         $conn->close();
     }
+    
+    
 ?>
 
 <!DOCTYPE html>
@@ -181,6 +183,8 @@
                     $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
                     $query = "SELECT Nomebarca,Titolo,NumeroPostiBarca,DataInizio,DataFine,LuogoDiRitrovo,SpesaViaggioTotale,Descrizione,StrumentazioneRichiesta,Latitudine,Longitudine,Citta,UsernameAutore FROM Posts WHERE ID=?";
                     $stmt = $conn->prepare($query);
+                    $n=1;
+                    include "createModalGraph.php";
                     foreach($array_Id as $Id)
                     {
                         $stmt->bind_param("i", $Id);
@@ -202,8 +206,13 @@
                         echo "<td>".$Longitudine."</td>";
                         echo "<td>".$citta."</td>";
                         echo "<td>".$autore."</td>";
-                        echo "<td><a href=\"visualizzaAttivita.php?id_post=$Id\" class=\"btn btn-primary\">Visualizza pagina Attività</a></td>";
+                        //echo "<td><a href=\"visualizzaAttivita.php?id_post=$Id\" class=\"btn btn-primary\">Visualizza pagina Attività</a></td>";
+                        //echo "<td><button type=\"button\"class=\"btn btn-primary\" >Visualizza pagina Attività</td>";
+                        echo "<td>";
+                        creteAButtonModal($n,"myModal","Header text","text body","close","Visualizza pagina Attività",$Latitudine,$Longitudine);
+                        echo "</td>";
                         echo "</tr>";
+                        $n++;
 
                     }
                     $stmt->close();
@@ -211,6 +220,13 @@
                 ?>
             </tbody>
         </table>
+        <?php createModalBootstrap("myModal","Header text","text body","close",$Latitudine,$Longitudine); ?>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhnvNJTfDyfVn08mAufLn9p1SA-DdhlXo&callback"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+        <script src="printMapOfPost.js"></script>
     </body>
 </html>
 
