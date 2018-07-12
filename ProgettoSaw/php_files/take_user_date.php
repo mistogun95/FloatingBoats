@@ -1,5 +1,5 @@
 <?php
-    function take_user_date($username, $conn)
+    function take_user_date($username, $conn, $var_directory)
     {
         $arrayDate = array();
         $stmt = $conn->prepare("SELECT FlagFoto, Citta, AboutMe, LinkWebSite, Facebook, Instagram, Twitter, Name, Surname, Interessi FROM Users WHERE Username=?");
@@ -15,13 +15,22 @@
         
         $stmt->bind_result($var_FlagFoto, $var_Citta, $var_AboutMe, $var_LinkWebSite, $var_Facebook, $var_Instagram, $var_Twitter, $var_Name, $var_Surname, $var_interessi);
         $stmt->fetch();
+        $arrayDate[] = $var_FlagFoto;
+        $arrayDate[] = $var_Citta;
+        $arrayDate[] = $var_AboutMe;
+        $arrayDate[] = $var_LinkWebSite;
+        $arrayDate[] = $var_Facebook;
+        $arrayDate[] = $var_Instagram;
+        $arrayDate[] = $var_Twitter;
+        $arrayDate[] = $var_Name;
+        $arrayDate[] = $var_Surname;
+        $arrayDate[] = $var_interessi;
         
         if(isset($var_Name) && isset($var_Surname) )
         {
             if($var_FlagFoto == 1)
             {
                 $var_tipo_immagine = array("png", "jpg", "jpeg");
-                $var_directory = "ImmaginiCaricate/";
 
                 for ($i = 0; $i < 3; $i++) 
                 {
@@ -36,7 +45,7 @@
             }
             else//carico la foto di deafult
             {
-                $var_complete_path_new_image = "ImmaginiCaricate/default.png";
+                $var_complete_path_new_image = $var_directory."default.png";
             }
 
         }
@@ -44,7 +53,9 @@
         {
             echo "<script type='text/javascript'>alert('Il fetch è andato male...');</script>";
         }
+        $arrayDate[] = $var_complete_path_new_image;
         
         $stmt->close();
+        return $arrayDate;
     }
 ?>

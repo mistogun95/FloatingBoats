@@ -15,11 +15,9 @@ ini_set('display_errors','On');
     }
     else
     {
-        take_user_date($username, $conn);
+        $arrayDate = take_user_date($username, $conn, "ImmaginiCaricate/");
     }
     $conn->close();
-
-    
 
 ?>
 <!DOCTYPE html>
@@ -81,23 +79,23 @@ ini_set('display_errors','On');
       
             <!-- Modal Header -->
             <div class="modal-header card">
-                <img class="card-img-top" src=<?php echo '"'.$var_complete_path_new_image.'"'?> alt="Avatar" style="width:100%">
+                <img class="card-img-top" src=<?php echo '"'.$arrayDate[10].'"'?> alt="Avatar" style="width:100%">
             </div>
       
             <!-- Modal body -->
             <div class="modal-body" style="width:400px">
                 <div class="card-body">
                     <h4 class="card-title"><?php echo $username?></h4>
-                    <p class="card-text"><?php echo "<b>Nome: </b>".$var_Name?></p>
-                    <p class="card-text"><?php echo "<b>Cognome: </b>".$var_Surname?></p>
-                    <p class="card-text"><?php echo "<b>Città: </b>".$var_Citta?></p>
-                    <p class="card-text"><?php echo "<b>Descrizione: </b>".$var_AboutMe?></p>
-                    <p class="card-text"><?php echo "<b>Sito Personale: </b>".$var_LinkWebSite?></p>
-                    <p class="card-text"><?php echo "<b>Facebook: </b>".$var_Facebook?></p>
-                    <p class="card-text"><?php echo "<b>Instagram: </b>".$var_Instagram?></p>
-                    <p class="card-text"><?php echo "<b>Twitter: </b>".$var_Twitter?></p>
-                    <p class="card-text"><?php echo "<b>Interessi: </b>".$var_interessi?></p>
-                    <a href="php_files/profile.php?interessi_Get=<?php echo $var_interessi ?>" class="btn btn-primary">Modifica Profilo</a>
+                    <p class="card-text"><?php echo "<b>Nome: </b>".$arrayDate[7]?></p>
+                    <p class="card-text"><?php echo "<b>Cognome: </b>".$arrayDate[8]?></p>
+                    <p class="card-text"><?php echo "<b>Città: </b>".$arrayDate[1]?></p>
+                    <p class="card-text"><?php echo "<b>Descrizione: </b>".$arrayDate[2]?></p>
+                    <p class="card-text"><?php echo "<b>Sito Personale: </b>".$arrayDate[3]?></p>
+                    <p class="card-text"><?php echo "<b>Facebook: </b>".$arrayDate[4]?></p>
+                    <p class="card-text"><?php echo "<b>Instagram: </b>".$arrayDate[5]?></p>
+                    <p class="card-text"><?php echo "<b>Twitter: </b>".$arrayDate[6]?></p>
+                    <p class="card-text"><?php echo "<b>Interessi: </b>".$arrayDate[9]?></p>
+                    <a href="php_files/profile.php?interessi_Get=<?php echo $arrayDate[9]?>" class="btn btn-primary">Modifica Profilo</a>
                 </div>
             </div>
       
