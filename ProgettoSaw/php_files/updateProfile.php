@@ -192,7 +192,7 @@
         }
     }
     echo "<label class='userPresent'><b>$message</b></label><br>";
-    //header( "refresh:0;url=../HomepagePersonale.php" );
+    header( "refresh:0;url=../HomepagePersonale.php" );
     echo "<a class='signIn' href='../HomepagePersonale.php'>Clicca qui per tornare alla homepage(se il tuo browser non supporta il reindirizzamento automatico)</a>";
     
     function removePhoto($var_flag_foto, $var_name_file, $var_directory, $oldUsername)

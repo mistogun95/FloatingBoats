@@ -2,6 +2,14 @@ body{
 	background: #66a1d1;
 }
 
+.bg{
+    background-image: url("../Immagini/barca.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover; 
+}
+
 .LogoDiv{
     background-color: rgb(30, 73, 218);
     height: 20%;
@@ -31,6 +39,34 @@ body{
 	text-transform: uppercase;
 	text-align: center;
 	font-family: shania, red-serif;
+}
+
+@media only screen and (max-width: 1080px){
+	.titleContainer{
+		height: 720px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		text-align: center;
+		margin-left: -10px;
+		margin-right: -10px;
+		background-image: url("Immagini/pesca3.jpg");
+		background-size:100% 100%;
+	}
+	
+	.title{
+		background-color: rgb(180, 180, 180);
+		opacity: 0.6;
+		filter: alpha(opacity=60);
+	}
+
+	.greatTitle{
+		color: black;
+		font-size: 60pt;
+		text-transform: uppercase;
+		text-align: center;
+		font-family: shania, red-serif;
+	}
 }
 
 .titleAbout, .titleContacts{
@@ -318,5 +354,12 @@ button{
 	margin: 5px 2px;
   }
 
+  .dropdown1{
+    margin-top: 0px;
+  }
+
+  .groundNav {
+	  background:#483d8b;
+  }
 
 

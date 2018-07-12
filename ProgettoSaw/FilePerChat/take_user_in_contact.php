@@ -26,9 +26,9 @@
             while($stmt->fetch())
             {
                 if(in_array($userContact, $arrayUsers))
-                    echo "<a class=\"nav-link\" href=\"FilePerChat/chat.php?userContact=".$userContact."\">".$userContact."  Nuovo Messaggio</a>";
+                    echo "<a class=\"nav-link btn btn-primary\" href=\"FilePerChat/chat.php?userContact=".$userContact."\">".$userContact."<i class=\"fa fa-exclamation-circle\" style=\"font-size:24px;color:red\"></i></a>";
                 else
-                    echo "<a class=\"nav-link\" href=\"FilePerChat/chat.php?userContact=".$userContact."\">".$userContact."</a>";
+                    echo "<a class=\"nav-link btn btn-primary\" href=\"FilePerChat/chat.php?userContact=".$userContact."\">".$userContact."</a>";
             }
             $stmt->close();
 
@@ -47,9 +47,9 @@
             while($stmt->fetch())
             {
                 if(in_array($userContact, $arrayUsers))
-                    echo "<a class=\"nav-link\" href=\"FilePerChat/chat.php?userContact=".$userContact."\">".$userContact."  Nuovo Messaggio</a>";
+                    echo "<a class=\"nav-link btn btn-primary\" href=\"FilePerChat/chat.php?userContact=".$userContact."\">".$userContact."<i class=\"fa fa-exclamation-circle\" style=\"font-size:24px;color:red\"></i></a>";
                 else
-                    echo "<a class=\"nav-link\" href=\"FilePerChat/chat.php?userContact=".$userContact."\">".$userContact."</a>";
+                    echo "<a class=\"nav-link btn btn-primary\" href=\"FilePerChat/chat.php?userContact=".$userContact."\">".$userContact."</a>";
             }
             $stmt->close();
         }
