@@ -3,10 +3,11 @@ session_start();
 ini_set('display_errors','On');
     error_reporting(E_ALL);
     
-    
+    if(!isset($_SESSION["username"]))
+        header("Refresh:0; URL=../Homepage.html");
+    else
+        $username = $_SESSION['username'];
     include "db/mysql_credentials.php";
-
-    $username = $_SESSION['username'];
     
     $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
     if ($conn->connect_error) {
@@ -78,18 +79,18 @@ ini_set('display_errors','On');
     </head>
 
     <body>
-        <nav class="navbar navbar-expand-lg bg-info navbar-light sticky-top">
+        <nav class="navbar navbar-expand-lg groundNav navbar-light sticky-top">
             <a class="navbar-brand" href="HomepagePersonale.php">
                 <img src="Immagini/logo1.png" alt="logo" style="width:60px;">
             </a>
             <ul class = "navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="#AboutUs">AboutUs</a></li>
-                <li class="nav-item"><a class="nav-link" href="#contatti">Contattaci</a></li>
-                <li class="nav-item"><a class="nav-link" data-toggle="modal" href="#myModal">Profilo</a></li>
-                <li class="nav-item"><a class="nav-link" data-toggle="modal" href="#myModal2">Attività</a></li>
+                <li class="nav-item"><a class="nav-link btn btn-success" href="#AboutUs">AboutUs</a></li>
+                <li class="nav-item"><a class="nav-link btn btn-success" href="#contatti">Contattaci</a></li>
+                <li class="nav-item"><a class="nav-link btn btn-success" data-toggle="modal" href="#myModal">Profilo</a></li>
+                <li class="nav-item"><a class="nav-link btn btn-success" data-toggle="modal" href="#myModal2">Attività</a></li>
                 <li class="nav-item">
                 <div class="dropdown">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                    <button type="button" class=" nav-link btn btn-success dropdown-toggle dropdown1" data-toggle="dropdown">
                         Messaggi
                     </button>
                     <div class="dropdown-menu">
@@ -100,13 +101,13 @@ ini_set('display_errors','On');
                             take_user_in_contact($username, $conn);
                             $conn->close();
                         ?>
-                        <a class="nav-link" href="FilePerChat/chat.php?userContact=">Nuova conversazione</a>
+                        <a class="nav-link btn btn-primary" href="FilePerChat/chat.php?userContact=">Nuova conversazione</a>
                     </div>
                 </div> 
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a class="nav-link" href="Logout.php">Logout</a></li>
+                <li class="nav-item"><a class="nav-link btn btn-primary" href="Logout.php">Logout</a></li>
             </ul>
         </nav>
 
@@ -125,15 +126,15 @@ ini_set('display_errors','On');
             <div class="modal-body" style="width:400px">
                 <div class="card-body">
                     <h4 class="card-title"><?php echo $username?></h4>
-                    <p class="card-text"><?php echo "Nome: ".$var_Name?></p>
-                    <p class="card-text"><?php echo "Cognome: ".$var_Surname?></p>
-                    <p class="card-text"><?php echo "Città: ".$var_Citta?></p>
-                    <p class="card-text"><?php echo "Descrizione: ".$var_AboutMe?></p>
-                    <p class="card-text"><?php echo "Sito Personale: ".$var_LinkWebSite?></p>
-                    <p class="card-text"><?php echo "Facebook: ".$var_Facebook?></p>
-                    <p class="card-text"><?php echo "Instagram: ".$var_Instagram?></p>
-                    <p class="card-text"><?php echo "Twitter: ".$var_Twitter?></p>
-                    <p class="card-text"><?php echo "Interessi: ".$var_interessi?></p>
+                    <p class="card-text"><?php echo "<b>Nome: </b>".$var_Name?></p>
+                    <p class="card-text"><?php echo "<b>Cognome: </b>".$var_Surname?></p>
+                    <p class="card-text"><?php echo "<b>Città: </b>".$var_Citta?></p>
+                    <p class="card-text"><?php echo "<b>Descrizione: </b>".$var_AboutMe?></p>
+                    <p class="card-text"><?php echo "<b>Sito Personale: </b>".$var_LinkWebSite?></p>
+                    <p class="card-text"><?php echo "<b>Facebook: </b>".$var_Facebook?></p>
+                    <p class="card-text"><?php echo "<b>Instagram: </b>".$var_Instagram?></p>
+                    <p class="card-text"><?php echo "<b>Twitter: </b>".$var_Twitter?></p>
+                    <p class="card-text"><?php echo "<b>Interessi: </b>".$var_interessi?></p>
                     <a href="php_files/profile.php?interessi_Get=<?php echo $var_interessi ?>" class="btn btn-primary">Modifica Profilo</a>
                 </div>
             </div>

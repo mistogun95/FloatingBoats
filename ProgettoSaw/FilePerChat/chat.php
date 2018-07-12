@@ -28,38 +28,52 @@
             <a class="navbar-brand" href="../HomepagePersonale.php">
                 <img src="../Immagini/logo1.png" alt="logo" style="width:60px;">
             </a>
-            <ul class = "navbar-nav">
+            <!-- <ul class = "navbar-nav">
                 <li class="nav-item"><a class="nav-link" href="#AboutUs">AboutUs</a></li>
                 <li class="nav-item"><a class="nav-link" href="#contatti">Contattaci</a></li>
                 <li class="nav-item"><a class="nav-link" href="php_files/get_data_profile.php">Profilo</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Messaggi</a></li>
+            </ul> -->
+            <ul class="navbar-nav">
+            <li class="nav-item"><p><b>Benvenuta <?php echo $user ?></b></p></li>
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link" href="../Logout.php">Logout</a></li>
             </ul>
         </nav>
-        <p>Benvenuto<b><?php echo $user; ?></b></p>
-        <?php
-            $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
-            if ($conn->connect_error) {
-                $message = "Conn ERORR!! <br/>";
-            }
-            else
-            {
-                show_message_user1($user, $user2, $conn);
-                show_message_user2($user, $user2, $conn);
-                $conn->close();
-            }
-        ?>
-        <div id="CHAT"></div>
-        <form name="chat" method="post" action="message.php?userContact=<?php echo $user2 ?>" enctype="multipart/form-data">
+        <div class = "bg">
+        <div class="row h-100 justify-content-center align-items-center" id="chat_div">
+            <div class="anyclass">
+                <?php
+                    $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
+                    if ($conn->connect_error) {
+                        $message = "Conn ERORR!! <br/>";
+                    }
+                    else
+                    {
+                        show_message_user1($user, $user2, $conn);
+                        show_message_user2($user, $user2, $conn);
+                        $conn->close();
+                    }
+                ?>
+            </div>
             <?php
-                if($user2 === "")
-                    echo "<input type=\"text\" name=\"username_chat\" size=\"50\" maxlength=\"200\" placeholder=\"Username persona da contattare\">"
+                if($user2 === "") 
+                    echo "<div id=\"CHAT\" class=\"offset-md-1 col-md-8\">";
+                else
+                    echo "<div id=\"CHAT\" class=\"offset-md-4 col-md-8\">";
             ?>
-            <input type="text" name="messaggio" size="50" maxlength="200" placeholder="Scrivi qui il messaggio">
-            <input type="submit" value="CHAT">
-        </form>
+                <form name="chat" method="post" action="message.php?userContact=<?php echo $user2 ?>" enctype="multipart/form-data">
+                    <?php
+                        if($user2 === "")
+                            echo "<input type=\"text\" name=\"username_chat\" size=\"50\" maxlength=\"200\" placeholder=\"Username persona da contattare\">"
+                    ?>
+                    <input type="text" name="messaggio" class="inputMessage"  maxlength="200" placeholder="Scrivi qui il messaggio">
+                    <input type="submit" value="CHAT">
+                </form>
+            </div>
+        </div>
+        </div>
     </body>
 </html>
 
