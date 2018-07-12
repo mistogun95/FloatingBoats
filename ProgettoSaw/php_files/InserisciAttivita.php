@@ -17,13 +17,13 @@
     $place = filter_var(htmlspecialchars(trim($_POST['placeIn'])), FILTER_SANITIZE_STRING);
     $totalCost = filter_var(htmlspecialchars(trim($_POST['totalCostIn'])), FILTER_SANITIZE_STRING);
     $instrumentation = filter_var(htmlspecialchars(trim($_POST['instrumentationIn'])), FILTER_SANITIZE_STRING);
-    $coordinateN = filter_var(htmlspecialchars(trim($_POST['coordinateNIn'])), FILTER_SANITIZE_STRING);
-    $coordinateS = filter_var(htmlspecialchars(trim($_POST['coordinateSIn'])), FILTER_SANITIZE_STRING);
+    $Latitudine = filter_var(htmlspecialchars(trim($_POST['Latitudine'])), FILTER_SANITIZE_STRING);
+    $Longitudine = filter_var(htmlspecialchars(trim($_POST['Longitudine'])), FILTER_SANITIZE_STRING);
     $tags = "";
     $regexDate = '/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/';
-    echo $start."<br>";
+    /*echo $start."<br>";
     echo $end."<br>";
-
+    */
     $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
 
     $stmt = $conn->prepare("SELECT COUNT(*) FROM Tags");
@@ -54,19 +54,20 @@
     }
     else
     {
-        $stmt = $conn->prepare("INSERT INTO Posts (Nomebarca, Titolo, NumeroPostiBarca, DataInizio, DataFine, LuogoDiRitrovo, SpesaViaggioTotale, Descrizione, StrumentazioneRichiesta, CoordinataNord, CoordinataSud, Citta, UsernameAutore, Tag) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-        $stmt->bind_param("sssssssssiisss", $boat, $title, $seats, $start, $end, $place, $totalCost, $description, $instrumentation, $coordinateN, $coordinateS, $città, $username, $tags);
+        $stmt = $conn->prepare("INSERT INTO Posts (Nomebarca, Titolo, NumeroPostiBarca, DataInizio, DataFine, LuogoDiRitrovo, SpesaViaggioTotale, Descrizione, StrumentazioneRichiesta, Latitudine, Longitudine, Citta, UsernameAutore, Tag) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        $stmt->bind_param("sssssssssddsss", $boat, $title, $seats, $start, $end, $place, $totalCost, $description, $instrumentation, $Latitudine, $Longitudine, $città, $username, $tags);
         if(!$stmt->execute())
         {
             echo "<script type='text/javascript'>alert('Execute Error');</script>";
             $stmt->close();
             $conn->close();
-            //header("Refresh:0; URL=HomepagePersonale.php");
+            header("Refresh:0; URL=HomepagePersonale.php");
         }
         $stmt->close(); 
     }
-    //header( "refresh:0;url=../HomepagePersonale.php" );
     $conn->close();
+    header( "refresh:0;url=../HomepagePersonale.php" );
+
     
 ?>
 

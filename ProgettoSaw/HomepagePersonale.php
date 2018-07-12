@@ -173,18 +173,18 @@ ini_set('display_errors','On');
                     <th>Spesa totale viaggio</th>
                     <th>Descrizione</th>
                     <th>Strumentazione richiesta</th>
-                    <th>Coordinata Nord</th>
-                    <th>Coordinata Sud</th>
+                    <th>Latitudine</th>
+                    <th>Longitudine</th>
                     <th>Città</th>
                     <th>Tag</th>
                 </tr>
                 <?php
                     $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
-                    $query = "SELECT Nomebarca,Titolo,NumeroPostiBarca,DataInizio,DataFine,LuogoDiRitrovo,SpesaViaggioTotale,Descrizione,StrumentazioneRichiesta,CoordinataNord,CoordinataSud,Citta,Tag FROM Posts WHERE UsernameAutore=?";
+                    $query = "SELECT Nomebarca,Titolo,NumeroPostiBarca,DataInizio,DataFine,LuogoDiRitrovo,SpesaViaggioTotale,Descrizione,StrumentazioneRichiesta,Latitudine,Longitudine,Citta,Tag FROM Posts WHERE UsernameAutore=?";
                     $stmt = $conn->prepare($query);
                     $stmt->bind_param("s", $username);
                     $stmt->execute();
-                    $stmt->bind_result($NomeB, $Titol, $NPosti, $Inizio, $Fine, $Ritrovo, $Spesa, $Descr, $Strumentazione, $CNord, $CSud, $citta, $tags);
+                    $stmt->bind_result($NomeB, $Titol, $NPosti, $Inizio, $Fine, $Ritrovo, $Spesa, $Descr, $Strumentazione, $Latitudine, $Longitudine, $citta, $tags);
                     while($stmt->fetch())
                     {
                         
@@ -198,8 +198,8 @@ ini_set('display_errors','On');
                         echo "<td>".$Spesa."</td>";
                         echo "<td>".$Descr."</td>";
                         echo "<td>".$Strumentazione."</td>";
-                        echo "<td>".$CNord."</td>";
-                        echo "<td>".$CSud."</td>";
+                        echo "<td>".$Latitudine."</td>";
+                        echo "<td>".$Longitudine."</td>";
                         echo "<td>".$citta."</td>";
                         echo "<td>".$tags."</td>";
                         echo "</tr>";

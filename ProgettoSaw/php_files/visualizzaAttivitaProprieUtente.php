@@ -49,11 +49,11 @@
             <?php
                     $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
                     $username = $_GET["username"];
-                    $query = "SELECT Nomebarca,Titolo,NumeroPostiBarca,DataInizio,DataFine,LuogoDiRitrovo,SpesaViaggioTotale,Descrizione,StrumentazioneRichiesta,CoordinataNord,CoordinataSud,Citta FROM Posts WHERE UsernameAutore=?";
+                    $query = "SELECT Nomebarca,Titolo,NumeroPostiBarca,DataInizio,DataFine,LuogoDiRitrovo,SpesaViaggioTotale,Descrizione,StrumentazioneRichiesta,Latitudine,Longitudine,Citta FROM Posts WHERE UsernameAutore=?";
                     $stmt = $conn->prepare($query);
                     $stmt->bind_param("s", $username);
                     $stmt->execute();
-                    $stmt->bind_result($NomeB, $Titol, $NPosti, $Inizio, $Fine, $Ritrovo, $Spesa, $Descr, $Strumentazione, $CNord, $CSud, $citta);
+                    $stmt->bind_result($NomeB, $Titol, $NPosti, $Inizio, $Fine, $Ritrovo, $Spesa, $Descr, $Strumentazione, $Latitudine, $Longitudine, $citta);
                     while($stmt->fetch())
                     {
                         
@@ -67,8 +67,8 @@
                         echo "<td>".$Spesa."</td>";
                         echo "<td>".$Descr."</td>";
                         echo "<td>".$Strumentazione."</td>";
-                        echo "<td>".$CNord."</td>";
-                        echo "<td>".$CSud."</td>";
+                        echo "<td>".$Latitudine."</td>";
+                        echo "<td>".$Longitudine."</td>";
                         echo "<td>".$citta."</td>";
                         echo "</tr>";
 

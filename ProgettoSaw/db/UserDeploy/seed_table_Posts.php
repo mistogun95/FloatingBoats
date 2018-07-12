@@ -5,7 +5,7 @@
     $con = mysqli_connect($mysql_server, $mysql_user, $mysql_pass, $mysql_db) or die ("Errore Connessione al Database");
     $query = "INSERT INTO `Posts` (`Nomebarca`, `Titolo`, `NumeroPostiBarca`,
                 `DataInizio`, `DataFine`, `LuogoDiRitrovo`, `SpesaViaggioTotale`,
-                `Descrizione`, `StrumentazioneRichiesta`, `CoordinataNord`, `CoordinataSud`,
+                `Descrizione`, `StrumentazioneRichiesta`, `Latitudine`, `Longitudine`,
                 `Citta`, `UsernameAutore`,`Tag`) VALUES
     
     ('luna','Pesca immersione la bella vita','8','2018-06-15','2018-06-16','marina di sestri',
