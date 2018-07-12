@@ -8,59 +8,16 @@ ini_set('display_errors','On');
     else
         $username = $_SESSION['username'];
     include "db/mysql_credentials.php";
-    
+    include "php_files/take_user_date.php";
     $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
     if ($conn->connect_error) {
         $message = "Conn ERORR!! <br/>";
     }
     else
     {
-        $stmt = $conn->prepare("SELECT FlagFoto, Citta, AboutMe, LinkWebSite, Facebook, Instagram, Twitter, Name, Surname, Interessi FROM Users WHERE Username=?");
-        $stmt->bind_param("s",$username);
-        
-        if(!$stmt->execute())
-        {
-            echo "<script type='text/javascript'>alert('Execute Error');</script>";
-            $stmt->close();
-            $conn->close();
-            header("Refresh:0; URL=Homepage.html");
-        }
-        
-        $stmt->bind_result($var_FlagFoto, $var_Citta, $var_AboutMe, $var_LinkWebSite, $var_Facebook, $var_Instagram, $var_Twitter, $var_Name, $var_Surname, $var_interessi);
-        $stmt->fetch();
-        
-        if(isset($var_Name) && isset($var_Surname) )
-        {
-            if($var_FlagFoto == 1)
-            {
-                $var_tipo_immagine = array("png", "jpg", "jpeg");
-                $var_directory = "ImmaginiCaricate/";
-
-                for ($i = 0; $i < 3; $i++) 
-                {
-                    $var_complete_path_new_image = $var_directory.$username.".".$var_tipo_immagine[$i];
-                    if(file_exists($var_complete_path_new_image))
-                    {
-                        break;
-                    }
-
-                }
-                
-            }
-            else//carico la foto di deafult
-            {
-                $var_complete_path_new_image = "ImmaginiCaricate/default.png";
-            }
-
-        }
-        else 
-        {
-            echo "<script type='text/javascript'>alert('Il fetch è andato male...');</script>";
-        }
-        
-        $stmt->close();
-        $conn->close();
+        take_user_date($username, $conn);
     }
+    $conn->close();
 
     
 
@@ -79,36 +36,41 @@ ini_set('display_errors','On');
     </head>
 
     <body>
-        <nav class="navbar navbar-expand-lg groundNav navbar-light sticky-top">
-            <a class="navbar-brand" href="HomepagePersonale.php">
-                <img src="Immagini/logo1.png" alt="logo" style="width:60px;">
-            </a>
-            <ul class = "navbar-nav">
-                <li class="nav-item"><a class="nav-link btn btn-success" href="#AboutUs">AboutUs</a></li>
-                <li class="nav-item"><a class="nav-link btn btn-success" href="#contatti">Contattaci</a></li>
-                <li class="nav-item"><a class="nav-link btn btn-success" data-toggle="modal" href="#myModal">Profilo</a></li>
-                <li class="nav-item"><a class="nav-link btn btn-success" data-toggle="modal" href="#myModal2">Attività</a></li>
-                <li class="nav-item">
-                <div class="dropdown">
-                    <button type="button" class=" nav-link btn btn-success dropdown-toggle dropdown1" data-toggle="dropdown">
-                        Messaggi
-                    </button>
-                    <div class="dropdown-menu">
-                        <?php
-                            include "db/mysql_credentials.php";
-                            include "FilePerChat/take_user_in_contact.php";
-                            $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
-                            take_user_in_contact($username, $conn);
-                            $conn->close();
-                        ?>
-                        <a class="nav-link btn btn-primary" href="FilePerChat/chat.php?userContact=">Nuova conversazione</a>
-                    </div>
-                </div> 
-                </li>
-            </ul>
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a class="nav-link btn btn-primary" href="Logout.php">Logout</a></li>
-            </ul>
+        <nav class="navbar navbar-expand-md bg-info navbar-light sticky-top bg-inverse">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapse_target">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class = "collapse navbar-collapse" id="collapse_target">
+                <a class="navbar-brand" href="HomepagePersonale.php">
+                    <img src="Immagini/logo1.png" alt="logo" style="width:60px;">
+                </a>
+                <ul class = "nav navbar-nav">
+                    <li class="nav-item"><a class="nav-link btn btn-primary" href="#AboutUs">AboutUs</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-primary" href="#contatti">Contattaci</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-primary" data-toggle="modal" href="#myModal">Profilo</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-primary" data-toggle="modal" href="#myModal2">Attività</a></li>
+                    <li class="nav-item">
+                    <div class="dropdown">
+                        <button type="button" class=" nav-link btn btn-primary dropdown-toggle dropdown1" data-toggle="dropdown">
+                            Messaggi
+                        </button>
+                        <div class="dropdown-menu">
+                            <?php
+                                include "db/mysql_credentials.php";
+                                include "FilePerChat/take_user_in_contact.php";
+                                $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
+                                take_user_in_contact($username, $conn);
+                                $conn->close();
+                            ?>
+                            <a class="nav-link btn btn-primary" href="FilePerChat/chat.php?userContact=">Nuova conversazione</a>
+                        </div>
+                    </div> 
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link btn btn-primary" href="Logout.php">Logout</a></li>
+                </ul>
+            </div>
         </nav>
 
             <!-- The Modal -->
@@ -141,6 +103,7 @@ ini_set('display_errors','On');
       
             <!-- Modal footer -->
             <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Chiudi</button>
             </div>
         </form>
           </div>
@@ -215,6 +178,7 @@ ini_set('display_errors','On');
             <!-- Modal footer -->
             <div class="modal-footer">
                 <a href="php_files/formInserimentoAttivita.php" class="btn btn-primary">Inserisci Attività</a>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Chiudi</button>
             </div>
         </form>
           </div>

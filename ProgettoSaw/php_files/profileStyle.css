@@ -16,3 +16,16 @@ body{
     background-size: cover;
     background-size: 100% 100%; 
 }
+
+.bodySearch{
+    background-image: url("../Immagini/barca3.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.tableSearch{
+    background: #66a1d1;
+}

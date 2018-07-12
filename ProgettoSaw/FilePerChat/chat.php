@@ -66,7 +66,7 @@
                 <form name="chat" method="post" action="message.php?userContact=<?php echo $user2 ?>" enctype="multipart/form-data">
                     <?php
                         if($user2 === "")
-                            echo "<input type=\"text\" name=\"username_chat\" size=\"50\" maxlength=\"200\" placeholder=\"Username persona da contattare\">"
+                            echo "<input type=\"text\" class=\"inputMessage\" name=\"username_chat\" size=\"50\" maxlength=\"200\" placeholder=\"Username persona da contattare\">"
                     ?>
                     <input type="text" name="messaggio" class="inputMessage"  maxlength="200" placeholder="Scrivi qui il messaggio">
                     <input type="submit" value="CHAT">
@@ -123,9 +123,9 @@
             {
                 echo "<div class=\"container darker\">";
                 $imagePath = take_user_profile_image($autor);
-                echo "<img src=\"".$imagePath."\"alt=\"Avatar\" style=\"width:40px;\"";
+                echo "<img src=\"".$imagePath."\"alt=\"Avatar\" class=\"right\" style=\"width:40px;\"";
                 echo "<label><p>"."<b>".$autor." scrive "."</b>".$mex."</p></label>";
-                echo "<span class=\"time-right\">".$dataMex."</span>";
+                echo "<span class=\"time-left\">".$dataMex."</span>";
                 echo "</div>";
             }
         }
@@ -172,7 +172,7 @@
             {
                 echo "<div class=\"container\">";
                 $imagePath = take_user_profile_image($autor);
-                echo "<img src=\"".$imagePath."\"alt=\"Avatar\" style=\"width:40px;\"";
+                echo "<img src=\"".$imagePath."\"alt=\"Avatar\"  style=\"width:40px;\"";
                 echo "<label><p>"."<b>".$autor." scrive "."</b>".$mex."</p></label>";
                 echo "<span class=\"time-right\">".$dataMex."</span>";
                 echo "</div>";
@@ -181,9 +181,9 @@
             {
                 echo "<div class=\"container darker\">";
                 $imagePath = take_user_profile_image($autor);
-                echo "<img src=\"".$imagePath."\"alt=\"Avatar\" style=\"width:40px;\"";
+                echo "<img src=\"".$imagePath."\"alt=\"Avatar\" class=\"right\" style=\"width:40px;\"";
                 echo "<label><p>"."<b>".$autor." scrive "."</b>".$mex."</p></label>";
-                echo "<span class=\"time-right\">".$dataMex."</span>";
+                echo "<span class=\"time-left\">".$dataMex."</span>";
                 echo "</div>";
             }
         }

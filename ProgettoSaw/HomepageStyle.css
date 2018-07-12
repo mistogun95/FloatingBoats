@@ -215,6 +215,16 @@ button{
 	font-family: Arial;
 }
 
+@media only screen and (max-width: 1080px){
+	.titleRegistration{
+		color: #331abe;
+		font-size: 40pt;
+		text-transform: uppercase;
+		text-align: center;
+		font-family: Arial;
+	}
+}
+
 .topRegistration{
 	color: #dc143c;
 	font-size: 20pt;
