@@ -147,27 +147,17 @@
     </head>
     <body class>
         <nav class="navbar navbar-expand-lg bg-info navbar-light sticky-top">
-            <?php
-                if(isset($_POST["username"]))
-                    echo "<a class=\"navbar-brand\" href=\"../HomepagePersonale.php\">
-                        <img src=\"../Immagini/logo1.png\" alt=\"logo\" style=\"width:60px;\">
-                        </a>";
-                else
-                    echo "<a class=\"navbar-brand\" href=\"../Homepage.html\">
-                        <img src=\"../Immagini/logo1.png\" alt=\"logo\" style=\"width:60px;\">
-                        </a>";
-            ?>
-            <!-- <ul class = "navbar-nav">
+            <a class="navbar-brand" href="../HomepagePersonale.php">
+                <img src="../Immagini/logo1.png" alt="logo" style="width:60px;">
+            </a>
+            <ul class = "navbar-nav">
                 <li class="nav-item"><a class="nav-link" href="#AboutUs">AboutUs</a></li>
                 <li class="nav-item"><a class="nav-link" href="#contatti">Contattaci</a></li>
                 <li class="nav-item"><a class="nav-link" href="php_files/get_data_profile.php">Profilo</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Messaggi</a></li>
-            </ul> -->
+            </ul>
             <ul class="navbar-nav ml-auto">
-                <?php
-                    if(isset($_POST["username"]))
-                        echo "<li class=\"nav-item btn btn-success\"><a class=\"nav-link\" href=\"../Logout.php\">Logout</a></li>"
-                ?>
+                <li class="nav-item"><a class="nav-link" href="../Logout.php">Logout</a></li>
             </ul>
         </nav>
         <table class = "tabel table-hover table-bordered personalTable">
@@ -219,7 +209,8 @@
                         //echo "<td><a href=\"visualizzaAttivita.php?id_post=$Id\" class=\"btn btn-primary\">Visualizza pagina Attività</a></td>";
                         //echo "<td><button type=\"button\"class=\"btn btn-primary\" >Visualizza pagina Attività</td>";
                         echo "<td>";
-                        creteAButtonModal($n,"myModal","Header text","text body","close","Visualizza pagina Attività",$Latitudine,$Longitudine);
+                        //creteAButtonModal($n,"myModal","Header text","text body","close","Visualizza pagina Attività",$Latitudine,$Longitudine);
+                        creteAButtonModal($n, "myModal",$Titol, $Descr,"close","Visualizza pagina Attività",$Latitudine,$Longitudine);
                         echo "</td>";
                         echo "</tr>";
                         $n++;
@@ -230,7 +221,7 @@
                 ?>
             </tbody>
         </table>
-        <?php createModalBootstrap("myModal","Header text","text body","close",$Latitudine,$Longitudine); ?>
+        <?php createModalBootstrap("myModal", $Titol, $Descr,"close",$Latitudine,$Longitudine, $autore); ?>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhnvNJTfDyfVn08mAufLn9p1SA-DdhlXo&callback"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

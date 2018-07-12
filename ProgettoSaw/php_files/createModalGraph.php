@@ -5,7 +5,6 @@
         <!-- Button to Open the Modal -->
         <div class=\"container\">";
         createButtonToModalBootstrap($nameButton,$IdNameModal,$Latitudine,$Longitudine);
-        //createModalBootstrap($IdNameModal,$titleHeader,$textBody,$nameButtonClose,$Latitudine,$Longitudine);
         echo "</div>";
     }
     
@@ -23,7 +22,7 @@
     
 /****************** START MODEL MODAL *******************/
     
-    function createModalBootstrap($IdNameModal,$titleHeader,$textBody,$nameButtonClose,$Latitudine,$Longitudine)
+    function createModalBootstrap($IdNameModal,$titleHeader,$textBody,$nameButtonClose,$Latitudine,$Longitudine,$bodyDown)
     {
         echo "
         <!-- The Modal -->
@@ -32,7 +31,7 @@
                 <div class=\"modal-content\">";
 
             createHeaderModalBootstrap($titleHeader);
-            createBodyModalBootstrap($textBody,$n,$Latitudine,$Longitudine);
+            createBodyModalBootstrap($textBody,$Latitudine,$Longitudine,$bodyDown);
             //createFooterModalBootstrap($nameButtonClose);
 
         echo "</div>
@@ -49,7 +48,7 @@
       </div>";
     }
 
-    function createBodyModalBootstrap($textBody,$Latitudine,$Longitudine)
+    function createBodyModalBootstrap($textBody,$Latitudine,$Longitudine,$bodyDown)
     {
         //$textBody1 = " <div id=\"".$n."\" onload=\"printMap(\"".$n."\",".$Latitudine.",".$Longitudine.")\"></div>";
         //$textBody1 = " <div id=\"".$n."\" style=\"width:85%;height:500px;\" onload=\"printMap(".$n.",".$Latitudine.",".$Longitudine.")\"></div>";
@@ -71,7 +70,7 @@
             </div>
             <div class=\"row\">
                 <div class=\"col-md-12 modal_body_end\">
-                    <p>robA sotto</p>
+                    <p>Evento proposto da: <a href=\"#\">".$bodyDown."</a></p>
                 </div>
             </div>
          </div>";
