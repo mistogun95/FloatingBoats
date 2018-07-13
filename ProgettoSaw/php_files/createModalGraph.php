@@ -1,19 +1,17 @@
 <?php
-    function creteAButtonModal($n,$IdNameModal,$nameButtonClose,$nameButton,$Latitudine,$Longitudine, $autore, $isRegister=false)
+    function creteAButtonModal($n,$IdNameModal,$nameButtonClose,$nameButton,$Latitudine,$Longitudine, $autore)
     {
         echo "
         <!-- Button to Open the Modal -->
         <div class=\"container\">";
-        createButtonToModalBootstrap($nameButton,$IdNameModal,$Latitudine,$Longitudine, $autore, $isRegister);
+        createButtonToModalBootstrap($nameButton,$IdNameModal,$Latitudine,$Longitudine, $autore);
         echo "</div>";
     }
     
     /*************** START BUTTON MODAL **********************/
-    function createButtonToModalBootstrap($nameButton,$IdNameModal,$Latitudine,$Longitudine, $autore, $isRegister)
+    function createButtonToModalBootstrap($nameButton,$IdNameModal,$Latitudine,$Longitudine, $autore)
     {
         $optional_string = " data-autore='".$autore."' ";
-        if($isRegister===true)
-            $optional_string = " data-autore='href=\"profiloUtente.php?Utente=".$autore."' ";
         $string_to_print = "<button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#".$IdNameModal."\"
         data-lat='".$Latitudine."' data-lng='".$Longitudine."' ".$optional_string." >
         ".$nameButton."
@@ -75,9 +73,7 @@
             </div>
             <div class=\"row\">
                 <div class=\"col-md-12 modal_body_end\">
-                    <div class=\"myBody\">
-                        <p>Evento proposto da: ".$bodyDown."</p>
-                    </div>
+                    <p>Eventa organizzato da: <a id='a1'></a></p>
                 </div>
             </div>
          </div>";

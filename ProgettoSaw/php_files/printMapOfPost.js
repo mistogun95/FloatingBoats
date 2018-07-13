@@ -30,8 +30,9 @@ $(document).ready(function()
     initializeGMap(button.data('lat'), button.data('lng'));
     var modal = $(this);
     $("#location-map").css("width", "100%");
-    $("#map_canvas").css("width", "100%");  
-    modal.find('.myBody').text('create by: <a href="profiloUtente.php?Utente="' +"zio\"" );
+    $("#map_canvas").css("width", "100%");
+    modal.find('#a1').attr("href", "profiloUtente.php?Utente="+autore)
+    modal.find('#a1').text('zio');
   });
 
   // Trigger map resize event after modal shown
