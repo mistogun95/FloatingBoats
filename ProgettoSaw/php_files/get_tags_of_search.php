@@ -147,7 +147,12 @@
     </head>
     <body>
             <nav class="navbar navbar-expand-lg bg-info navbar-light sticky-top">
-                <a class="navbar-brand" href="../HomepagePersonale.php">
+                <?php
+                    if(isset($_SESSION["username"]))
+                        echo "<a class=\"navbar-brand\" href=\"../HomepagePersonale.php\">";
+                    else
+                        echo "<a class=\"navbar-brand\" href=\"../Homepage.html\">";
+                ?>
                     <img src="../Immagini/logo1.png" alt="logo" style="width:60px;">
                 </a>
                 <!-- <ul class = "navbar-nav">
@@ -157,9 +162,13 @@
                     <li class="nav-item"><a class="nav-link" href="#">Messaggi</a></li>
                 </ul> -->
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link btn btn-primary" href="../Logout.php">Logout</a></li>
+                    <?php
+                        if(isset($_SESSION["username"]))
+                            echo "<li class=\"nav-item\"><a class=\"nav-link btn btn-primary\" href=\"../Logout.php\">Logout</a></li>"     
+                    ?>
                 </ul>
             </nav>
+            <div class="table-responsive">
             <table class = "tabel table-hover table-bordered personalTable tableSearch">
                 <thead>
                     <tr>
@@ -205,7 +214,10 @@
                             echo "<td>".$Latitudine."</td>";
                             echo "<td>".$Longitudine."</td>";
                             echo "<td>".$citta."</td>";
-                            echo "<td>"."<a class =\"btn btn-primary\" href=\"profiloUtente.php?Utente=".$autore."\">".$autore."</a></td>";
+                            if(isset($_SESSION["username"]))
+                                echo "<td>"."<a class =\"btn btn-primary\" href=\"profiloUtente.php?Utente=".$autore."\">".$autore."</a></td>";
+                            else
+                                echo "<td>"."<a class =\"btn btn-primary not-active\" href=\"profiloUtente.php?Utente=".$autore."\" disabled>".$autore."</a></td>";
                             //echo "<td><a href=\"visualizzaAttivita.php?id_post=$Id\" class=\"btn btn-primary\">Visualizza pagina Attività</a></td>";
                             //echo "<td><button type=\"button\"class=\"btn btn-primary\" >Visualizza pagina Attività</td>";
                             echo "<td>";
@@ -221,6 +233,7 @@
                     ?>
                 </tbody>
             </table>
+            </div>
             <?php createModalBootstrap("myModal", $Titol, $Descr,"close",$Latitudine,$Longitudine, $autore); ?>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhnvNJTfDyfVn08mAufLn9p1SA-DdhlXo&callback"></script>
