@@ -18,10 +18,10 @@
             $stmt->bind_param("ss",$username, $passwordSha1);
             if(!$stmt->execute())
             {
-                echo "<script type='text/javascript'>alert('Execute Error');</script>";
+                //echo "<script type='text/javascript'>alert('Execute Error');</script>";
                 $stmt->close();
                 $conn->close();
-                header("Refresh:0; URL=HomepagePersonale.php");
+                header("Refresh:0; URL=error.php");
             }
             echo "DOPO EXECUTE<br>";
             $stmt->bind_result($var_query_name,$var_query_surname);
@@ -42,8 +42,8 @@
             }
             else 
             {
-                echo "<script type='text/javascript'>alert('Il fetch è andato male...');</script>";
-                header("Refresh:0; URL=Homepage.html");
+                //echo "<script type='text/javascript'>alert('Il fetch è andato male...');</script>";
+                header("Refresh:0; URL=error.php");
             }
             
             $stmt->close();

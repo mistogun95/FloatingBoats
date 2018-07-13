@@ -22,10 +22,10 @@
         
         if(!$stmt->execute())
         {
-            echo "<script type='text/javascript'>alert('Execute Error');</script>";
+            //echo "<script type='text/javascript'>alert('Execute Error');</script>";
             $stmt->close();
             $conn->close();
-            header("Refresh:0; URL=Homepage.html");
+            header("Refresh:0; URL=error.php");
         }
         
         $stmt->bind_result($var_FlagFoto, $var_Citta, $var_AboutMe, $var_LinkWebSite, $var_Facebook, $var_Instagram, $var_Twitter, $var_Name, $var_Surname);
@@ -57,7 +57,8 @@
         }
         else 
         {
-            echo "<script type='text/javascript'>alert('Il fetch è andato male...');</script>";
+            //echo "<script type='text/javascript'>alert('Il fetch è andato male...');</script>";
+            header("Refresh:0; URL=error.php");
         }
         
         $stmt->close();
@@ -66,10 +67,10 @@
 
         if(!$stmt->execute())
         {
-            echo "<script type='text/javascript'>alert('Execute Error');</script>";
+            //echo "<script type='text/javascript'>alert('Execute Error');</script>";
             $stmt->close();
             $conn->close();
-            header("Refresh:0; URL=Homepage.html");
+            header("Refresh:0; URL=error.php");
         }
         $stmt->bind_result($var_Name_Tags);
         $array_tags_names = array();
