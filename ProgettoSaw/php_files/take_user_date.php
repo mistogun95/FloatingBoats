@@ -51,7 +51,7 @@
         }
         else 
         {
-            echo "<script type='text/javascript'>alert('Il fetch è andato male...');</script>";
+            echo "<script type='text/javascript'>alert('Il fetch è andato male...(take_user_date.php)');</script>";
         }
         $arrayDate[] = $var_complete_path_new_image;
         

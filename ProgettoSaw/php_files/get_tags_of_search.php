@@ -210,7 +210,7 @@
                             //echo "<td><button type=\"button\"class=\"btn btn-primary\" >Visualizza pagina Attività</td>";
                             echo "<td>";
                             //creteAButtonModal($n,"myModal","Header text","text body","close","Visualizza pagina Attività",$Latitudine,$Longitudine);
-                            creteAButtonModal($n, "myModal",$Titol, $Descr,"close","Visualizza mappa attività",$Latitudine,$Longitudine);
+                            creteAButtonModal($n, "myModal","close","Visualizza mappa attività",$Latitudine,$Longitudine, $autore, true);
                             echo "</td>";
                             echo "</tr>";
                             $n++;
@@ -221,7 +221,7 @@
                     ?>
                 </tbody>
             </table>
-            <?php createModalBootstrap("myModal", $Titol, $Descr,"close",$Latitudine,$Longitudine, $autore); ?>
+            <?php createModalBootstrap("myModal", $Titol, $Descr,"close",$Latitudine,$Longitudine); ?>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhnvNJTfDyfVn08mAufLn9p1SA-DdhlXo&callback"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

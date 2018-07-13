@@ -26,9 +26,12 @@ $(document).ready(function()
   // Re-init map before show modal
   $('#myModal').on('show.bs.modal', function(event) {
     var button = $(event.relatedTarget);
+    var autore = button.data('autore');
     initializeGMap(button.data('lat'), button.data('lng'));
+    var modal = $(this);
     $("#location-map").css("width", "100%");
-    $("#map_canvas").css("width", "100%");
+    $("#map_canvas").css("width", "100%");  
+    modal.find('.myBody').text('create by: <a href="profiloUtente.php?Utente="' +"zio\"" );
   });
 
   // Trigger map resize event after modal shown
