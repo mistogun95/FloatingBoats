@@ -1,20 +1,23 @@
 <?php
-    function creteAButtonModal($n,$IdNameModal,$titleHeader,$textBody,$nameButtonClose,$nameButton,$Latitudine,$Longitudine)
+    function creteAButtonModal($n,$IdNameModal,$nameButtonClose,$nameButton,$Latitudine,$Longitudine, $autore)
     {
         echo "
         <!-- Button to Open the Modal -->
         <div class=\"container\">";
-        createButtonToModalBootstrap($nameButton,$IdNameModal,$Latitudine,$Longitudine);
+        createButtonToModalBootstrap($nameButton,$IdNameModal,$Latitudine,$Longitudine, $autore);
         echo "</div>";
     }
     
     /*************** START BUTTON MODAL **********************/
-    function createButtonToModalBootstrap($nameButton,$IdNameModal,$Latitudine,$Longitudine)
+    function createButtonToModalBootstrap($nameButton,$IdNameModal,$Latitudine,$Longitudine, $autore)
     {
-        echo "<button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#".$IdNameModal."\"
-        data-lat='".$Latitudine."' data-lng='".$Longitudine."'>
+        $optional_string = " data-autore='".$autore."' ";
+        $string_to_print = "<button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#".$IdNameModal."\"
+        data-lat='".$Latitudine."' data-lng='".$Longitudine."' ".$optional_string." >
         ".$nameButton."
       </button>";
+      
+      echo $string_to_print;
     }
 
     /****************** END BUTTON MODAL *******************/
@@ -22,7 +25,7 @@
     
 /****************** START MODEL MODAL *******************/
     
-    function createModalBootstrap($IdNameModal,$titleHeader,$textBody,$nameButtonClose,$Latitudine,$Longitudine,$bodyDown)
+    function createModalBootstrap($IdNameModal,$titleHeader,$textBody,$nameButtonClose,$Latitudine,$Longitudine,$bodyDown="\n")
     {
         echo "
         <!-- The Modal -->
@@ -70,7 +73,7 @@
             </div>
             <div class=\"row\">
                 <div class=\"col-md-12 modal_body_end\">
-                    <p>Evento proposto da: <a href=\"#\">".$bodyDown."</a></p>
+                    <p>Eventa organizzato da: <a id='a1'></a></p>
                 </div>
             </div>
          </div>";

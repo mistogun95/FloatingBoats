@@ -169,70 +169,71 @@
                 </ul>
             </nav>
             <div class="table-responsive">
-            <table class = "tabel table-hover table-bordered personalTable tableSearch">
-                <thead>
-                    <tr>
-                        <th>Nome Barca</th>
-                        <th>Titolo</th>
-                        <th>Numero Posti Barca</th>
-                        <th>Data Inizio</th>
-                        <th>Data Fine</th>
-                        <th>Luogo di Ritrovo</th>
-                        <th>Spesa totale viaggio</th>
-                        <th>Descrizione</th>
-                        <th>Strumentazione richiesta</th>
-                        <th>Latitudine</th>
-                        <th>Longitudine</th>
-                        <th>Città</th>
-                        <th>Autore post</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                        $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
-                        $query = "SELECT Nomebarca,Titolo,NumeroPostiBarca,DataInizio,DataFine,LuogoDiRitrovo,SpesaViaggioTotale,Descrizione,StrumentazioneRichiesta,Latitudine,Longitudine,Citta,UsernameAutore FROM Posts WHERE ID=?";
-                        $stmt = $conn->prepare($query);
-                        $n=1;
-                        include "createModalGraph.php";
-                        foreach($array_Id as $Id)
-                        {
-                            $stmt->bind_param("i", $Id);
-                            $stmt->execute();
-                            $stmt->bind_result($NomeB, $Titol, $NPosti, $Inizio, $Fine, $Ritrovo, $Spesa, $Descr, $Strumentazione, $Latitudine, $Longitudine, $citta, $autore);
-                            $stmt->fetch();
-                            
-                            echo "<tr>";
-                            echo "<td>".$NomeB."</td>";
-                            echo "<td>".$Titol."</td>";
-                            echo "<td>".$NPosti."</td>";
-                            echo "<td>".$Inizio."</td>";
-                            echo "<td>".$Fine."</td>";
-                            echo "<td>".$Ritrovo."</td>";
-                            echo "<td>".$Spesa."</td>";
-                            echo "<td>".$Descr."</td>";
-                            echo "<td>".$Strumentazione."</td>";
-                            echo "<td>".$Latitudine."</td>";
-                            echo "<td>".$Longitudine."</td>";
-                            echo "<td>".$citta."</td>";
-                            if(isset($_SESSION["username"]))
-                                echo "<td>"."<a class =\"btn btn-primary\" href=\"profiloUtente.php?Utente=".$autore."\">".$autore."</a></td>";
-                            else
-                                echo "<td>"."<a class =\"btn btn-primary not-active\" href=\"profiloUtente.php?Utente=".$autore."\" disabled>".$autore."</a></td>";
-                            //echo "<td><a href=\"visualizzaAttivita.php?id_post=$Id\" class=\"btn btn-primary\">Visualizza pagina Attività</a></td>";
-                            //echo "<td><button type=\"button\"class=\"btn btn-primary\" >Visualizza pagina Attività</td>";
-                            echo "<td>";
-                            //creteAButtonModal($n,"myModal","Header text","text body","close","Visualizza pagina Attività",$Latitudine,$Longitudine);
-                            creteAButtonModal($n, "myModal",$Titol, $Descr,"close","Visualizza mappa attività",$Latitudine,$Longitudine);
-                            echo "</td>";
-                            echo "</tr>";
-                            $n++;
+                <table class = "tabel table-hover table-bordered personalTable tableSearch">
+                    <thead>
+                        <tr>
+                            <th>Nome Barca</th>
+                            <th>Titolo</th>
+                            <th>Numero Posti Barca</th>
+                            <th>Data Inizio</th>
+                            <th>Data Fine</th>
+                            <th>Luogo di Ritrovo</th>
+                            <th>Spesa totale viaggio</th>
+                            <th>Descrizione</th>
+                            <th>Strumentazione richiesta</th>
+                            <th>Latitudine</th>
+                            <th>Longitudine</th>
+                            <th>Città</th>
+                            <th>Autore post</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                            $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
+                            $query = "SELECT Nomebarca,Titolo,NumeroPostiBarca,DataInizio,DataFine,LuogoDiRitrovo,SpesaViaggioTotale,Descrizione,StrumentazioneRichiesta,Latitudine,Longitudine,Citta,UsernameAutore FROM Posts WHERE ID=?";
+                            $stmt = $conn->prepare($query);
+                            $n=1;
+                            include "createModalGraph.php";
+                            foreach($array_Id as $Id)
+                            {
+                                $stmt->bind_param("i", $Id);
+                                $stmt->execute();
+                                $stmt->bind_result($NomeB, $Titol, $NPosti, $Inizio, $Fine, $Ritrovo, $Spesa, $Descr, $Strumentazione, $Latitudine, $Longitudine, $citta, $autore);
+                                $stmt->fetch();
+                                
+                                echo "<tr>";
+                                echo "<td>".$NomeB."</td>";
+                                echo "<td>".$Titol."</td>";
+                                echo "<td>".$NPosti."</td>";
+                                echo "<td>".$Inizio."</td>";
+                                echo "<td>".$Fine."</td>";
+                                echo "<td>".$Ritrovo."</td>";
+                                echo "<td>".$Spesa."</td>";
+                                echo "<td>".$Descr."</td>";
+                                echo "<td>".$Strumentazione."</td>";
+                                echo "<td>".$Latitudine."</td>";
+                                echo "<td>".$Longitudine."</td>";
+                                echo "<td>".$citta."</td>";
+                                if(isset($_SESSION["username"]))
+                                    echo "<td>"."<a class =\"btn btn-primary\" href=\"profiloUtente.php?Utente=".$autore."\">".$autore."</a></td>";
+                                else
+                                    echo "<td>"."<a class =\"btn btn-primary not-active\" href=\"profiloUtente.php?Utente=".$autore."\" disabled>".$autore."</a></td>";
+                                //echo "<td><a href=\"visualizzaAttivita.php?id_post=$Id\" class=\"btn btn-primary\">Visualizza pagina Attività</a></td>";
+                                //echo "<td><button type=\"button\"class=\"btn btn-primary\" >Visualizza pagina Attività</td>";
+                                echo "<td>";
+                                //creteAButtonModal($n,"myModal","Header text","text body","close","Visualizza pagina Attività",$Latitudine,$Longitudine);
+                                creteAButtonModal($n, "myModal","close","Visualizza mappa attività",$Latitudine,$Longitudine, $autore, true);
+                                echo "</td>";
+                                echo "</tr>";
+                                $n++;
 
-                        }
-                        $stmt->close();
-                        $conn->close();
-                    ?>
-                </tbody>
-            </table>
+                            }
+                            $stmt->close();
+                            $conn->close();
+                        ?>
+                    </tbody>
+                </table>
+                <?php createModalBootstrap("myModal", $Titol, $Descr,"close",$Latitudine,$Longitudine); ?>
             </div>
             <?php createModalBootstrap("myModal", $Titol, $Descr,"close",$Latitudine,$Longitudine, $autore); ?>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
