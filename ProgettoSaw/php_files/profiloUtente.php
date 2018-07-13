@@ -35,12 +35,6 @@
             <a class="navbar-brand" href="../HomepagePersonale.php">
                 <img src="../Immagini/logo1.png" alt="logo" style="width:60px;">
             </a>
-            <!-- <ul class = "navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="#AboutUs">AboutUs</a></li>
-                <li class="nav-item"><a class="nav-link" href="#contatti">Contattaci</a></li>
-                <li class="nav-item"><a class="nav-link" href="php_files/get_data_profile.php">Profilo</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Messaggi</a></li>
-            </ul>  -->
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link btn btn-primary" href="../Logout.php">Logout</a></li>
             </ul>
@@ -64,61 +58,61 @@
                                         <div class = "form-group row">
                                             <label id = "username" class = "col-4 col-form-label">Username</label>
                                             <div class = "col-8">
-                                                <label id = "username" class = "col-4 col-form-label"><?php echo $user?></label>
+                                            <input id = "usernameIn" name = "usernameIn" placeholder = "Username" class = "form-control here" type = "text" value = <?php echo '"'.$user.'"'?> disabled>
                                             </div> 
                                         </div>
                                         <div class = "form-group row">
                                             <label id = "name" class = "col-4 col-form-label">Name</label>
                                             <div class = "col-8">
-                                                <label id = "username" class = "col-4 col-form-label"><?php echo $arrayDate[7]?></label>
+                                            <input name = "nameIn" placeholder = "Nome" class = "form-control here" type = "text" value = <?php echo '"'.$arrayDate[7].'"'?> disabled>
                                             </div> 
                                         </div>
                                         <div class = "form-group row">
                                             <label id = "surname" class = "col-4 col-form-label">Cognome</label>
                                             <div class = "col-8">
-                                                <label id = "username" class = "col-4 col-form-label"><?php echo $arrayDate[8]?></label>
+                                                <input name = "surnameIn" placeholder = "Cognome" class = "form-control here" type = "text" value = <?php echo '"'.$arrayDate[8].'"'?> disabled>
                                             </div> 
                                         </div>
                                         <div class = "form-group row">
                                             <label id = "webSite" class = "col-4 col-form-label">Web Site personale</label>
                                             <div class = "col-8">
-                                                <label id = "username" class = "col-4 col-form-label"><?php echo $arrayDate[3]?></label>
+                                                <input name = "webIn" placeholder = "Web Site personale" class = "form-control here" type = "text" value = <?php echo '"'.$arrayDate[3].'"'?> disabled>
                                             </div> 
                                         </div>
                                         <div class = "form-group row">
                                             <label id = "instagram" class = "col-4 col-form-label">Instagram</label>
                                             <div class = "col-8">
-                                                <label id = "username" class = "col-4 col-form-label"><?php echo $arrayDate[5]?></label>
+                                                <input name = "instagramIn" placeholder = "pagina Instagram" class = "form-control here" type = "text" value = <?php echo '"'.$arrayDate[5].'"'?> disabled>
                                             </div> 
                                         </div>
                                         <div class = "form-group row">
                                             <label id = "twitter" class = "col-4 col-form-label">Twitter</label>
                                             <div class = "col-8">
-                                                <label id = "username" class = "col-4 col-form-label"><?php echo $arrayDate[6]?></label>
+                                                <input name = "twitterIn" placeholder = "pagina Twitter" class = "form-control here" type = "text" value = <?php echo '"'.$arrayDate[6].'"'?> disabled>
                                             </div> 
                                         </div>
                                         <div class = "form-group row">
                                             <label id = "facebook" class = "col-4 col-form-label">Facebook</label>
                                             <div class = "col-8">
-                                                <label id = "username" class = "col-4 col-form-label"><?php echo $arrayDate[4]?></label>
+                                                <input name = "faceIn" placeholder = "pagina Facebook" class = "form-control here" type = "text" value = <?php echo '"'.$arrayDate[4].'"'?> disabled>
                                             </div> 
                                         </div>
                                         <div class = "form-group row">
                                             <label id = "città" class = "col-4 col-form-label">Città</label>
                                             <div class = "col-8">
-                                                <label id = "username" class = "col-4 col-form-label"><?php echo $arrayDate[1]?></label>
+                                                <input name = "cittàIn" placeholder = "città di provenienza" class = "form-control here" type = "text" value = <?php echo '"'.$arrayDate[1].'"'?> disabled>
                                             </div> 
                                         </div>
                                         <div class="form-group row">
                                             <label for="publicinfo" class="col-4 col-form-label">Interessi</label> 
                                             <div class = "col-8">
-                                                <label id = "username" class = "col-4 col-form-label"><?php echo $arrayDate[9]?></label>
+                                            <input name = "cittàIn" placeholder = "città di provenienza" class = "form-control here" type = "text" value = <?php echo '"'.$arrayDate[9].'"'?> disabled>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="publicinfo" class="col-4 col-form-label">Descrizione</label> 
                                             <div class = "col-8">
-                                                <label id = "username" class = "col-4 col-form-label"><?php echo $arrayDate[2]?></label>
+                                                <textarea name = "descrizione" cols = "40" rows = "4" class = "form-control" disabled><?php echo $arrayDate[2]?></textarea>
                                             </div>
                                         </div>
                                         <div class="form-group row">
