@@ -1,0 +1,14 @@
+
+.bg{
+    background-image: url("../Immagini/barcaErrore2.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover; 
+}
+
+.mexError{
+    background-color: rgb(180, 180, 180);
+    opacity: 0.6;
+    filter: alpha(opacity=60);
+}

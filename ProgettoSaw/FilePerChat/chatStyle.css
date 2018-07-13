@@ -81,6 +81,7 @@ body{
 .darker {
     border-color: #ccc;
     background-color:#A9A9A9;
+    text-align: right;
 }
 
 /* Clear floats */

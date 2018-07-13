@@ -7,9 +7,9 @@
 
         if(!$stmt->execute())
         {
-            echo "<script type='text/javascript'>alert('Execute Error2');</script>";
+            //echo "<script type='text/javascript'>alert('Execute Error2');</script>";
             $stmt->close();
-            header("Refresh:0; URL=../HomepagePersonale.php");
+            header("Refresh:0; URL=error.php");
         }
 
         $stmt->bind_result($Id_chat);
@@ -24,9 +24,9 @@
 
         if(!$stmt->execute())
         {
-            echo "<script type='text/javascript'>alert('Execute Error2');</script>";
+            //echo "<script type='text/javascript'>alert('Execute Error2');</script>";
             $stmt->close();
-            header("Refresh:0; URL=../HomepagePersonale.php");
+            header("Refresh:0; URL=error.php");
         }
 
         $stmt->bind_result($Id_chat);

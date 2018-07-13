@@ -55,7 +55,8 @@
         }
         else
         {
-            echo "<br>c'è stato un errore di connesione col db durante l'aggiornamento degli interessi.<br>";
+            //echo "<br>c'è stato un errore di connesione col db durante l'aggiornamento degli interessi.<br>";
+            header("Refresh:0; URL=error.php");
         }
         //echo "<br>FIN CHECK<br>";
     }

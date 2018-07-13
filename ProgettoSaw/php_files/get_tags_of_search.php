@@ -52,21 +52,21 @@
     if(!isset($array))
     {
         //echo "array non definito<br>";
-        echo "<script type='text/javascript'>alert('array non definito');</script>";
-        header("Refresh:0; URL=Homepage.html");
+        //echo "<script type='text/javascript'>alert('array non definito');</script>";
+        header("Refresh:0; URL=error.php");
     }
     $var_array_size = count($array);
     if($var_array_size==0)
     {
         //echo "array vuoto<br>";
-        echo "<script type='text/javascript'>alert('array vuoto');</script>";
-        header("Refresh:0; URL=Homepage.html");
+        //echo "<script type='text/javascript'>alert('array vuoto');</script>";
+        header("Refresh:0; URL=error.php");
     }
     include "../db/mysql_credentials.php";
     $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
     if ($conn->connect_error) {
-        echo "<script type='text/javascript'>alert('connection error');</script>";
-        header("Refresh:0; URL=Homepage.html");
+        //echo "<script type='text/javascript'>alert('connection error');</script>";
+        header("Refresh:0; URL=error.php");
     }
     else
     {
@@ -99,10 +99,10 @@
         // echo "prima della execute<br>";
         if(!$stmt->execute())
         {
-            echo "<script type='text/javascript'>alert('Execute Error');</script>";
+            //echo "<script type='text/javascript'>alert('Execute Error');</script>";
             $stmt->close();
             $conn->close();
-            header("Refresh:0; URL=Homepage.html");
+            header("Refresh:0; URL=error.php");
         }
         if($var_array_size == 1)
         {
