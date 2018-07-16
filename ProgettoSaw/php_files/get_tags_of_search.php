@@ -198,16 +198,16 @@
                                 echo "<td>".$Spesa."</td>";
                                 echo "<td id=\"descrizione_td".$n."\">".$Descr."</td>";
                                 echo "<td>".$Strumentazione."</td>";
-                                echo "<td>".$Latitudine."</td>";
-                                echo "<td>".$Longitudine."</td>";
+                                echo "<td id=\"latitudine".$n."\">".$Latitudine."</td>";
+                                echo "<td id=\"longitudine".$n."\">".$Longitudine."</td>";
                                 echo "<td>".$citta."</td>";
                                 if(isset($_SESSION["username"]))
-                                    $tmp1=" href=\"profiloUtente.php?Utente=".$autore."\"";
+                                    $tmp1=" id=\"href_a".$n."\" href=\"profiloUtente.php?Utente=".$autore."\"";
                                 else
                                     $tmp0=" not-active";
                                 echo "<td id=\"autore_td".$n."\" >"."<a class =\"btn btn-primary".$tmp0."\" ".$tmp1." >".$autore."</a></td>";
                                 echo "<td>";
-                                creteAButtonModal($n, "myModal","close","Visualizza mappa attività",$Latitudine,$Longitudine, $autore, $Titol, $Descr);
+                                creteAButtonModal($n, "myModal", "Visualizza mappa attività");
                                 echo "</td>";
                                 echo "</tr>";
                                 $n++;
@@ -217,7 +217,7 @@
                         ?>
                     </tbody>
                 </table>
-                <?php createModalBootstrap("myModal", $Titol, $Descr,"close",$Latitudine,$Longitudine); ?>
+                <?php createModalBootstrap("myModal"); ?>
             </div>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhnvNJTfDyfVn08mAufLn9p1SA-DdhlXo&callback"></script>

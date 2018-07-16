@@ -25,24 +25,29 @@ $(document).ready(function()
   // Re-init map before show modal
   $('#myModal').on('show.bs.modal', function(event) {
     var button = $(event.relatedTarget);
-    /*var autore = button.data('autore');
-    var titolo = button.data('titolo');
-    var descrizione = button.data('descrizione');*/
     var n = button.data('n');
-    console.log(n);
+    //console.log(n);
     var autore = document.getElementById("autore_td"+n).textContent;
-    console.log(autore);
+    //console.log(autore);
     var descrizione = document.getElementById("descrizione_td"+n).textContent;
-    console.log(descrizione);
+    //console.log(descrizione);
     var titolo = document.getElementById("titolo_td"+n).textContent;
-    console.log(titolo);
-    /*var titolo = document.getElementById("myText1").value;
-    var descrizione = button.data('descrizione');*/
-    initializeGMap(button.data('lat'), button.data('lng'));
+    //console.log(titolo);
+    var longitudine = document.getElementById("longitudine"+n).textContent;
+    //console.log(descrizione);
+    var latitudine = document.getElementById("latitudine"+n).textContent;
+    //console.log(titolo);
+    initializeGMap(latitudine, longitudine);
     var modal = $(this);
     $("#location-map").css("width", "100%");
     $("#map_canvas").css("width", "100%");
-    modal.find('#a1').attr("href", "profiloUtente.php?Utente="+autore)
+    try{
+      var href = document.getElementById("href_a"+n).href;
+      //console.log("x!=null");
+      modal.find('#a1').attr("href", "profiloUtente.php?Utente="+autore);
+      modal.find('#a1').attr("class", "btn btn-primary");
+    }
+    catch(err){console.log("x==null");}
     modal.find('#a1').text(autore);
     modal.find('#descrizione').text(descrizione);
     modal.find('#titolo').text(titolo);

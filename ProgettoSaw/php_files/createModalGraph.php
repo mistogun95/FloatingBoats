@@ -1,19 +1,18 @@
 <?php
-    function creteAButtonModal($n,$IdNameModal,$nameButtonClose,$nameButton,$Latitudine,$Longitudine, $autore, $titolo, $descrizione)
+    function creteAButtonModal($n,$IdNameModal,$nameButton)
     {
         echo "
         <!-- Button to Open the Modal -->
         <div class=\"container\">";
-        createButtonToModalBootstrap($nameButton,$IdNameModal,$Latitudine,$Longitudine, $autore, $titolo, $descrizione, $n);
+        createButtonToModalBootstrap($nameButton,$IdNameModal, $n);
         echo "</div>";
     }
     
     /*************** START BUTTON MODAL **********************/
-    function createButtonToModalBootstrap($nameButton,$IdNameModal,$Latitudine,$Longitudine, $autore, $titolo, $descrizione, $n)
+    function createButtonToModalBootstrap($nameButton,$IdNameModal, $n)
     {
-        $optional_string = " data-autore='".$autore."' ";
         $string_to_print = "<button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#".$IdNameModal."\"
-        data-lat='".$Latitudine."' data-lng='".$Longitudine."' data-titolo='".$titolo."' data-descrizione='".$descrizione."' data-n='".$n."' ".$optional_string." >
+        data-n='".$n."' >
         ".$nameButton."
       </button>";
       
@@ -25,7 +24,7 @@
     
 /****************** START MODEL MODAL *******************/
     
-    function createModalBootstrap($IdNameModal,$titleHeader,$textBody,$nameButtonClose,$Latitudine,$Longitudine,$bodyDown="\n")
+    function createModalBootstrap($IdNameModal)
     {
         echo "
         <!-- The Modal -->
@@ -33,7 +32,7 @@
                 <div class=\"modal-dialog\">
                 <div class=\"modal-content\">";
 
-            createHeaderModalBootstrap($titleHeader);
+            createHeaderModalBootstrap();
             createBodyModalBootstrap();
             //createFooterModalBootstrap($nameButtonClose);
 
@@ -41,7 +40,7 @@
                 </div>
             </div>";
     }
-    function createHeaderModalBootstrap($titleHeader)
+    function createHeaderModalBootstrap()
     {
         echo "
         <!-- Modal Header -->
