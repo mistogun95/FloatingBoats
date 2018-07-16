@@ -1,5 +1,6 @@
 <?php
     session_start();
+    ini_set('display_errors','On');
     if(!isset($_SESSION["username"]))
         header("Refresh:0; URL=../error.php");
     if(isset($_GET["Utente"]))
@@ -9,6 +10,7 @@
 
     include "../db/mysql_credentials.php";
     include "take_user_date.php";
+    include "../FilePerChat/take_user_profile_imeage.php";
     $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
     if ($conn->connect_error) {
         header("Refresh:0; URL=../error.php");
@@ -50,6 +52,12 @@
                             <div class = "row">
                                 <div class = "col-md-12 text-center">
                                     <img src = <?php echo '"'.$arrayDate[10].'"'?> alt = "avatar" class="mx-auto d-block" style="width:260px;" >
+                                    <div class="col social">
+                                        <a href=<?php echo '"'.$arrayDate[4].'"'?>><img src="../Immagini/facebook.png" alt="facebook" style="width: 5%;"></a>
+                                        <a href=<?php echo '"'.$arrayDate[6].'"'?>><img src="../Immagini/twitter.png" alt="twitter" style="width: 5%;"></a>
+                                        <a href=<?php echo '"'.$arrayDate[5].'"'?>><img src="../Immagini/instagram.png" alt="instagram" style="width: 5%;"></a>
+                                        <a href=<?php echo '"'.$arrayDate[3].'"'?>><img src="../Immagini/sitoPersonale.png" alt="facebook" style="width: 5%;"></a>
+                                    </div>
                                     <label><h4>Profilo Utente</h4></label>
 		                            <hr>
                                 </div>
@@ -72,30 +80,6 @@
                                             <label id = "surname" class = "col-4 col-form-label">Cognome</label>
                                             <div class = "col-8">
                                                 <input name = "surnameIn" placeholder = "Cognome" class = "form-control here" type = "text" value = <?php echo '"'.$arrayDate[8].'"'?> disabled>
-                                            </div> 
-                                        </div>
-                                        <div class = "form-group row">
-                                            <label id = "webSite" class = "col-4 col-form-label">Web Site personale</label>
-                                            <div class = "col-8">
-                                                <input name = "webIn" placeholder = "Web Site personale" class = "form-control here" type = "text" value = <?php echo '"'.$arrayDate[3].'"'?> disabled>
-                                            </div> 
-                                        </div>
-                                        <div class = "form-group row">
-                                            <label id = "instagram" class = "col-4 col-form-label">Instagram</label>
-                                            <div class = "col-8">
-                                                <input name = "instagramIn" placeholder = "pagina Instagram" class = "form-control here" type = "text" value = <?php echo '"'.$arrayDate[5].'"'?> disabled>
-                                            </div> 
-                                        </div>
-                                        <div class = "form-group row">
-                                            <label id = "twitter" class = "col-4 col-form-label">Twitter</label>
-                                            <div class = "col-8">
-                                                <input name = "twitterIn" placeholder = "pagina Twitter" class = "form-control here" type = "text" value = <?php echo '"'.$arrayDate[6].'"'?> disabled>
-                                            </div> 
-                                        </div>
-                                        <div class = "form-group row">
-                                            <label id = "facebook" class = "col-4 col-form-label">Facebook</label>
-                                            <div class = "col-8">
-                                                <input name = "faceIn" placeholder = "pagina Facebook" class = "form-control here" type = "text" value = <?php echo '"'.$arrayDate[4].'"'?> disabled>
                                             </div> 
                                         </div>
                                         <div class = "form-group row">

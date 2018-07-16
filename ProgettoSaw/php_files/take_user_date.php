@@ -1,7 +1,6 @@
 <?php
     function take_user_date($username, $conn, $var_directory)
     {
-        include_once "FilePerChat/take_user_profile_imeage.php";
         $arrayDate = array();
         $stmt = $conn->prepare("SELECT FlagFoto, Citta, AboutMe, LinkWebSite, Facebook, Instagram, Twitter, Name, Surname, Interessi FROM Users WHERE Username=?");
         $stmt->bind_param("s",$username);
