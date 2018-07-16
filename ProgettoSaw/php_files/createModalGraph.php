@@ -1,19 +1,19 @@
 <?php
-    function creteAButtonModal($n,$IdNameModal,$nameButtonClose,$nameButton,$Latitudine,$Longitudine, $autore)
+    function creteAButtonModal($n,$IdNameModal,$nameButtonClose,$nameButton,$Latitudine,$Longitudine, $autore, $titolo, $descrizione)
     {
         echo "
         <!-- Button to Open the Modal -->
         <div class=\"container\">";
-        createButtonToModalBootstrap($nameButton,$IdNameModal,$Latitudine,$Longitudine, $autore);
+        createButtonToModalBootstrap($nameButton,$IdNameModal,$Latitudine,$Longitudine, $autore, $titolo, $descrizione, $n);
         echo "</div>";
     }
     
     /*************** START BUTTON MODAL **********************/
-    function createButtonToModalBootstrap($nameButton,$IdNameModal,$Latitudine,$Longitudine, $autore)
+    function createButtonToModalBootstrap($nameButton,$IdNameModal,$Latitudine,$Longitudine, $autore, $titolo, $descrizione, $n)
     {
         $optional_string = " data-autore='".$autore."' ";
         $string_to_print = "<button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#".$IdNameModal."\"
-        data-lat='".$Latitudine."' data-lng='".$Longitudine."' ".$optional_string." >
+        data-lat='".$Latitudine."' data-lng='".$Longitudine."' data-titolo='".$titolo."' data-descrizione='".$descrizione."' data-n='".$n."' ".$optional_string." >
         ".$nameButton."
       </button>";
       
@@ -34,7 +34,7 @@
                 <div class=\"modal-content\">";
 
             createHeaderModalBootstrap($titleHeader);
-            createBodyModalBootstrap($textBody,$Latitudine,$Longitudine,$bodyDown);
+            createBodyModalBootstrap();
             //createFooterModalBootstrap($nameButtonClose);
 
         echo "</div>
@@ -46,22 +46,19 @@
         echo "
         <!-- Modal Header -->
         <div class=\"modal-header\">
-        <h4 class=\"modal-title\">".$titleHeader."</h4>
+        <h4 class=\"modal-title\" id=\"titolo\"></h4>
         <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>
       </div>";
     }
 
-    function createBodyModalBootstrap($textBody,$Latitudine,$Longitudine,$bodyDown)
+    function createBodyModalBootstrap()
     {
-        //$textBody1 = " <div id=\"".$n."\" onload=\"printMap(\"".$n."\",".$Latitudine.",".$Longitudine.")\"></div>";
-        //$textBody1 = " <div id=\"".$n."\" style=\"width:85%;height:500px;\" onload=\"printMap(".$n.",".$Latitudine.",".$Longitudine.")\"></div>";
-
         echo "
         <!-- Modal body -->
         <div class=\"modal-body\">
             <div class=\"row\">
                 <div class=\"col-md-12 modal_body_content\">
-                    <p>".$textBody."</p>
+                    <p id=\"descrizione\"></p>
                 </div>
             </div>
             <div class=\"row\">

@@ -193,14 +193,14 @@
                                 $stmt->bind_result($NomeB, $Titol, $NPosti, $Inizio, $Fine, $Ritrovo, $Spesa, $Descr, $Strumentazione, $Latitudine, $Longitudine, $citta, $autore);
                                 $stmt->fetch();
                                 echo "<tr>";
-                                echo "<td>".$NomeB."</td>";
-                                echo "<td>".$Titol."</td>";
+                                echo "<td >".$NomeB."</td>";
+                                echo "<td id=\"titolo_td".$n."\">".$Titol."</td>";
                                 echo "<td>".$NPosti."</td>";
                                 echo "<td>".$Inizio."</td>";
                                 echo "<td>".$Fine."</td>";
                                 echo "<td>".$Ritrovo."</td>";
                                 echo "<td>".$Spesa."</td>";
-                                echo "<td>".$Descr."</td>";
+                                echo "<td id=\"descrizione_td".$n."\">".$Descr."</td>";
                                 echo "<td>".$Strumentazione."</td>";
                                 echo "<td>".$Latitudine."</td>";
                                 echo "<td>".$Longitudine."</td>";
@@ -209,9 +209,9 @@
                                     $tmp1=" href=\"profiloUtente.php?Utente=".$autore."\"";
                                 else
                                     $tmp0=" not-active";
-                                echo "<td>"."<a class =\"btn btn-primary".$tmp0."\" ".$tmp1.">".$autore."</a></td>";
+                                echo "<td id=\"autore_td".$n."\" >"."<a class =\"btn btn-primary".$tmp0."\" ".$tmp1." >".$autore."</a></td>";
                                 echo "<td>";
-                                creteAButtonModal($n, "myModal","close","Visualizza mappa attività",$Latitudine,$Longitudine, $autore, true);
+                                creteAButtonModal($n, "myModal","close","Visualizza mappa attività",$Latitudine,$Longitudine, $autore, $Titol, $Descr);
                                 echo "</td>";
                                 echo "</tr>";
                                 $n++;
