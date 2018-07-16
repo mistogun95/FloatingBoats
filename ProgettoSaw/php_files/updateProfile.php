@@ -13,9 +13,6 @@
     $aboutMe = filter_var(htmlspecialchars(trim($_POST['descrizione'])), FILTER_SANITIZE_STRING);
     $città = filter_var(htmlspecialchars(trim($_POST['cittàIn'])), FILTER_SANITIZE_STRING);
     $facebook = filter_var(htmlspecialchars(trim($_POST['faceIn'])), FILTER_SANITIZE_STRING);
-    /*$numbers_of_tags = filter_var(htmlspecialchars(trim($_POST['numbers_of_tags'])), FILTER_SANITIZE_STRING);
-    if(isset($numbers_of_tags))
-        echo "<br>numbers of tags ->>".$numbers_of_tags."<br>";*/
     $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
     if ($conn->connect_error) {
         $message1 = "KO";
@@ -29,34 +26,27 @@
     $stmtCheck->fetch();
     $stmtCheck->close();
     $cont=1;
+    $message = "";
     if(isset($_POST['check']))
     {
         include "get_in_array_data_strings.php";
         $var_name_attribute="Name";
         $var_name_table="Tags";
         $var_array_of_all_tags=get_in_array_data_strings($conn, $var_name_attribute, $var_name_table, false);//false per non fare la close su $conn
-        //echo "Prima del forearch -> var_array_of_all_tags<br>";
         if($var_array_of_all_tags)
         {
-            /*foreach($var_array_of_all_tags as $value)
-            {
-                echo $value."<br>";
-            }*/
-            //echo "Dopo del forearch -> var_array_of_all_tags<br>";
-
             $var_checks = $_POST['check'];
             $checkBox_to_insert="";
             foreach($var_checks as $value)
             {
                 $var_tmp = filter_var(htmlspecialchars(trim($value)));
-                if(in_array($var_tmp,$var_array_of_all_tags))//ecito che qulacuno mi mandi valori non giusti.
+                if(in_array($var_tmp,$var_array_of_all_tags))//evito che qulacuno mi mandi valori non giusti.
                     $checkBox_to_insert =$checkBox_to_insert.$var_tmp.",";
             }
         }
         else
         {
-            //echo "<br>c'è stato un errore di connesione col db durante l'aggiornamento degli interessi.<br>";
-            header("Refresh:0; URL=error.php");
+            header("Refresh:0; URL=../error.php");
         }
         //echo "<br>FIN CHECK<br>";
     }
@@ -81,22 +71,22 @@
     $stmtUser1->close();
 
     if(preg_match('@[^\w]@', $surname))
-        $message = "Attenzione hai inserito caratteri speciali nel Cognome<br/>";
+        $message = $message.","."Attenzione hai inserito caratteri speciali nel Cognome<br/>";
 
     //controllo che il nome non contegna caratteri speciali
-    else if(preg_match('@[^\w]@', $name))
-        $message = "Attenzione hai inserito caratteri speciali nel Nome<br/>";
+    if(preg_match('@[^\w]@', $name))
+        $message = $message.","."Attenzione hai inserito caratteri speciali nel Nome<br/>";
 
     //controllo che l'username non contegna caratteri speciali
-    else if(preg_match('@[^\w]@', $username))
-        $message = "Attenzione hai inserito caratteri speciali nel username<br/>";
+    if(preg_match('@[^\w]@', $username))
+        $message = $message.","."Attenzione hai inserito caratteri speciali nel username<br/>";
     
-    else if (isset($userResult1) && $userResult1 != $oldUsername)
-        $message = "Attenzione username già presente nel database";
+    if (isset($userResult1) && $userResult1 != $oldUsername)
+        $message = $message.","."Attenzione username già presente nel database";
 
     //se tutti i controlli vengono passati allora posso inserire l'utente nel database
-    else if ($message1 === "KO") 
-        $message = "Errore connessione!! <br/>";
+    if ($message1 === "KO") 
+        $message = $message.","."Errore connessione";
 
     // else if (!preg_match($facebookRegex, $facebook))
     //     $message = "Errore nell'inserimento del link di facebook";
@@ -107,7 +97,7 @@
     //else if (!preg_match($instagramRegex, $instagram))
         //$message = "Errore nell'inserimento del link di instagram";
 
-    else
+    if($message === "")
     {
         $stmtFoto = $conn->prepare("SELECT FlagFoto FROM Users WHERE Username=?");
         $stmtFoto->bind_param("s", $username);
@@ -127,12 +117,12 @@
             $var_flag_foto = 1;
             if($var_tipo_immagine != "jpg" && $var_tipo_immagine != "png" && $var_tipo_immagine != "jpeg")
             {
-                echo "<h3>Tipo Sbagliato</h3>";
+                $message = $message.","."<h3>Tipo Sbagliato</h3>";
                 $var_flag_image = 0;
             }
             if($_FILES["fileDaCaricare"]["size"] > 1000000)
             {
-                echo "File troppo lungo!!";
+                $message = $message.","."File troppo grande!!";
                 $var_flag_image = 0;
             }
         }
@@ -145,10 +135,10 @@
             $stmt = $conn->prepare($query);
             $stmt->bind_param("ssissssssss", $name, $surname, $var_flag_foto, $città, $aboutMe, $webSite, $facebook, $instagram, $twitter, $checkBox_to_insert, $userResult);
             if(!$stmt->execute())
-                $message = "EXECUTE!!! <br/>";
+                header("Refresh:0; URL=../error.php");
             $stmt->close();
             $conn->close();
-            $message = "Modifica andata a buon fine"; 
+            $message = $message.","."Modifica andata a buon fine"; 
         }
         else 
         {
@@ -165,13 +155,13 @@
                         if(rename($var_directory.$oldUsername.".".$arrayType[$i], $var_directory.$username.".".$arrayType[$i]))
                         {
                             $var_flag_foto = 1;
-                            echo "Nome aggiornato con successo";
+                            $message = $message.","."Nome aggiornato con successo";
                         }
                     }
                 }
             }
             if(!$stmt->execute())
-                $message = "EXECUTE!!! <br/>";
+                header("Refresh:0; URL=../error.php");
             $_SESSION['username'] = $username;
             if ($var_name_file === "")
             {
@@ -182,14 +172,14 @@
                     {
                         if(rename($var_directory.$oldUsername.".".$arrayType[$i], $var_directory.$username.".".$arrayType[$i]))
                         {
-                            echo "Nome aggiornato con successo";
+                            $message = $message.","."Nome aggiornato con successo";
                         }
                     }
                 }
             }
             $stmt->close();
             $conn->close();
-            $message = "Modifica andata a buon fine";
+            $message = $message.","."Nome aggiornato con successo";
         }
     }
     echo "<label class='userPresent'><b>$message</b></label><br>";
@@ -225,7 +215,7 @@
             if(move_uploaded_file($_FILES["fileDaCaricare"]["tmp_name"], $var_complete_path_new_image))
                 echo "Il file".basename($_FILES["fileDaCaricare"]["name"])." è stato caricato con il nome $username.$var_tipo_immagine nella cartella -> $var_directory.";
             else
-                echo "Qualcosa è andato storto.";
+                header("Refresh:0; URL=../error.php");
         }
     }
 ?>

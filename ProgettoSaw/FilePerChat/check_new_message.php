@@ -14,20 +14,17 @@ function check_new_message($user1, $conn)
     {
         if(!$stmt = $conn->prepare($query))
         {
-            //echo "<script type='text/javascript'>alert('Execute prepare');</script>";
-            header("Refresh:0; URL=error.php");
+            header("Refresh:0; URL=../error.php");
         }
         if(!$stmt->bind_param("ii", $Id_chat, $b))
         {
-            //echo "<script type='text/javascript'>alert('Execute bind_param');</script>";
             $stmt->close();
-            header("Refresh:0; URL=error.php");
+            header("Refresh:0; URL=../error.php");
         }
         if(!$stmt->execute())
         {
-            //echo "<script type='text/javascript'>alert('Execute execute');</script>";
             $stmt->close();
-            header("Refresh:0; URL=error.php");
+            header("Refresh:0; URL=../error.php");
         }
         $stmt->bind_result($username);
         $stmt->fetch();

@@ -16,7 +16,7 @@
 
     $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
     if ($conn->connect_error) {
-        $message = "Conn ERORR!! <br/>";
+        header("Refresh:0; URL=../error.php");
     }
     else
     {
@@ -27,8 +27,7 @@
         {
             $stmt->close();
             $conn->close();
-            //echo "<script type='text/javascript'>alert('Execute Error4');</script>";
-            header("Refresh:0; URL=error.php");
+            header("Refresh:0; URL=../error.php");
         }
 
         $stmt->bind_result($Id_chat);
@@ -61,10 +60,9 @@
 
         if(!$stmt2->execute())
         {
-            //echo "<script type='text/javascript'>alert('Utente non Presente');</script>";
             $stmt2->close();
             $conn->close();
-            header("Refresh:0; URL=error.php");
+            header("Refresh:0; URL=../error.php");
         }
 
         $stmt2->close();
@@ -77,10 +75,9 @@
 
         if(!$stmt->execute())
         {
-            //echo "<script type='text/javascript'>alert('Execute Error2');</script>";
             $stmt->close();
             $conn->close();
-            header("Refresh:0; URL=error.php");
+            header("Refresh:0; URL=../error.php");
         }
 
         $stmt->bind_result($Id_chat);
@@ -98,10 +95,9 @@
 
         if(!$stmt->execute())
         {
-            //echo "<script type='text/javascript'>alert('Execute Error3');</script>";
             $stmt->close();
             $conn->close();
-            header("Refresh:0; URL=error.php");
+            header("Refresh:0; URL=../error.php");
         }
 
         $stmt->close();
