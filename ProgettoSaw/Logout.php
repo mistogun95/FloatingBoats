@@ -2,6 +2,6 @@
 session_start();
 session_unset();
 session_destroy();
-header('location: Homepage.html');
+header('location: Homepage.php');
 exit();
 ?>

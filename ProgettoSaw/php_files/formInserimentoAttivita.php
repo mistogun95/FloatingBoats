@@ -1,6 +1,9 @@
 <?php 
     include "../db/mysql_credentials.php";
     ini_set('display_errors','On');
+    session_start();
+    if(!isset($_SESSION["username"]))
+        header("Location: ../error.php");
 ?>
 <!DOCTYPE html>
 <html>

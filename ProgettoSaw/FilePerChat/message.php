@@ -3,7 +3,7 @@
     error_reporting(E_ALL);
     session_start();
     if(!isset($_SESSION["username"]))
-        header("Refresh:0; URL=../Homepage.html");
+        header("Location: ../error.php");
     else 
         $user1 = stripslashes($_SESSION["username"]);
     include "../db/mysql_credentials.php";

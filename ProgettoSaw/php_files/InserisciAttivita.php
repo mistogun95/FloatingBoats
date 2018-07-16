@@ -1,9 +1,10 @@
 <?php 
-    include "../db/mysql_credentials.php";
     ini_set('display_errors','On');
 ?>
 <?php
     session_start();
+    if(!isset($_SESSION["username"]))
+        header("Location: ../error.php");
     include "../db/mysql_credentials.php";
     $username = $_SESSION['username'];
     $boat = filter_var(htmlspecialchars(trim($_POST['boatIn'])), FILTER_SANITIZE_STRING);

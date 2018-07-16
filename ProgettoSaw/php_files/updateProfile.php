@@ -3,6 +3,8 @@
     ini_set('display_errors','On');
     error_reporting(E_ALL);
     session_start();
+    if(!isset($_SESSION["username"]))
+        header("Location: ../error.php");
     $oldUsername = $_SESSION['username'];
     $webSite = filter_var(htmlspecialchars(trim($_POST['webIn'])), FILTER_SANITIZE_STRING);
     $name = filter_var(htmlspecialchars(trim($_POST['nameIn'])), FILTER_SANITIZE_STRING);

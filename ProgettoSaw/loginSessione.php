@@ -10,7 +10,6 @@
         $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
         if ($conn->connect_error) {
             $message = "Conn ERORR!! <br/>";
-            //die("Connection failed: " . mysqli_connect_error());
         }
         else
         {
@@ -21,7 +20,7 @@
                 //echo "<script type='text/javascript'>alert('Execute Error');</script>";
                 $stmt->close();
                 $conn->close();
-                header("Refresh:0; URL=error.php");
+                header("Location: error.php");
             }
             echo "DOPO EXECUTE<br>";
             $stmt->bind_result($var_query_name,$var_query_surname);
@@ -32,18 +31,14 @@
             echo"<br>--$var_query_surname--<br>";
             if(isset($var_query_name) && isset($var_query_surname) )
             {
-                echo "dentro isset <br>";
                 $_SESSION['name'] = $var_query_name;
                 $_SESSION['surname'] = $var_query_surname;
                 $_SESSION['username'] = $username;
-                header("Refresh:0; URL=HomepagePersonale.php");
-                //echo "<script type='text/javascript'>alert('$var_query_name -- $var_query_surname');</script>";
-                //$_SESSION['username'] = $username;
+                header("Location: Homepage.php");
             }
             else 
             {
-                //echo "<script type='text/javascript'>alert('Il fetch è andato male...');</script>";
-                header("Refresh:0; URL=error.php");
+                header("Location: error.php");
             }
             
             $stmt->close();

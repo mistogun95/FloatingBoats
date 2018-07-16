@@ -3,7 +3,7 @@
     error_reporting(E_ALL); 
     session_start();
     if(!isset($_SESSION["username"]))
-        header("Refresh:0; URL=../Homepage.html");
+        header("Location: ../error.php");
     else
     {
         $user = stripslashes($_SESSION["username"]);
@@ -105,7 +105,7 @@
             if($autor === $user1)
             {
                 echo "<div class=\"container\">";
-                $imagePath = take_user_profile_image($autor);
+                $imagePath = take_user_profile_image($autor, "../ImmaginiCaricate/");
                 echo "<img src=\"".$imagePath."\"alt=\"Avatar\" style=\"width:40px;\"";
                 echo "<label><p>"."<b>".$autor." scrive "."</b>".$mex."</p></label>";
                 echo "<span class=\"time-right\">".$dataMex."</span>";
@@ -114,7 +114,7 @@
             else
             {
                 echo "<div class=\"container darker\">";
-                $imagePath = take_user_profile_image($autor);
+                $imagePath = take_user_profile_image($autor, "../ImmaginiCaricate/");
                 echo "<img src=\"".$imagePath."\"alt=\"Avatar\" class=\"right\" style=\"width:40px;\"";
                 echo "<label><p>"."<b>".$autor." scrive "."</b>".$mex."</p></label>";
                 echo "<span class=\"time-left\">".$dataMex."</span>";

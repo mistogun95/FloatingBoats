@@ -2,11 +2,11 @@
     session_start();
     ini_set('display_errors','On');
     if(!isset($_SESSION["username"]))
-        header("Refresh:0; URL=../error.php");
+        header("Location: ../error.php");
     if(isset($_GET["Utente"]))
         $user = $_GET["Utente"];
     else
-        header("Refresh:0; URL=../error.php");
+        header("Location: ../error.php");
 
     include "../db/mysql_credentials.php";
     include "take_user_date.php";

@@ -4,7 +4,7 @@ ini_set('display_errors','On');
     error_reporting(E_ALL);
     
     if(!isset($_SESSION["username"]))
-        header("Refresh:0; URL=Homepage.html");
+        header("Location: error.php");
     else
         $username = $_SESSION['username'];
     include "db/mysql_credentials.php";
@@ -22,11 +22,10 @@ ini_set('display_errors','On');
 
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="it">
     <head>
-        <title></title>
+        <title>Homepage Personale</title>
 	    <meta name ="homepage" content ="homepage here" />
-	    <meta name ="" content ="" />
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="utf-8"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
@@ -80,7 +79,7 @@ ini_set('display_errors','On');
       
             <!-- Modal Header -->
             <div class="modal-header card">
-                <img class="card-img-top" src=<?php echo '"'.$arrayDate[10].'"'?> alt="Avatar" style="width:100%">
+                <img class="card-img-top" src="<?php echo $arrayDate[10]?>" alt="Avatar" style="width:100%">
             </div>
       
             <!-- Modal body -->
@@ -110,7 +109,7 @@ ini_set('display_errors','On');
     </div>
 
       <!-- The Modal -->
-      <div class="modal fade bs-example-modal-lg scrollmenu" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="classInfo" aria-hidden="true">
+      <div class="modal fade bs-example-modal-lg scrollmenu" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <form class="containerform" action="profile.php" method="POST">
@@ -208,29 +207,22 @@ ini_set('display_errors','On');
             </form>
         </div>
 
-        <div class = "Contatti_e_Social" id = "contatti">
-            <table class="table table-borderless">
-                <tr>
-                    <th><label class="titleContacts">Contattaci</label></th>
-                    <th><label class="social" align: left>Social</label></th>
-                </tr>
-                <tr>
-                   <th><label class="emailC">Email: floatingBoats@gmail.com</label></th>
-                        <th>
-                            <a href="#" class="fa fa-facebook" align: left></a>
-                            <a href="#" class="fa fa-twitter" align: left></a>
-                            <a href="#" class="fa fa-instagram" align: left></a>
-                        </th> 
-                </tr>
-                <tr>
-                    <th><label class="telephoneC">Telefono: 010409055</label> </th>
-                </tr>
-                <tr>
-                    <th><label class="mobilePhoneC">Telefono Cellulare: 3456789023</label></th>
-                </tr>
-            </table>
+       <div class = "Contatti_e_Social row" id = "contatti">
+                    <div class ="col">
+                        <label class="titleContacts">Contattaci</label>
+                        <br>
+                        <label class="emailC">Email: floatingBoats@gmail.com</label>
+                        <br>
+                        <label class="telephoneC">Telefono: 010409055</label>
+                        <br>
+                        <label class="mobilePhoneC">Telefono Cellulare: 3456789023</label> 
+                    </div>
+                    <div class="col social">
+                        <a href=""><img src="../Immagini/facebook.png" alt="facebook" style="width: 15%;"></a>
+                        <a href=""><img src="../Immagini/twitter.png" alt="twitter" style="width: 15%;"></a>
+                        <a href=""><img src="../Immagini/instagram.png" alt="instagram" style="width: 15%;"></a>
+                    </div>
         </div>
-    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

@@ -2,6 +2,9 @@
     ini_set('display_errors','On');
     error_reporting(E_ALL);
     include "../db/mysql_credentials.php";
+    session_start();
+    if(!isset($_SESSION["username"]))
+        header("Location: ../error.php");
     $id = $_GET["id_post"];
     $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
     $query = "SELECT Nomebarca,Titolo,NumeroPostiBarca,DataInizio,DataFine,LuogoDiRitrovo,SpesaViaggioTotale,Descrizione,StrumentazioneRichiesta,Latitudine,Longitudine,Citta,UsernameAutore FROM Posts WHERE ID=?";

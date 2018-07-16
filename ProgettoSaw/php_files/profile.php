@@ -6,7 +6,8 @@
 ?>
 <?php
     session_start();
-    
+    if(!isset($_SESSION["username"]))
+        header("Location: ../error.php");
     
     include "../db/mysql_credentials.php"; 
 

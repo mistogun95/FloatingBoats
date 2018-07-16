@@ -18,7 +18,7 @@
 		include "Registration_checkData.php";
 		$message = checkData();
 		echo "<label class='userPresent'><b>$message</b></label><br>";
-    	header( "refresh:5;url=Homepage.html" );
+    	header( "refresh:5;url=Homepage.php" );
     	echo "<a class='signIn' href='Homepage.html'>Clicca qui per tornare alla homepage(se il tuo browser non supporta il reindirizzamento automatico)</a>";
     ?>
 	</div>

@@ -2,7 +2,7 @@
     if(isset($_SESSION["username"]))
         header("Refresh:5; URL=HomepagePersonale.php");
     else
-        header("Refresh:5; URL=Homepage.html");
+        header("Refresh:5; URL=Homepage.php");
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +34,7 @@
                         if(isset($_SESSION["username"]))
                             echo "<a class=\"btn btn-primary display-4\" href=\"HomepagePersonale.php\">Ritorna alla Homepage</a>";
                         else
-                            echo "<a class=\"btn btn-primary display-4\" href=\"Homepage.html\">Ritorna alla Homepage</a>";
+                            echo "<a class=\"btn btn-primary display-4\" href=\"Homepage.php\">Ritorna alla Homepage</a>";
                     ?>
                 </div>
             </div>

@@ -37,41 +37,30 @@
     if(isset($var_flag_titolo))
     {
         $var_search = "Titolo";
-        $var_get_post_title = $_POST['search2']; //inserire qua il post
-        // echo "<br>".$var_get_post_title;
+        $var_get_post_title = $_POST['search2']; 
 
         $array = spachetta($var_get_post_title);
-        // echo "flag_titolo settata<br>";
     }
     if(isset($var_flag_tag))
     {
         $var_search = "Tag";
-        $array = array($_POST['search2']);//trim htmlspecialchar ecc da fare post per tag
-        // echo "flag_tag settata<br>";
+        $array = array($_POST['search2']);
     }
 
     if(!isset($array))
     {
-        //echo "array non definito<br>";
-        //echo "<script type='text/javascript'>alert('array non definito');</script>";
         header("Refresh:0; URL=../error.php");
     }
     $var_array_size = count($array);
     if($var_array_size==0)
     {
-        //echo "array vuoto<br>";
-        //echo "<script type='text/javascript'>alert('array vuoto');</script>";
         header("Refresh:0; URL=../error.php");
     }
     $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
     if ($conn->connect_error) {
-        //echo "<script type='text/javascript'>alert('connection error');</script>";
-        //header("Refresh:0; URL=../error.php");
     }
     else
     {
-        
-        // echo "array -> ".$var_array_size."<br><br>";
         if($var_array_size == 1)
         {
             $var_final_query=" SELECT ID,Titolo,Descrizione FROM Posts WHERE $var_search LIKE '%".$array[0]."%' GROUP BY ID,Titolo,Descrizione ";
