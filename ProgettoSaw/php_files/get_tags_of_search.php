@@ -190,6 +190,8 @@
                                 echo "<td id=\"latitudine".$n."\">".$Latitudine."</td>";
                                 echo "<td id=\"longitudine".$n."\">".$Longitudine."</td>";
                                 echo "<td>".$citta."</td>";
+                                $tmp1="";
+                                $tmp0="";
                                 if(isset($_SESSION["username"]))
                                     $tmp1=" id=\"href_a".$n."\" href=\"profiloUtente.php?Utente=".$autore."\"";
                                 else
