@@ -206,13 +206,11 @@
                                 echo "<td>".$Longitudine."</td>";
                                 echo "<td>".$citta."</td>";
                                 if(isset($_SESSION["username"]))
-                                    echo "<td>"."<a class =\"btn btn-primary\" href=\"profiloUtente.php?Utente=".$autore."\">".$autore."</a></td>";
+                                    $tmp1=" href=\"profiloUtente.php?Utente=".$autore."\"";
                                 else
-                                    echo "<td>"."<a class =\"btn btn-primary not-active\" href=\"profiloUtente.php?Utente=".$autore."\" disabled>".$autore."</a></td>";
-                                //echo "<td><a href=\"visualizzaAttivita.php?id_post=$Id\" class=\"btn btn-primary\">Visualizza pagina Attività</a></td>";
-                                //echo "<td><button type=\"button\"class=\"btn btn-primary\" >Visualizza pagina Attività</td>";
+                                    $tmp0=" not-active";
+                                echo "<td>"."<a class =\"btn btn-primary".$tmp0."\" ".$tmp1.">".$autore."</a></td>";
                                 echo "<td>";
-                                //creteAButtonModal($n,"myModal","Header text","text body","close","Visualizza pagina Attività",$Latitudine,$Longitudine);
                                 creteAButtonModal($n, "myModal","close","Visualizza mappa attività",$Latitudine,$Longitudine, $autore, true);
                                 echo "</td>";
                                 echo "</tr>";
@@ -225,7 +223,6 @@
                 </table>
                 <?php createModalBootstrap("myModal", $Titol, $Descr,"close",$Latitudine,$Longitudine); ?>
             </div>
-            <?php createModalBootstrap("myModal", $Titol, $Descr,"close",$Latitudine,$Longitudine, $autore); ?>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhnvNJTfDyfVn08mAufLn9p1SA-DdhlXo&callback"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

@@ -32,7 +32,7 @@ $(document).ready(function()
     $("#location-map").css("width", "100%");
     $("#map_canvas").css("width", "100%");
     modal.find('#a1').attr("href", "profiloUtente.php?Utente="+autore)
-    modal.find('#a1').text('zio');
+    modal.find('#a1').text(autore);
   });
 
   // Trigger map resize event after modal shown
