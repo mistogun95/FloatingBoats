@@ -21,9 +21,6 @@
     $Longitudine = filter_var(htmlspecialchars(trim($_POST['Longitudine'])), FILTER_SANITIZE_STRING);
     $tags = "";
     $regexDate = '/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/';
-    /*echo $start."<br>";
-    echo $end."<br>";
-    */
     $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
 
     $stmt = $conn->prepare("SELECT COUNT(*) FROM Tags");
@@ -31,10 +28,9 @@
     
     if(!$stmt->execute())
     {
-        //echo "<script type='text/javascript'>alert('Execute Error');</script>";
         $stmt->close();
         $conn->close();
-        header("Refresh:0; URL=error.php");
+        header("Refresh:0; URL=../error.php");
     }
 
     $stmt->bind_result($numberTags);
@@ -58,10 +54,9 @@
         $stmt->bind_param("sssssssssddsss", $boat, $title, $seats, $start, $end, $place, $totalCost, $description, $instrumentation, $Latitudine, $Longitudine, $città, $username, $tags);
         if(!$stmt->execute())
         {
-            //echo "<script type='text/javascript'>alert('Execute Error');</script>";
             $stmt->close();
             $conn->close();
-            header("Refresh:0; URL=error.php");
+            header("Refresh:0; URL=../error.php");
         }
         $stmt->close(); 
     }

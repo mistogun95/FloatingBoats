@@ -13,28 +13,15 @@
 
 <body class=bodyData>
     
- 	<nav class="navbar navbar-expand-lg bg-info navbar-light sticky-top">
-    	<a class="navbar-brand" href="Homepage.html">
-        	<img src="Immagini/logo1.png" alt="logo" style="width:60px;">
-    	</a>
-    	<ul class = "navbar-nav">
-        	<li class="nav-item"><a class="nav-link" href="#AboutUs">AboutUs</a></li>
-        	<li class="nav-item"><a class="nav-link" href="#contatti">Contattaci</a></li>
-    	</ul>
-    	<ul class="navbar-nav ml-auto">
-        	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-            	Accedi
-        	</button>
-        	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal1">
-            	Registrati
-        	</button>
-    	</ul>
-    </nav> 
-    
     <div class="Data_div">
     <?php
-        include "Registration_checkData.php";
+		include "Registration_checkData.php";
+		$message = checkData();
+		echo "<label class='userPresent'><b>$message</b></label><br>";
+    	header( "refresh:5;url=Homepage.html" );
+    	echo "<a class='signIn' href='Homepage.html'>Clicca qui per tornare alla homepage(se il tuo browser non supporta il reindirizzamento automatico)</a>";
     ?>
-    </div>
+	</div>
+	
 </body>
 </html>

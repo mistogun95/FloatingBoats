@@ -1,16 +1,17 @@
 <?php
     session_start();
+    if(!isset($_SESSION["username"]))
+        header("Refresh:0; URL=../error.php");
     if(isset($_GET["Utente"]))
         $user = $_GET["Utente"];
     else
-        header("Refresh:0; URL=../Homepage.html");
+        header("Refresh:0; URL=../error.php");
 
     include "../db/mysql_credentials.php";
     include "take_user_date.php";
     $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
     if ($conn->connect_error) {
-        //echo "<script type='text/javascript'>alert('connection error');</script>";
-        header("Refresh:0; URL=error.php");
+        header("Refresh:0; URL=../error.php");
     }
     else
     {

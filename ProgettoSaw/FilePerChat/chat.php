@@ -28,12 +28,6 @@
             <a class="navbar-brand" href="../HomepagePersonale.php">
                 <img src="../Immagini/logo1.png" alt="logo" style="width:60px;">
             </a>
-            <!-- <ul class = "navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="#AboutUs">AboutUs</a></li>
-                <li class="nav-item"><a class="nav-link" href="#contatti">Contattaci</a></li>
-                <li class="nav-item"><a class="nav-link" href="php_files/get_data_profile.php">Profilo</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Messaggi</a></li>
-            </ul> -->
             <ul class="navbar-nav">
             <li class="nav-item"><p><b>Benvenuta <?php echo $user ?></b></p></li>
             </ul>
@@ -47,7 +41,7 @@
                 <?php
                     $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
                     if ($conn->connect_error) {
-                        $message = "Conn ERORR!! <br/>";
+                        header("Refresh:0; URL=../error.php");
                     }
                     else
                     {
@@ -86,10 +80,9 @@
 
         if(!$stmt->execute())
         {
-            echo "<script type='text/javascript'>alert('Execute Error');</script>";
             $stmt->close();
             $conn->close();
-            header("Refresh:0; URL=../HomepagePersonale.php");
+            header("Refresh:0; URL=../error.php");
         }
 
         $stmt->bind_result($Id_chat);
@@ -101,10 +94,9 @@
 
         if(!$stmt2->execute())
         {
-            echo "<script type='text/javascript'>alert('Execute Error');</script>";
             $stmt2->close();
             $conn->close();
-            header("Refresh:0; URL=../HomepagePersonale.php");
+            header("Refresh:0; URL=../error.php");
         }
 
         $stmt2->bind_result($mex, $dataMex, $autor);
@@ -144,10 +136,9 @@
 
         if(!$stmt->execute())
         {
-            echo "<script type='text/javascript'>alert('Execute Error');</script>";
             $stmt->close();
             $conn->close();
-            header("Refresh:0; URL=../HomepagePersonale.php");
+            header("Refresh:0; URL=../error.php");
         }
 
         $stmt->bind_result($Id_chat);
@@ -159,10 +150,9 @@
 
         if(!$stmt2->execute())
         {
-            echo "<script type='text/javascript'>alert('Execute Error');</script>";
             $stmt2->close();
             $conn->close();
-            header("Refresh:0; URL=../HomepagePersonale.php");
+            header("Refresh:0; URL=../error.php");
         }
 
         $stmt2->bind_result($mex, $dataMex, $autor);
@@ -171,7 +161,7 @@
             if($autor === $user1)
             {
                 echo "<div class=\"container\">";
-                $imagePath = take_user_profile_image($autor);
+                $imagePath = take_user_profile_image($autor, "../ImmaginiCaricate/");
                 echo "<img src=\"".$imagePath."\"alt=\"Avatar\"  style=\"width:40px;\"";
                 echo "<label><p>"."<b>".$autor." scrive "."</b>".$mex."</p></label>";
                 echo "<span class=\"time-right\">".$dataMex."</span>";
@@ -180,7 +170,7 @@
             else
             {
                 echo "<div class=\"container darker\">";
-                $imagePath = take_user_profile_image($autor);
+                $imagePath = take_user_profile_image($autor, "../ImmaginiCaricate/");
                 echo "<img src=\"".$imagePath."\"alt=\"Avatar\" class=\"right\" style=\"width:40px;\"";
                 echo "<label><p>"."<b>".$autor." scrive "."</b>".$mex."</p></label>";
                 echo "<span class=\"time-left\">".$dataMex."</span>";
@@ -201,10 +191,9 @@
 
         if(!$stmt->execute())
         {
-            echo "<script type='text/javascript'>alert('Execute Error');</script>";
             $stmt->close();
             $conn->close();
-            header("Refresh:0; URL=../HomepagePersonale.php");
+            header("Refresh:0; URL=../error.php");
         }
         $stmt->close();
 

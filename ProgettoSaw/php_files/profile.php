@@ -1,6 +1,7 @@
 
 <?php 
     include "../db/mysql_credentials.php";
+    include_once "../FilePerChat/take_user_profile_imeage.php";
     ini_set('display_errors','On');
 ?>
 <?php
@@ -13,7 +14,7 @@
     
     $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
     if ($conn->connect_error) {
-        $message = "Conn ERORR!! <br/>";
+        $message = "Errore connessione";
     }
     else
     {
@@ -22,10 +23,9 @@
         
         if(!$stmt->execute())
         {
-            //echo "<script type='text/javascript'>alert('Execute Error');</script>";
             $stmt->close();
             $conn->close();
-            header("Refresh:0; URL=error.php");
+            header("Refresh:0; URL=../error.php");
         }
         
         $stmt->bind_result($var_FlagFoto, $var_Citta, $var_AboutMe, $var_LinkWebSite, $var_Facebook, $var_Instagram, $var_Twitter, $var_Name, $var_Surname);
@@ -33,32 +33,11 @@
         
         if(isset($var_Name) && isset($var_Surname) )
         {
-            if($var_FlagFoto == 1)
-            {
-                $var_tipo_immagine = array("png", "jpg", "jpeg");
-                $var_directory = "../ImmaginiCaricate/";
-
-                for ($i = 0; $i < 3; $i++) 
-                {
-                    $var_complete_path_new_image = $var_directory.$username.".".$var_tipo_immagine[$i];
-                    if(file_exists($var_complete_path_new_image))
-                    {
-                        break;
-                    }
-
-                }
-                
-            }
-            else//carico la foto di deafult
-            {
-                $var_complete_path_new_image = "../ImmaginiCaricate/default.png";
-            }
-
+            $var_complete_path_new_image = take_user_profile_image($username, "../ImmaginiCaricate/");
         }
         else 
         {
-            //echo "<script type='text/javascript'>alert('Il fetch è andato male...');</script>";
-            header("Refresh:0; URL=error.php");
+            header("Refresh:0; URL=../error.php");
         }
         
         $stmt->close();
@@ -67,10 +46,9 @@
 
         if(!$stmt->execute())
         {
-            //echo "<script type='text/javascript'>alert('Execute Error');</script>";
             $stmt->close();
             $conn->close();
-            header("Refresh:0; URL=error.php");
+            header("Refresh:0; URL=../error.php");
         }
         $stmt->bind_result($var_Name_Tags);
         $array_tags_names = array();
@@ -102,12 +80,6 @@
             <a class="navbar-brand" href="../HomepagePersonale.php">
                 <img src="../Immagini/logo1.png" alt="logo" style="width:60px;">
             </a>
-            <!-- <ul class = "navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="#AboutUs">AboutUs</a></li>
-                <li class="nav-item"><a class="nav-link" href="#contatti">Contattaci</a></li>
-                <li class="nav-item"><a class="nav-link" href="php_files/get_data_profile.php">Profilo</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Messaggi</a></li>
-            </ul> -->
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link btn btn-primary" href="../Logout.php">Logout</a></li>
             </ul>
@@ -191,9 +163,7 @@
                                                     {
                                                         $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
                                                         include "get_interessi_of_user.php";
-                                                        $interessi_Get = get_Interessi_query_of_user($username, $conn);//la funzione chiude tutto stmt e conn con la close.
-                                                        /*if($interessi_Get == null)//non serve tanto il null viene gestito dalle funzioni dopo senza probelmi.
-                                                            $interessi_Get ="";*/
+                                                        $interessi_Get = get_Interessi_query_of_user($username, $conn);
                                                     }
                                                     else
                                                         $interessi_Get = $_GET['interessi_Get'];
@@ -210,7 +180,7 @@
                                                     foreach($array_tags_names as $value)
                                                     {
                                                         $flag_presente = false;
-                                                        if(in_array($value,$result_interessi) ) //cosi evito possibili "infezioni" dal GET
+                                                        if(in_array($value,$result_interessi) )
                                                             $flag_presente = true;
                                                         echo  "<div class=\"form-check\">
                                                                 <label class=\"form-check-label\">

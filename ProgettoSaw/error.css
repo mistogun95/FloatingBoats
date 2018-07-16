@@ -2,9 +2,9 @@
 .bg{
     background-image: url("../Immagini/barcaErrore2.jpg");
     background-repeat: no-repeat;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover; 
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 .mexError{

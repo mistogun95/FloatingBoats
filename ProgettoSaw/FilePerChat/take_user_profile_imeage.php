@@ -1,7 +1,6 @@
 <?php
-    function take_user_profile_image($user)
+    function take_user_profile_image($user, $var_directory)
     {
-        $var_directory = "../ImmaginiCaricate/";
         $arrayType = array("jpg", "png", "jpeg");
 
         for ($i=0; $i < 3; $i++)
