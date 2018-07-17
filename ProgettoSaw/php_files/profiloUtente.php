@@ -4,7 +4,7 @@
     if(!isset($_SESSION["username"]))
         header("Location: ../error.php");
     if(isset($_GET["Utente"]))
-        $user = $_GET["Utente"];
+        $user = filter_var(htmlspecialchars(trim($_GET["Utente"])));
     else
         header("Location: ../error.php");
 
@@ -13,7 +13,7 @@
     include "../FilePerChat/take_user_profile_imeage.php";
     $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
     if ($conn->connect_error) {
-        header("Refresh:0; URL=../error.php");
+        header("Location: ../error.php");
     }
     else
     {

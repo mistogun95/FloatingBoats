@@ -26,7 +26,7 @@
         {
             $stmt->close();
             $conn->close();
-            header("Refresh:0; URL=../error.php");
+            header("Location: ../error.php");
         }
         
         $stmt->bind_result($var_FlagFoto, $var_Citta, $var_AboutMe, $var_LinkWebSite, $var_Facebook, $var_Instagram, $var_Twitter, $var_Name, $var_Surname);
@@ -38,7 +38,7 @@
         }
         else 
         {
-            header("Refresh:0; URL=../error.php");
+            header("Location: ../error.php");
         }
         
         $stmt->close();
@@ -49,7 +49,7 @@
         {
             $stmt->close();
             $conn->close();
-            header("Refresh:0; URL=../error.php");
+            header("Location: ../error.php");
         }
         $stmt->bind_result($var_Name_Tags);
         $array_tags_names = array();
