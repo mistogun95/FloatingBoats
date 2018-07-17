@@ -1,0 +1,38 @@
+body{
+	background: #66a1d1;
+}
+
+.personalTable{
+	width: 50%;
+    margin-left: auto;
+	margin-right: auto;
+	
+}
+
+.bg{
+    background-image: url("../Immagini/barca.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-size: 100% 100%; 
+}
+
+.bodySearch{
+    background-image: url("../Immagini/barca3.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.tableSearch{
+    background: #66a1d1;
+}
+
+.not-active {
+    pointer-events: none;
+    cursor: default;
+    text-decoration: none;
+    color: black;
+}

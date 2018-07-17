@@ -1,0 +1,131 @@
+body{
+    height: 100%;
+    background: #66a1d1;
+}
+
+.bg{
+    background-image: url("../Immagini/barca.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height:100%;
+    width:100%;
+    position:fixed;
+    width:100%;
+    height:100%;
+    top:0px;
+    left:0px;
+    z-index:1000;
+}
+
+.inputMessage{
+    width: 40%;
+}
+
+@media only screen and (max-width: 800px){
+    .bg{
+        background-image: url("../Immagini/barca2.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        background-attachment: initial;
+    } 
+    
+    .anyclass{
+        overflow:hidden;
+        height:50%;
+        width: 50%;
+        overflow-y: scroll;
+    }
+    
+    .inputMessage{
+        width: 82%;
+    }
+}
+
+@media only screen and (min-width: 800px){
+    .bg{
+        background-image: url("../Immagini/barca3.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        background-attachment: initial;
+    } 
+    
+    .anyclass{
+        overflow:hidden;
+        height:50%;
+        width: 50%;
+        overflow-y: scroll;
+    }
+    
+    .inputMessage{
+        width: 40%;
+    }
+}
+
+ /* Chat containers */
+ .container {
+    border: 2px solid #dedede;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 10px; 
+    margin: 10px 0;
+}
+
+/* Darker chat container */
+.darker {
+    border-color: #ccc;
+    background-color:#A9A9A9;
+    text-align: right;
+}
+
+/* Clear floats */
+.container::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/* Style images */
+.container img {
+    float: left;
+    max-width: 60px;
+    width: 100%;
+    margin-right: 20px;
+    border-radius: 50%;
+}
+
+/* Style the right image */
+.container img.right {
+    float: right;
+    margin-left: 20px;
+    margin-right:0;
+}
+
+/* Style time text */
+.time-right {
+    float: right;
+    color: #aaa;
+}
+
+/* Style time text */
+.time-left {
+    float: left;
+    color:white;
+}
+
+.anyclass{
+    overflow:hidden;
+    height:50%;
+    width: 50%;
+    overflow-y: scroll;
+}
