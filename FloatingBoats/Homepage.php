@@ -27,14 +27,14 @@
                     <img src="Immagini/logo1.png" alt="logo" style="width:60px;">
                 </a>
                 <ul class = "navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="#AboutUs">AboutUs</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contatti">Contattaci</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#AboutUs" onclick="closeCollapse()">AboutUs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contatti" onclick="closeCollapse()">Contattaci</a></li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
-                    <li><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                    <li><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="closeCollapse()">
                         Accedi
                     </button></li>
-                    <li><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal1">
+                    <li><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal1" onclick="closeCollapse()">
                         Registrati
                     </button></li>
                 </ul>
@@ -170,5 +170,6 @@
         <script src="controllaUsername.js"></script>
         <script src="controllaPassword.js"></script>
         <script src="cancellaCampi.js"></script>
+        <script src="closeCollapse.js"></script>
   </body>
 </html>

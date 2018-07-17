@@ -43,10 +43,10 @@ ini_set('display_errors','On');
                     <img src="Immagini/logo1.png" alt="logo" style="width:60px;">
                 </a>
                 <ul class = "nav navbar-nav">
-                    <li class="nav-item"><a class="nav-link btn btn-primary" href="#AboutUs">AboutUs</a></li>
-                    <li class="nav-item"><a class="nav-link btn btn-primary" href="#contatti">Contattaci</a></li>
-                    <li class="nav-item"><a class="nav-link btn btn-primary" data-toggle="modal" href="#myModal">Profilo</a></li>
-                    <li class="nav-item"><a class="nav-link btn btn-primary" data-toggle="modal" href="#myModal2">Attività</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-primary" href="#AboutUs" onclick="closeCollapse()">AboutUs</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-primary" href="#contatti" onclick="closeCollapse()">Contattaci</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-primary" data-toggle="modal" href="#myModal" onclick="closeCollapse()">Profilo</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-primary" data-toggle="modal" href="#myModal2" onclick="closeCollapse()">Attività</a></li>
                     <li class="nav-item">
                     <div class="dropdown">
                         <button type="button" class=" nav-link btn btn-primary dropdown-toggle dropdown1" data-toggle="dropdown">
@@ -121,8 +121,6 @@ ini_set('display_errors','On');
             <!-- Modal body -->
             <div class="modal-body table-responsive">
             <table class = "tabel table-hover table-bordered personalTable">
-            <thead>
-            </thead>
             <tbody>
                 <tr>
                     <th>Nome Barca</th>
@@ -228,6 +226,7 @@ ini_set('display_errors','On');
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    <script src="closeCollapse.js"></script>
 </body>
 </html> 
 
