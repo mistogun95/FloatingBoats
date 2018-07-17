@@ -7,7 +7,7 @@
     else
     {
         $user = stripslashes($_SESSION["username"]);
-        $user2 = $_GET['userContact'];
+        $user2 = filter_var(htmlspecialchars(trim($_GET['userContact'])));
     }
     include "../db/mysql_credentials.php"; 
 ?>
@@ -29,7 +29,7 @@
                 <img src="../Immagini/logo1.png" alt="logo" style="width:60px;">
             </a>
             <ul class="navbar-nav">
-            <li class="nav-item"><p><b>Benvenuta <?php echo $user ?></b></p></li>
+            <li class="nav-item"><p><b>Benvenuto <?php echo $user ?></b></p></li>
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link" href="../Logout.php">Logout</a></li>
@@ -41,7 +41,7 @@
                 <?php
                     $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
                     if ($conn->connect_error) {
-                        header("Refresh:0; URL=../error.php");
+                        header("Location: ../error.php");
                     }
                     else
                     {
@@ -82,7 +82,7 @@
         {
             $stmt->close();
             $conn->close();
-            header("Refresh:0; URL=../error.php");
+            header("Location: ../error.php");
         }
 
         $stmt->bind_result($Id_chat);
@@ -96,7 +96,7 @@
         {
             $stmt2->close();
             $conn->close();
-            header("Refresh:0; URL=../error.php");
+            header("Location: ../error.php");
         }
 
         $stmt2->bind_result($mex, $dataMex, $autor);
@@ -138,7 +138,7 @@
         {
             $stmt->close();
             $conn->close();
-            header("Refresh:0; URL=../error.php");
+            header("Location: ../error.php");
         }
 
         $stmt->bind_result($Id_chat);
@@ -152,7 +152,7 @@
         {
             $stmt2->close();
             $conn->close();
-            header("Refresh:0; URL=../error.php");
+            header("Location: ../error.php");
         }
 
         $stmt2->bind_result($mex, $dataMex, $autor);
@@ -193,7 +193,7 @@
         {
             $stmt->close();
             $conn->close();
-            header("Refresh:0; URL=../error.php");
+            header("Location: ../error.php");
         }
         $stmt->close();
 

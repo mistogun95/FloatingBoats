@@ -31,7 +31,7 @@
     {
         $stmt->close();
         $conn->close();
-        header("Refresh:0; URL=../error.php");
+        header("Location: error.php");
     }
 
     $stmt->bind_result($numberTags);
@@ -57,12 +57,12 @@
         {
             $stmt->close();
             $conn->close();
-            header("Refresh:0; URL=../error.php");
+            header("Location: ../error.php");
         }
         $stmt->close(); 
     }
     $conn->close();
-    header( "refresh:0;url=../HomepagePersonale.php" );
+    header("Location: ../error.php");
 
     
 ?>
