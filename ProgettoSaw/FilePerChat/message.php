@@ -11,43 +11,48 @@
         $user2 = filter_var(htmlspecialchars(trim($_GET["userContact"])));
     else 
         $user2 = filter_var(htmlspecialchars(trim($_POST["username_chat"])));
-    $mex = filter_var(htmlspecialchars(trim($_POST["messaggio"])));
-
-    $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
-    if ($conn->connect_error) {
+    if($user2 === $user1)
         header("Location: ../error.php");
-    }
-    else
-    {
-        $stmt = $conn->prepare("SELECT ID FROM private_chat WHERE (Utente1=? AND Utente2=?) OR (Utente1=? AND Utente2=?)");
-        $stmt->bind_param("ssss", $user1, $user2, $user2, $user1);
+    else{
+        $mex = filter_var(htmlspecialchars(trim($_POST["messaggio"])));
 
-        if(!$stmt->execute())
-        {
-            $stmt->close();
-            $conn->close();
+        $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
+        if ($conn->connect_error) {
             header("Location: ../error.php");
-        }
-
-        $stmt->bind_result($Id_chat);
-        $stmt->fetch();
-        $stmt->close();
-
-        if(!isset($Id_chat))
-        {
-            set_private_chat($conn, $user1, $user2);
-            $Id_chat1 = take_chat_id($user1, $user2, $conn);
-            send_message($user1, $Id_chat1, $mex, $conn);
-            $conn->close();
-            header("Refresh:0; URL=chat.php?userContact=".$user2);
         }
         else
         {
-            send_message($user1, $Id_chat, $mex, $conn);
-            $conn->close();
-            header("Refresh:0; URL=chat.php?userContact=".$user2);
+            $stmt = $conn->prepare("SELECT ID FROM private_chat WHERE (Utente1=? AND Utente2=?) OR (Utente1=? AND Utente2=?)");
+            $stmt->bind_param("ssss", $user1, $user2, $user2, $user1);
+
+            if(!$stmt->execute())
+            {
+                $stmt->close();
+                $conn->close();
+                header("Location: ../error.php");
+            }
+
+            $stmt->bind_result($Id_chat);
+            $stmt->fetch();
+            $stmt->close();
+
+            if(!isset($Id_chat))
+            {
+                set_private_chat($conn, $user1, $user2);
+                $Id_chat1 = take_chat_id($user1, $user2, $conn);
+                send_message($user1, $Id_chat1, $mex, $conn);
+                $conn->close();
+                header("Refresh:0; URL=chat.php?userContact=".$user2);
+            }
+            else
+            {
+                send_message($user1, $Id_chat, $mex, $conn);
+                $conn->close();
+                header("Refresh:0; URL=chat.php?userContact=".$user2);
+            }
         }
     }
+
 
     function set_private_chat($conn, $user1, $user2)
     {
