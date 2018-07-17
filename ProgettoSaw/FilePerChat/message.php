@@ -8,14 +8,15 @@
         $user1 = stripslashes($_SESSION["username"]);
     include "../db/mysql_credentials.php";
     if ($_GET["userContact"] != "")
-        $user2 = filter_var(htmlspecialchars(trim($_GET["userContact"])));
+        $user2 = $_GET["userContact"];
     else 
-        $user2 = filter_var(htmlspecialchars(trim($_POST["username_chat"])));
-    $mex = filter_var(htmlspecialchars(trim($_POST["messaggio"])));
+        $user2 = $_POST["username_chat"];
+    $mex = $_POST["messaggio"];
+    echo "<br>".$mex;
 
     $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
     if ($conn->connect_error) {
-        header("Location: ../error.php");
+        header("Refresh:0; URL=../error.php");
     }
     else
     {
@@ -26,7 +27,7 @@
         {
             $stmt->close();
             $conn->close();
-            header("Location: ../error.php");
+            header("Refresh:0; URL=../error.php");
         }
 
         $stmt->bind_result($Id_chat);
@@ -37,6 +38,7 @@
         {
             set_private_chat($conn, $user1, $user2);
             $Id_chat1 = take_chat_id($user1, $user2, $conn);
+            echo $Id_chat;
             send_message($user1, $Id_chat1, $mex, $conn);
             $conn->close();
             header("Refresh:0; URL=chat.php?userContact=".$user2);
@@ -44,6 +46,7 @@
         else
         {
             send_message($user1, $Id_chat, $mex, $conn);
+            echo "chat_presente";
             $conn->close();
             header("Refresh:0; URL=chat.php?userContact=".$user2);
         }
@@ -59,7 +62,7 @@
         {
             $stmt2->close();
             $conn->close();
-            header("Location: ../error.php");
+            header("Refresh:0; URL=../error.php");
         }
 
         $stmt2->close();
@@ -74,7 +77,7 @@
         {
             $stmt->close();
             $conn->close();
-            header("Location: ../error.php");
+            header("Refresh:0; URL=../error.php");
         }
 
         $stmt->bind_result($Id_chat);
@@ -94,7 +97,7 @@
         {
             $stmt->close();
             $conn->close();
-            header("Location: ../error.php");
+            header("Refresh:0; URL=../error.php");
         }
 
         $stmt->close();

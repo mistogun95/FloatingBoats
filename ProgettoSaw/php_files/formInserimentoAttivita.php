@@ -6,11 +6,10 @@
         header("Location: ../error.php");
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="it">
     <head>
-        <title></title>
+        <title>Inserimento attività</title>
 	    <meta name ="homepage" content ="homepage here" />
-	    <meta name ="" content ="" />
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="utf-8"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
@@ -40,7 +39,7 @@
                         <div class = "card-body">
                             <div class = "row">
                                 <div class = "col-md-12 text-center">
-                                    <label><h4>Inserisci Attività</h4></label>
+                                    <h4>Inserisci Attività</h4>
 		                            <hr>
                                 </div>
                             </div>
@@ -98,7 +97,7 @@
                                             </div> 
                                         </div>
                                         <div class="form-group row">
-                                            <label for="publicinfo" class="col-4 col-form-label">Tag</label> 
+                                            <label id="tag" class="col-4 col-form-label">Tag</label> 
                                             <div class = "col-8">
                                                 <?php
                                                     include "../db/mysql_credentials.php";
@@ -111,7 +110,7 @@
                                                         echo "<script type='text/javascript'>alert('Execute Error');</script>";
                                                         $stmt->close();
                                                         $conn->close();
-                                                        header("Location: ../error.php");
+                                                        header("Refresh:0; URL=../error.php");
                                                     }
 
                                                     $stmt->bind_result($nameTags);
@@ -149,7 +148,7 @@
                                             </div> 
                                         </div>
                                         <div class="form-group row">
-                                            <label for="publicinfo" class="col-4 col-form-label">Descrizione</label> 
+                                            <label id="descrizione" class="col-4 col-form-label">Descrizione</label> 
                                             <div class = "col-8">
                                                 <textarea name = "descrizione" cols = "40" rows = "4" class = "form-control" placeholder = "Inserisci descrizione attività" required></textarea>
                                             </div>

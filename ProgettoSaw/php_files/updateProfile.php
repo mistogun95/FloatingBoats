@@ -1,5 +1,6 @@
 <?php
     include "../db/mysql_credentials.php";
+    //include "checkUpdateProfileDate.php";
     ini_set('display_errors','On');
     error_reporting(E_ALL);
     session_start();
@@ -50,9 +51,7 @@
         {
             header("Refresh:0; URL=../error.php");
         }
-        //echo "<br>FIN CHECK<br>";
     }
-    //echo "<br>stampa dei nuovi interessi: ".$checkBox_to_insert."<br>";
 
     // $facebookRegex = "/(?:https?:\/\/)?(?:www\.)?facebook\.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[\w\-]*\/)*([\w\-\.]*)/";
     // $twitterRegex = "/(?:http:\/\/)?(?:www\.)?twitter\.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[\w\-]*\/)*([\w\-]*)/";
@@ -140,7 +139,7 @@
                 header("Refresh:0; URL=../error.php");
             $stmt->close();
             $conn->close();
-            $message = $message.", Modifica andata a buon fine"; 
+            $message = $message.","."Modifica andata a buon fine"; 
         }
         else 
         {
@@ -184,9 +183,6 @@
             $message = $message.","."Nome aggiornato con successo";
         }
     }
-    echo "<label class='userPresent'><b>$message</b></label><br>";
-    header( "refresh:0;url=../HomepagePersonale.php" );
-    echo "<a class='signIn' href='../HomepagePersonale.php'>Clicca qui per tornare alla homepage(se il tuo browser non supporta il reindirizzamento automatico)</a>";
     
     function removePhoto($var_flag_foto, $var_name_file, $var_directory, $oldUsername)
     {
@@ -215,10 +211,36 @@
             }
             
             if(move_uploaded_file($_FILES["fileDaCaricare"]["tmp_name"], $var_complete_path_new_image))
-                echo "Il file ".basename($_FILES["fileDaCaricare"]["name"])." è stato caricato con il nome $username.$var_tipo_immagine nella cartella -> $var_directory.";
+                echo "Il file".basename($_FILES["fileDaCaricare"]["name"])." è stato caricato con il nome $username.$var_tipo_immagine nella cartella -> $var_directory.";
             else
                 header("Refresh:0; URL=../error.php");
         }
     }
 ?>
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <title></title>
+	<meta name ="homepage" content ="homepage here" />
+	<meta name ="" content ="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../HomepageStyle.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body class=bodyData>
+    
+    <div class="Data_div">
+    <?php
+        echo "<label class='userPresent'><b>$message</b></label><br>";
+        header( "refresh:5;url=../HomepagePersonale.php" );
+        echo "<a class='signIn' href='../HomepagePersonale.php'>Clicca qui per tornare alla homepage(se il tuo browser non supporta il reindirizzamento automatico)</a>";
+    ?>
+	</div>
+	
+</body>
+</html>
 
