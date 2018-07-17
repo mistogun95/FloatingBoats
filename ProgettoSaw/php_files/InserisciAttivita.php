@@ -62,7 +62,7 @@
         $stmt->close(); 
     }
     $conn->close();
-    header("Location: ../error.php");
+    header("Location: ../HomepagePersonale.php");
 
     
 ?>
