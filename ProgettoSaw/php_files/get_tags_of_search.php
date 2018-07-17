@@ -136,7 +136,7 @@
                     if(isset($_SESSION["username"]))
                         echo "<a class=\"navbar-brand\" href=\"../HomepagePersonale.php\">";
                     else
-                        echo "<a class=\"navbar-brand\" href=\"../Homepage.html\">";
+                        echo "<a class=\"navbar-brand\" href=\"../Homepage.php\">";
                 ?><img src="../Immagini/logo1.png" alt="logo" style="width:60px;"></a>
                 <ul class="navbar-nav ml-auto">
                     <?php

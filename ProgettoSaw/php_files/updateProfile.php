@@ -140,7 +140,7 @@
                 header("Refresh:0; URL=../error.php");
             $stmt->close();
             $conn->close();
-            $message = $message.","."Modifica andata a buon fine"; 
+            $message = $message.", Modifica andata a buon fine"; 
         }
         else 
         {
@@ -215,7 +215,7 @@
             }
             
             if(move_uploaded_file($_FILES["fileDaCaricare"]["tmp_name"], $var_complete_path_new_image))
-                echo "Il file".basename($_FILES["fileDaCaricare"]["name"])." è stato caricato con il nome $username.$var_tipo_immagine nella cartella -> $var_directory.";
+                echo "Il file ".basename($_FILES["fileDaCaricare"]["name"])." è stato caricato con il nome $username.$var_tipo_immagine nella cartella -> $var_directory.";
             else
                 header("Refresh:0; URL=../error.php");
         }

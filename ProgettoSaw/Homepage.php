@@ -23,7 +23,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class = "collapse navbar-collapse" id="collapse_target">
-                <a class="navbar-brand" href="Homepage.html">
+                <a class="navbar-brand" href="Homepage.php">
                     <img src="Immagini/logo1.png" alt="logo" style="width:60px;">
                 </a>
                 <ul class = "navbar-nav">
