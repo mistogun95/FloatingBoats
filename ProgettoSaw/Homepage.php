@@ -18,7 +18,7 @@
     </head>
 
     <body>
-        <nav class="navbar navbar-expand-lg bg-info navbar-light sticky-top">
+        <nav class="navbar navbar-expand-lg bg-info navbar-light sticky-top navbarHome">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapse_target">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -27,14 +27,14 @@
                     <img src="Immagini/logo1.png" alt="logo" style="width:60px;">
                 </a>
                 <ul class = "navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="#AboutUs">AboutUs</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contatti">Contattaci</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#AboutUs" onclick="closeCollapse()">AboutUs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contatti" onclick="closeCollapse()">Contattaci</a></li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
-                    <li><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                    <li><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="closeCollapse()">
                         Accedi
                     </button></li>
-                    <li><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal1">
+                    <li><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal1" onclick="closeCollapse()">
                         Registrati
                     </button></li>
                 </ul>
@@ -87,19 +87,19 @@
                 <div class="modal-body">
                         <label class="nameP"><b>Nome:</b></label><br>
                         <input class="form" type="text" name="name" id="name" onkeyup="controllaNome()" placeholder="Inserisci Nome" required>
-                        <label class="nameInsert" id="nameInsert"></label>
+                        <label class="Insert" id="nameInsert"></label>
 			            <br>
 			            <label class="surnameP"><b>Cognome:</b></label><br>
                         <input class="form" type="text" name="surname" id="surname" onkeyup="controllaCognome()" placeholder="Inserisci Cognome" required>
-                        <label class="surnameInsert" id="surnameInsert"></label>
+                        <label class="Insert" id="surnameInsert"></label>
 			            <br>
 			            <label class="usernameP"><b>Username:</b></label><br>
 			            <input class="form" name="username" id="username" onmouseout="controllaUsername()" type="text" placeholder="Inserisci Username" required>
-                        <label class="usernameInsert" id="usernameInsert"></label>
+                        <label class="Insert" id="usernameInsert"></label>
                         <br>
 			            <label class="passwordP"><b>Password:</b></label><br>
                         <input class="form" type="password" name="password" id="password" onkeyup="controllaPassword()" placeholder="Inserisci Password" required>
-                        <label class="passwordInsert" id="passwordInsert"></label>
+                        <label class="Insert" id="passwordInsert"></label>
                         <br>
                         <label class="passwordP"><b>Carica immagine profilo(opzionale):</b></label><br>
 			            <input type="file" name="fileDaCaricare" id="fileDaCaricare">
@@ -123,14 +123,11 @@
 
             <div class = "titleContainer">
                 <div class = "title">
-                    <!-- <div class = "col-4 mx-auto text-center">
-                        <img src="Immagini/logo1.png" alt="logo" style="width:20%;">
-                    </div> -->
                     <h1 class = "greatTitle">Enjoy your Passion</h1>
                 </div>
             </div>
 
-            <div class="container-fluid bg-2 text-center" id = "AboutUs">
+            <div class="container-fluid bg-2 text-center searchDiv" id = "AboutUs">
                 <h3 class="margin">Che cosa puoi fare con noi?</h3>
                 <p>Condividi la tua passione per il mare e tutto ciò che lo riguarda con la possibilità di metterti in contatto con altri appassionati comincia cercando qualcosa che possa essere di tuo interesse e unisciti a noi!!!</p>
     
@@ -170,5 +167,6 @@
         <script src="controllaUsername.js"></script>
         <script src="controllaPassword.js"></script>
         <script src="cancellaCampi.js"></script>
+        <script src="closeCollapse.js"></script>
   </body>
 </html>
