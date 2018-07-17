@@ -69,7 +69,7 @@
             </div>
             <div class=\"row\">
                 <div class=\"col-md-12 modal_body_end\">
-                    <p>Eventa organizzato da: <a id='a1'></a></p>
+                    <p>Evento organizzato da: <a id='a1'></a></p>
                 </div>
             </div>
          </div>";

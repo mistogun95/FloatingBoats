@@ -49,8 +49,10 @@
 
         //se tutti i controlli vengono passati allora posso inserire l'utente nel database
         //controllo immagine
+        //$conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
         if ($message1 === "KO") {
             $message = $message.","."Errore connessione!! <br/>";
+            //die("Connection failed: " . mysqli_connect_error());
         }
         if($message === "")
         {
@@ -92,9 +94,9 @@
                     else
                     {
                         if(move_uploaded_file($_FILES["fileDaCaricare"]["tmp_name"], $var_complete_path_new_image))
-                            $message = $message.","."Immagine di profilo caricata con successo";
+                            $message = $message.","."Il file".basename($_FILES["fileDaCaricare"]["name"])." è stato caricato con il nome $surname.$var_tipo_immagine nella cartella -> $var_directory.";
                         else
-                            $message = $message.","."Errore caricamento immagine di profilo";
+                            $message = $message.","."Qualcosa è andato storto.";
                     }
                 }
                 

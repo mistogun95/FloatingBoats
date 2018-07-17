@@ -119,10 +119,11 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="it">
+<html>
     <head>
-        <title>Attività</title>
+        <title></title>
 	    <meta name ="homepage" content ="homepage here" />
+	    <meta name ="" content ="" />
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="utf-8"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
@@ -135,7 +136,7 @@
                     if(isset($_SESSION["username"]))
                         echo "<a class=\"navbar-brand\" href=\"../HomepagePersonale.php\">";
                     else
-                        echo "<a class=\"navbar-brand\" href=\"../Homepage.html\">";
+                        echo "<a class=\"navbar-brand\" href=\"../Homepage.php\">";
                 ?><img src="../Immagini/logo1.png" alt="logo" style="width:60px;"></a>
                 <ul class="navbar-nav ml-auto">
                     <?php
@@ -161,7 +162,6 @@
                             <th>Longitudine</th>
                             <th>Città</th>
                             <th>Autore post</th>
-                            <th>Mappa</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -190,6 +190,8 @@
                                 echo "<td id=\"latitudine".$n."\">".$Latitudine."</td>";
                                 echo "<td id=\"longitudine".$n."\">".$Longitudine."</td>";
                                 echo "<td>".$citta."</td>";
+                                $tmp1="";
+                                $tmp0="";
                                 if(isset($_SESSION["username"]))
                                     $tmp1=" id=\"href_a".$n."\" href=\"profiloUtente.php?Utente=".$autore."\"";
                                 else

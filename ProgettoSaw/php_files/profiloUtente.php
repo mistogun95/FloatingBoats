@@ -4,7 +4,7 @@
     if(!isset($_SESSION["username"]))
         header("Location: ../error.php");
     if(isset($_GET["Utente"]))
-        $user = $_GET["Utente"];
+        $user = filter_var(htmlspecialchars(trim($_GET["Utente"])));
     else
         header("Location: ../error.php");
 
@@ -13,7 +13,7 @@
     include "../FilePerChat/take_user_profile_imeage.php";
     $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
     if ($conn->connect_error) {
-        header("Refresh:0; URL=../error.php");
+        header("Location: ../error.php");
     }
     else
     {
@@ -22,10 +22,11 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="it">
+<html>
     <head>
-        <title>Profilo Utente</title>
+        <title></title>
 	    <meta name ="homepage" content ="homepage here" />
+	    <meta name ="" content ="" />
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="utf-8"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
@@ -57,7 +58,7 @@
                                         <a href=<?php echo '"'.$arrayDate[5].'"'?>><img src="../Immagini/instagram.png" alt="instagram" style="width: 5%;"></a>
                                         <a href=<?php echo '"'.$arrayDate[3].'"'?>><img src="../Immagini/sitoPersonale.png" alt="facebook" style="width: 5%;"></a>
                                     </div>
-                                    <h4>Profilo Utente</h4>
+                                    <label><h4>Profilo Utente</h4></label>
 		                            <hr>
                                 </div>
                             </div>
@@ -88,13 +89,13 @@
                                             </div> 
                                         </div>
                                         <div class="form-group row">
-                                            <label id="interessi" class="col-4 col-form-label">Interessi</label> 
+                                            <label for="publicinfo" class="col-4 col-form-label">Interessi</label> 
                                             <div class = "col-8">
                                             <input name = "cittàIn" placeholder = "città di provenienza" class = "form-control here" type = "text" value = <?php echo '"'.$arrayDate[9].'"'?> disabled>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label id="descrizione" class="col-4 col-form-label">Descrizione</label> 
+                                            <label for="publicinfo" class="col-4 col-form-label">Descrizione</label> 
                                             <div class = "col-8">
                                                 <textarea name = "descrizione" cols = "40" rows = "4" class = "form-control" disabled><?php echo $arrayDate[2]?></textarea>
                                             </div>

@@ -2,6 +2,7 @@
 <?php 
     include "../db/mysql_credentials.php";
     include_once "../FilePerChat/take_user_profile_imeage.php";
+    ini_set('display_errors','On');
 ?>
 <?php
     session_start();
@@ -25,7 +26,7 @@
         {
             $stmt->close();
             $conn->close();
-            header("Refresh:0; URL=../error.php");
+            header("Location: ../error.php");
         }
         
         $stmt->bind_result($var_FlagFoto, $var_Citta, $var_AboutMe, $var_LinkWebSite, $var_Facebook, $var_Instagram, $var_Twitter, $var_Name, $var_Surname);
@@ -37,7 +38,7 @@
         }
         else 
         {
-            header("Refresh:0; URL=../error.php");
+            header("Location: ../error.php");
         }
         
         $stmt->close();
@@ -48,7 +49,7 @@
         {
             $stmt->close();
             $conn->close();
-            header("Refresh:0; URL=../error.php");
+            header("Location: ../error.php");
         }
         $stmt->bind_result($var_Name_Tags);
         $array_tags_names = array();
@@ -64,10 +65,11 @@
     
 
 <!DOCTYPE html>
-<html lang="it">
+<html>
     <head>
-        <title>Profilo Utente</title>
+        <title></title>
 	    <meta name ="homepage" content ="homepage here" />
+	    <meta name ="" content ="" />
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="utf-8"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
@@ -93,7 +95,7 @@
                             <div class = "row">
                                 <div class = "col-md-12 text-center">
                                     <img src = <?php echo '"'.$var_complete_path_new_image.'"'?> alt = "avatar" class="mx-auto d-block" style="width:260px;" >
-                                    <h4>Profilo Utente</h4>
+                                    <label><h4>Profilo Utente</h4></label>
 		                            <hr>
                                 </div>
                             </div>
@@ -155,7 +157,7 @@
                                             </div> 
                                         </div>
                                         <div class="form-group row">
-                                            <label id="interessi" class="col-4 col-form-label">Interessi</label> 
+                                            <label for="publicinfo" class="col-4 col-form-label">Interessi</label> 
                                             <div class = "col-8">
                                                 <?php
                                                     if(!isset($_GET['interessi_Get']))
@@ -185,7 +187,7 @@
                                                                 <label class=\"form-check-label\">
                                                                     <input type=\"checkbox\" class=\"form-check-input\" name=\"check[]\" value=\"".$value."\"";
                                                         if($flag_presente)
-                                                            echo " checked";
+                                                            echo " checked=\"true\"";
                                                         echo " id = \"check".$contatore."\">";
                                                         echo $value."
                                                         </label>
@@ -196,7 +198,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label id="Descrizione" class="col-4 col-form-label">Descrizione</label> 
+                                            <label for="publicinfo" class="col-4 col-form-label">Descrizione</label> 
                                             <div class = "col-8">
                                                 <textarea name = "descrizione" cols = "40" rows = "4" class = "form-control"><?php echo $var_AboutMe ?></textarea>
                                             </div>
