@@ -60,45 +60,49 @@
                 if($var_tipo_immagine != "jpg" && $var_tipo_immagine != "png" && $var_tipo_immagine != "jpeg")
                 {
                     $message = $message." "."<h3>Tipo Sbagliato</h3>";
-                    $var_flag_image = 0;
+                    $var_flag_foto = 0;
                 }
                 if($_FILES["fileDaCaricare"]["size"] > 1000000)
                 {
                     $message = $message." "."File troppo grande";
-                    $var_flag_image = 0;
+                    $var_flag_foto = 0;
                 }
             }
 
             
-            $passwordSha1 = sha1($password);
-            $stmt = $conn->prepare("INSERT INTO Users (Username, Name, Surname, Password, FlagFoto) VALUES (?, ?, ?, ?, ?)");
-            $stmt->bind_param("ssssi",$username,$name, $surname, $passwordSha1, $var_flag_foto);
-            if(!$stmt->execute())
-                $message = "Errore inserimento dati";
-            else
-            {
-                if(strlen($var_name_file) > 0)
+                $passwordSha1 = sha1($password);
+                $stmt = $conn->prepare("INSERT INTO Users (Username, Name, Surname, Password, FlagFoto) VALUES (?, ?, ?, ?, ?)");
+                $stmt->bind_param("ssssi",$username,$name, $surname, $passwordSha1, $var_flag_foto);
+                if(!$stmt->execute())
+                    $message = "Errore inserimento dati";
+                else
                 {
-                    $var_complete_path_new_image = $var_directory.$username.".".$var_tipo_immagine;
-                    if(file_exists($var_complete_path_new_image))
+                    if($var_flag_foto ==1)
                     {
-                        $message = $message." "."Error il file Esiste<br>";
+                        if(strlen($var_name_file) > 0)
+                        {
+                            $var_complete_path_new_image = $var_directory.$username.".".$var_tipo_immagine;
+                            if(file_exists($var_complete_path_new_image))
+                            {
+                                $message = $message." "."Error il file Esiste<br>";
+                            }
+                            else
+                            {
+                                if(move_uploaded_file($_FILES["fileDaCaricare"]["tmp_name"], $var_complete_path_new_image))
+                                    $message = $message." "."l'immagine è stata inserita con successo";
+                                else
+                                    $message = $message." "."Qualcosa è andato storto.";
+                            }
+                        }
                     }
-                    else
-                    {
-                        if(move_uploaded_file($_FILES["fileDaCaricare"]["tmp_name"], $var_complete_path_new_image))
-                            $message = $message." "."l'immagine è stata inserita con successo";
-                        else
-                            $message = $message." "."Qualcosa è andato storto.";
-                    }
+                    
                 }
-                
-            }
-            //solo di test..
-            $message = $message." La registrazione è andata a buon fine sarai reindirizzato alla homepage tra 5 secondi";
-
-            $stmt->close();
-            $conn->close();
+                //solo di test..
+                $message = $message." La registrazione è andata a buon fine sarai reindirizzato alla homepage tra 5 secondi";
+            
+                $stmt->close();
+                $conn->close();
+          
         }
         
 
