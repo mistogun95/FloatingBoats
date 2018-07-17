@@ -52,11 +52,10 @@
         }
         //echo "<br>FIN CHECK<br>";
     }
-    //echo "<br>stampa dei nuovi interessi: ".$checkBox_to_insert."<br>";
 
     // $facebookRegex = "/(?:https?:\/\/)?(?:www\.)?facebook\.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[\w\-]*\/)*([\w\-\.]*)/";
     // $twitterRegex = "/(?:http:\/\/)?(?:www\.)?twitter\.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[\w\-]*\/)*([\w\-]*)/";
-    //$instagramRegex = "/(https?:\/\/www\.)?instagram\.com(\/p\/\w+\/?)/";
+    // $instagramRegex = "/(https?:\/\/www\.)?instagram\.com(\/p\/\w+\/?)/";
 
     $stmtUser = $conn->prepare("SELECT Username FROM Users WHERE Username=?");
     $stmtUser->bind_param("s", $oldUsername);
@@ -76,29 +75,29 @@
         $message = $message.","."Attenzione hai inserito caratteri speciali nel Cognome<br/>";
 
     //controllo che il nome non contegna caratteri speciali
-    if(preg_match('@[^\w]@', $name))
-        $message = $message.","."Attenzione hai inserito caratteri speciali nel Nome<br/>";
+    if(preg_match('@[^\w]@', $name) || preg_match('@[0-9]@', $name))
+        $message = $message.","."Attenzione hai inserito caratteri speciali o numeri nel Nome<br/>";
 
-    //controllo che l'username non contegna caratteri speciali
-    if(preg_match('@[^\w]@', $username))
-        $message = $message.","."Attenzione hai inserito caratteri speciali nel username<br/>";
+    //controllo che l'username non contegna caratteri speciali1
+    if(preg_match('@[^\w]@', $username) || preg_match('@[0-9]@', $surname))
+        $message = $message.","."Attenzione hai inserito caratteri speciali o numeri nel username<br/>";
     
     if (isset($userResult1) && $userResult1 != $oldUsername)
         $message = $message.","."Attenzione username già presente nel database";
 
-    //se tutti i controlli vengono passati allora posso inserire l'utente nel database
     if ($message1 === "KO") 
         $message = $message.","."Errore connessione";
 
-    // else if (!preg_match($facebookRegex, $facebook))
-    //     $message = "Errore nell'inserimento del link di facebook";
+    // if (!preg_match($facebookRegex, $facebook))
+    //     $message = $message.","."Errore nell'inserimento del link di facebook";
     
-    // else if (!preg_match($twitterRegex, $twitter))
-    //     $message = "Errore nell'inserimento del link di twitter";
+    // if (!preg_match($twitterRegex, $twitter))
+    //     $message = $message.","."Errore nell'inserimento del link di twitter";
     
-    //else if (!preg_match($instagramRegex, $instagram))
-        //$message = "Errore nell'inserimento del link di instagram";
+    // if (!preg_match($instagramRegex, $instagram))
+    //     $message = $message.","."Errore nell'inserimento del link di instagram";
 
+    //se tutti i controlli vengono passati allora posso inserire l'utente nel database
     if($message === "")
     {
         $stmtFoto = $conn->prepare("SELECT FlagFoto FROM Users WHERE Username=?");
@@ -184,9 +183,6 @@
             $message = $message.","."Nome aggiornato con successo";
         }
     }
-    echo "<label class='userPresent'><b>$message</b></label><br>";
-    header( "refresh:0;url=../HomepagePersonale.php" );
-    echo "<a class='signIn' href='../HomepagePersonale.php'>Clicca qui per tornare alla homepage(se il tuo browser non supporta il reindirizzamento automatico)</a>";
     
     function removePhoto($var_flag_foto, $var_name_file, $var_directory, $oldUsername)
     {
@@ -221,4 +217,30 @@
         }
     }
 ?>
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <title></title>
+	<meta name ="homepage" content ="homepage here" />
+	<meta name ="" content ="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../HomepageStyle.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body class="bg2">
+    
+    <div class="Data_div">
+    <?php
+		echo "<label class='userPresent'><b>$message</b></label><br>";
+        header( "refresh:5;url=../HomepagePersonale.php" );
+        echo "<a class='signIn' href='../HomepagePersonale.php'>Clicca qui per tornare alla homepage(se il tuo browser non supporta il reindirizzamento automatico)</a>";
+    ?>
+	</div>
+	
+</body>
+</html>
 

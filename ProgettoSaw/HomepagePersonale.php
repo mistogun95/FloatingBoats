@@ -34,7 +34,7 @@ ini_set('display_errors','On');
     </head>
 
     <body>
-        <nav class="navbar navbar-expand-md bg-info navbar-light sticky-top bg-inverse">
+        <nav class="navbar navbar-expand-md bg-info navbar-light sticky-top bg-inverse navbarHome">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapse_target">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -194,7 +194,7 @@ ini_set('display_errors','On');
             </div>
         </div>
 
-        <div class="container-fluid bg-2 text-center" id = "AboutUs">
+        <div class="container-fluid bg-2 text-center searchDiv" id = "AboutUs">
             <h3 class="margin">Che cosa puoi fare con noi?</h3>
             <p>Condividi la tua passione per il mare e tutto ciò che lo riguarda con la possibilità di metterti in contatto con altri appassionati comincia cercando qualcosa che possa essere di tuo interesse e unisciti a noi!!!</p>
 
@@ -218,9 +218,9 @@ ini_set('display_errors','On');
                         <label class="mobilePhoneC">Telefono Cellulare: 3456789023</label> 
                     </div>
                     <div class="col social">
-                        <a href=""><img src="../Immagini/facebook.png" alt="facebook" style="width: 15%;"></a>
-                        <a href=""><img src="../Immagini/twitter.png" alt="twitter" style="width: 15%;"></a>
-                        <a href=""><img src="../Immagini/instagram.png" alt="instagram" style="width: 15%;"></a>
+                        <a href=""><img src="Immagini/facebook.png" alt="facebook" style="width: 15%;"></a>
+                        <a href=""><img src="Immagini/twitter.png" alt="twitter" style="width: 15%;"></a>
+                        <a href=""><img src="Immagini/instagram.png" alt="instagram" style="width: 15%;"></a>
                     </div>
         </div>
     <!-- Optional JavaScript -->

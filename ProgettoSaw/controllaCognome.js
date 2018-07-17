@@ -21,7 +21,7 @@ function controllaCognome()
             {
                 label = document.getElementById("surnameInsert");
                 label.style.color = "red";
-                label.innerHTML = "Attenzione hai inserito un carattere speciale nel cognome";
+                label.innerHTML = "Attenzione hai inserito un carattere speciale o un numero nel cognome";
             }
             else if (xhttp.responseText === "OK")
             {

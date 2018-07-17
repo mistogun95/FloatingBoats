@@ -3,11 +3,11 @@ body{
 }
 
 .bg{
-    background-image: url("../Immagini/barca.jpg");
+    background-image: url("Immagini/barca.jpg");
     background-repeat: no-repeat;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover; 
+	background-position: center center;
+	background-size: cover;
+    background-attachment: fixed; 
 }
 
 .LogoDiv{
@@ -21,11 +21,11 @@ body{
 	flex-direction: column;
 	justify-content: center;
 	text-align: center;
-	/* margin-left: -10px; */
-    margin-right: -15px;
 	background-image: url("Immagini/pesca3.jpg");
 	background-size:100% 100%;
 	background-size: cover;
+	margin: 0;
+    padding: 0;
 }
 
 .title{
@@ -49,9 +49,10 @@ body{
 		flex-direction: column;
 		justify-content: center;
 		text-align: center;
-		margin-right: -15px;
 		background-image: url("Immagini/pesca3.jpg");
 		background-size:100% 100%;
+		margin: 0;
+    	padding: 0;
 	}
 	
 	.title{
@@ -70,16 +71,13 @@ body{
 }
 
 .searchDiv{
-	margin-right: -15px;
-}
-
-.Contatti_e_Social{
-	margin-right: -15px;
-	margin-left: -15px;
+	margin: 0;
+    padding: 0;
 }
 
 .navbarHome{
-	margin-right: -15px;
+	margin: 0;
+    padding: 0;
 }
 
 .titleAbout, .titleContacts{
@@ -253,32 +251,16 @@ button{
 }
 
 .Data_div{
-	background-color: white;
-	margin: 0 auto;
-	width:40%;
-	height:30%;
-	border-style: ridge;
-	border-color: red;
-	padding: 16px;	
-	position: absolute;
-	top: 50%;
- 	left: 40%;
-  	margin: -100px 0 0 -150px;		
+	background-color: rgb(180, 180, 180);
+    opacity: 0.6;
+    filter: alpha(opacity=60);		
 }
 
 @media screen and (max-width: 1600px){
 	.Data_div{
-		background-color: white;
-		margin: 0 auto;
-		width:100%;
-		height:100%;
-		border-style: ridge;
-		border-color: red;
-		padding: 16px;	
-		position: absolute;
-		top: 50%;
- 		left: 40%;
-  		margin: -100px 0 0 -150px;	
+		background-color: rgb(180, 180, 180);
+    	opacity: 0.6;
+    	filter: alpha(opacity=60);	
 	}
 }
 
@@ -352,10 +334,11 @@ button{
 
   .Contatti_e_Social{
 	background: #66a1d1;
+	margin: 0;
+    padding: 0;
   }
 
   .social{
-	/* margin-left: 70%; */
 	color:white;
 	text-align: right; 
   }

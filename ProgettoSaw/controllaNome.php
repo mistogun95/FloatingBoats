@@ -3,7 +3,7 @@
 
     if($name === "")
         $returnName = "";
-    else if (preg_match('@[^\w]@', $name))
+    else if (preg_match('@[^\w]@', $name) || preg_match('@[0-9]@', $name))
         $returnName = "KO";
     else
         $returnName = "OK";

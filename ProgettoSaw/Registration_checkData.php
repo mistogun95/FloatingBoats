@@ -31,14 +31,14 @@
             $message= $message.","."Password non corretta deve avere almeno 8 caratteri e contenere almeno una lettera maiuscola, una minuscola, un numero e un carattere speciale<br/>";
 
         //controllo che il cognome non contenga caratteri speciali
-        if(preg_match('@[^\w]@', $surname))
+        if(preg_match('@[^\w]@', $surname) || preg_match('@[0-9]@', $surname))
             //echo("Attenzione hai inserito caratteri speciali nel Cognome<br/>");
-            $message = $message.","."Attenzione hai inserito caratteri speciali nel Cognome<br/>";
+            $message = $message.","."Attenzione hai inserito caratteri speciali o numeri nel Cognome<br/>";
 
         //controllo che il nome non contegna caratteri speciali
-        if(preg_match('@[^\w]@', $name))
+        if(preg_match('@[^\w]@', $name) || preg_match('@[0-9]@', $name))
             //echo("Attenzione hai inserito caratteri speciali nel Nome<br/>");
-            $message = $message.","."Attenzione hai inserito caratteri speciali nel Nome<br/>";
+            $message = $message.","."Attenzione hai inserito caratteri speciali o numeri nel Nome<br/>";
 
         //controllo che l'username non contegna caratteri speciali
         if(preg_match('@[^\w]@', $username))

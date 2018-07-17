@@ -1,6 +1,4 @@
-<?php
-    ini_set('display_errors','On');
-    error_reporting(E_ALL); 
+<?php 
     session_start();
     if(!isset($_SESSION["username"]))
         header("Location: ../error.php");
@@ -9,6 +7,8 @@
         $user = stripslashes($_SESSION["username"]);
         $user2 = filter_var(htmlspecialchars(trim($_GET['userContact'])));
     }
+    if($user === $user2)
+        header("Location: ../error.php");
     include "../db/mysql_credentials.php"; 
 ?>
 
@@ -24,7 +24,7 @@
         <link rel="stylesheet" type="text/css" href="chatStyle.css"/>
     <head>
     <body>
-        <nav class="navbar navbar-expand-lg bg-info navbar-light sticky-top">
+        <nav class="navbar navbar-expand-lg bg-info navbar-light sticky-top navbarHome">
             <a class="navbar-brand" href="../HomepagePersonale.php">
                 <img src="../Immagini/logo1.png" alt="logo" style="width:60px;">
             </a>

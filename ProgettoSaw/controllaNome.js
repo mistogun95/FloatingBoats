@@ -21,7 +21,7 @@ function controllaNome()
             {
                 label = document.getElementById("nameInsert");
                 label.style.color = "red";
-                label.innerHTML = "Attenzione hai inserito un carattere speciale nel nome";
+                label.innerHTML = "Attenzione hai inserito un carattere speciale o un numero nel nome";
             }
             else if (xhttp.responseText === "OK")
             {

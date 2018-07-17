@@ -22,12 +22,6 @@
             <a class="navbar-brand" href="../HomepagePersonale.php">
                 <img src="../Immagini/logo1.png" alt="logo" style="width:60px;">
             </a>
-            <ul class = "navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="#AboutUs">AboutUs</a></li>
-                <li class="nav-item"><a class="nav-link" href="#contatti">Contattaci</a></li>
-                <li class="nav-item"><a class="nav-link" href="php_files/get_data_profile.php">Profilo</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Messaggi</a></li>
-            </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link" href="../Logout.php">Logout</a></li>
             </ul>

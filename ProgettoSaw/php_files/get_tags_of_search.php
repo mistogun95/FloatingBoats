@@ -162,6 +162,7 @@
                             <th>Longitudine</th>
                             <th>Città</th>
                             <th>Autore post</th>
+                            <th>Mappa</th>
                         </tr>
                     </thead>
                     <tbody>
