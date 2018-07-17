@@ -65,11 +65,10 @@
     
 
 <!DOCTYPE html>
-<html>
+<html lang="it">
     <head>
-        <title></title>
+        <title>Profilo Utente</title>
 	    <meta name ="homepage" content ="homepage here" />
-	    <meta name ="" content ="" />
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="utf-8"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
@@ -95,7 +94,7 @@
                             <div class = "row">
                                 <div class = "col-md-12 text-center">
                                     <img src = <?php echo '"'.$var_complete_path_new_image.'"'?> alt = "avatar" class="mx-auto d-block" style="width:260px;" >
-                                    <label><h4>Profilo Utente</h4></label>
+                                    <h4>Profilo Utente</h4>
 		                            <hr>
                                 </div>
                             </div>
@@ -157,7 +156,7 @@
                                             </div> 
                                         </div>
                                         <div class="form-group row">
-                                            <label for="publicinfo" class="col-4 col-form-label">Interessi</label> 
+                                            <label id="Interessi" class="col-4 col-form-label">Interessi</label> 
                                             <div class = "col-8">
                                                 <?php
                                                     if(!isset($_GET['interessi_Get']))
@@ -187,7 +186,7 @@
                                                                 <label class=\"form-check-label\">
                                                                     <input type=\"checkbox\" class=\"form-check-input\" name=\"check[]\" value=\"".$value."\"";
                                                         if($flag_presente)
-                                                            echo " checked=\"true\"";
+                                                            echo " checked";
                                                         echo " id = \"check".$contatore."\">";
                                                         echo $value."
                                                         </label>
@@ -198,7 +197,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="publicinfo" class="col-4 col-form-label">Descrizione</label> 
+                                            <label id="publicinfo" class="col-4 col-form-label">Descrizione</label> 
                                             <div class = "col-8">
                                                 <textarea name = "descrizione" cols = "40" rows = "4" class = "form-control"><?php echo $var_AboutMe ?></textarea>
                                             </div>

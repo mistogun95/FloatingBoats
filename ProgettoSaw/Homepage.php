@@ -151,9 +151,9 @@
                         <label class="mobilePhoneC">Telefono Cellulare: 3456789023</label> 
                     </div>
                     <div class="col social">
-                        <a href=""><img src="../Immagini/facebook.png" alt="facebook" style="width: 15%;"></a>
-                        <a href=""><img src="../Immagini/twitter.png" alt="twitter" style="width: 15%;"></a>
-                        <a href=""><img src="../Immagini/instagram.png" alt="instagram" style="width: 15%;"></a>
+                        <a href=""><img src="Immagini/facebook.png" alt="facebook" style="width: 15%;"></a>
+                        <a href=""><img src="Immagini/twitter.png" alt="twitter" style="width: 15%;"></a>
+                        <a href=""><img src="Immagini/instagram.png" alt="instagram" style="width: 15%;"></a>
                     </div>
             </div>
         </div>
