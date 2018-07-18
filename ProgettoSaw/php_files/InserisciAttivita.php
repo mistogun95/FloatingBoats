@@ -4,7 +4,7 @@
 <?php
 function check_data_valid_and_redirect($validSimbol, $string_to_check)
 {
-    if(!ctype_alnum(str_replace($aValid, '', $string_to_check)))
+    if(!ctype_alnum(str_replace($validSimbol, '', $string_to_check)))
     {
        header("Location: ../error.php");
        exit;
