@@ -3,7 +3,10 @@
     error_reporting(E_ALL);
     session_start();
     if(!isset($_SESSION["username"]))
+    {
         header("Location: ../error.php");
+        exit;
+    }
     else 
         $user1 = stripslashes($_SESSION["username"]);
     include "../db/mysql_credentials.php";
@@ -12,13 +15,17 @@
     else 
         $user2 = filter_var(htmlspecialchars(trim($_POST["username_chat"])));
     if($user2 === $user1)
+    {
         header("Location: ../error.php");
+        exit;
+    }
     else{
         $mex = filter_var(htmlspecialchars(trim($_POST["messaggio"])));
 
         $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
         if ($conn->connect_error) {
             header("Location: ../error.php");
+            exit;
         }
         else
         {
@@ -30,6 +37,7 @@
                 $stmt->close();
                 $conn->close();
                 header("Location: ../error.php");
+                exit;
             }
 
             $stmt->bind_result($Id_chat);
@@ -42,14 +50,13 @@
                 $Id_chat1 = take_chat_id($user1, $user2, $conn);
                 send_message($user1, $Id_chat1, $mex, $conn);
                 $conn->close();
-                header("Refresh:0; URL=chat.php?userContact=".$user2);
             }
             else
             {
                 send_message($user1, $Id_chat, $mex, $conn);
                 $conn->close();
-                header("Refresh:0; URL=chat.php?userContact=".$user2);
             }
+            header("Refresh:0; URL=chat.php?userContact=".$user2);
         }
     }
 
@@ -65,6 +72,7 @@
             $stmt2->close();
             $conn->close();
             header("Location: ../error.php");
+            exit;
         }
 
         $stmt2->close();
@@ -80,6 +88,7 @@
             $stmt->close();
             $conn->close();
             header("Location: ../error.php");
+            exit;
         }
 
         $stmt->bind_result($Id_chat);
@@ -100,6 +109,7 @@
             $stmt->close();
             $conn->close();
             header("Location: ../error.php");
+            exit;
         }
 
         $stmt->close();

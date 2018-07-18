@@ -8,7 +8,8 @@
         if(!$stmt->execute())
         {
             $stmt->close();
-            header("Refresh:0; URL=../error.php");
+            header("Location: ../error.php");
+            exit;
         }
 
         $stmt->bind_result($Id_chat);
@@ -24,7 +25,8 @@
         if(!$stmt->execute())
         {
             $stmt->close();
-            header("Refresh:0; URL=../error.php");
+            header("Location: ../error.php");
+            exit;
         }
 
         $stmt->bind_result($Id_chat);

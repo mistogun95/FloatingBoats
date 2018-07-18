@@ -2,11 +2,17 @@
     session_start();
     ini_set('display_errors','On');
     if(!isset($_SESSION["username"]))
+    {
         header("Location: ../error.php");
+        exit;
+    }
     if(isset($_GET["Utente"]))
         $user = filter_var(htmlspecialchars(trim($_GET["Utente"])));
     else
+    {
         header("Location: ../error.php");
+        exit;
+    }
 
     include "../db/mysql_credentials.php";
     include "take_user_date.php";
@@ -14,6 +20,7 @@
     $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
     if ($conn->connect_error) {
         header("Location: ../error.php");
+        exit;
     }
     else
     {

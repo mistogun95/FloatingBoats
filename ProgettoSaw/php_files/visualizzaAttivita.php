@@ -4,7 +4,10 @@
     include "../db/mysql_credentials.php";
     session_start();
     if(!isset($_SESSION["username"]))
+    {
         header("Location: ../error.php");
+        exit;
+    }
     $id = $_GET["id_post"];
     $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
     $query = "SELECT Nomebarca,Titolo,NumeroPostiBarca,DataInizio,DataFine,LuogoDiRitrovo,SpesaViaggioTotale,Descrizione,StrumentazioneRichiesta,Latitudine,Longitudine,Citta,UsernameAutore FROM Posts WHERE ID=?";

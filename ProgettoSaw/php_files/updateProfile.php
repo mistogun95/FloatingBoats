@@ -48,7 +48,8 @@
         }
         else
         {
-            header("Refresh:0; URL=../error.php");
+            header("Location: ../error.php");
+            exit;
         }
     }
 
@@ -136,12 +137,12 @@
             $stmt->bind_param("ssissssssss", $name, $surname, $var_flag_foto, $città, $aboutMe, $webSite, $facebook, $instagram, $twitter, $checkBox_to_insert, $userResult);
             if(!$stmt->execute())
             {
-                header("Refresh:0; URL=../error.php");
+                header("Location: ../error.php");
                 exit;
             }
             $stmt->close();
             $conn->close();
-            $message = $message.", Modifica andata a buon fine"; 
+            $message = $message." Modifica andata a buon fine"; 
         }
         else 
         {
@@ -165,7 +166,7 @@
             }
             if(!$stmt->execute())
             {
-                header("Refresh:0; URL=../error.php");
+                header("Location: ../error.php");
                 exit;
             }
             $_SESSION['username'] = $username;
@@ -217,7 +218,7 @@
             
             if(!move_uploaded_file($_FILES["fileDaCaricare"]["tmp_name"], $var_complete_path_new_image))
             {
-                header("Refresh:0; URL=../error.php");
+                header("Location: ../error.php");
                 exit;
             }
         }

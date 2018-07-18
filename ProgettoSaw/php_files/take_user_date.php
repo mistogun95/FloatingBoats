@@ -9,7 +9,8 @@
         {
             $stmt->close();
             $conn->close();
-            header("Refresh:0; URL=../error.php");
+            header("Location: ../error.php");
+            exit;
         }
         
         $stmt->bind_result($var_FlagFoto, $var_Citta, $var_AboutMe, $var_LinkWebSite, $var_Facebook, $var_Instagram, $var_Twitter, $var_Name, $var_Surname, $var_interessi);
@@ -31,7 +32,8 @@
         }
         else 
         {
-            header("Refresh:0; URL=../error.php");
+            header("Location: ../error.php");
+            exit;
         }
         $arrayDate[] = $var_complete_path_new_image;
         

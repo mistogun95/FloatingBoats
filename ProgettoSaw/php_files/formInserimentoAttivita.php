@@ -3,7 +3,10 @@
     ini_set('display_errors','On');
     session_start();
     if(!isset($_SESSION["username"]))
+    {
         header("Location: ../error.php");
+        exit;
+    }
 ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -101,10 +104,10 @@
 
                                                     if(!$stmt->execute())
                                                     {
-                                                        echo "<script type='text/javascript'>alert('Execute Error');</script>";
                                                         $stmt->close();
                                                         $conn->close();
                                                         header("Location: ../error.php");
+                                                        exit;
                                                     }
 
                                                     $stmt->bind_result($nameTags);
