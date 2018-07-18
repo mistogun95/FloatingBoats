@@ -9,13 +9,20 @@
         exit;
     }
 
-    function check_data_valid_and_redirect($validSimbol, $string_to_check)
+    function check_data_valid_and_redirect($validSimbol, $string_to_check, $empty=false, $flag_alpa=false)
     {
-        if(!ctype_alnum(str_replace($validSimbol, '', $string_to_check)))
+        $var_mmt = str_replace($validSimbol, '', $string_to_check);
+        if($empty && empty($var_mmt))
+            return;
+        if($flag_alpa)
         {
-            header("Location: ../error.php");
-            exit;
-        }
+            if(ctype_alpha($var_mmt))
+                return;
+        }//tanto va nel else
+        if(ctype_alnum($var_mmt))
+            return;
+        header("Location: ../error.php");
+        exit;
     }
     $oldUsername = $_SESSION['username'];
     $webSite = filter_var(htmlspecialchars(trim($_POST['webIn'])), FILTER_SANITIZE_STRING);
@@ -30,17 +37,15 @@
     
     
     $aValid = array(' ', '!','?',);
-    check_data_valid_and_redirect($aValid, $aboutMe);
+    check_data_valid_and_redirect($aValid, $aboutMe,true);
 
     $aValid = array(' ');
     check_data_valid_and_redirect($aValid, $name);
     check_data_valid_and_redirect($aValid, $surname);
-
-    if(!ctype_alpha(str_replace($aValid, '', $città)) || !ctype_alnum($username))
-    {
-        header("Location: ../error.php");
-        exit;
-    }
+    check_data_valid_and_redirect($aValid, $città,true);
+    
+    $aValid = array('');
+    check_data_valid_and_redirect($aValid, $username);
     
     
     $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
