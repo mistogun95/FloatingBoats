@@ -50,12 +50,7 @@
         {
             header("Refresh:0; URL=../error.php");
         }
-        //echo "<br>FIN CHECK<br>";
     }
-
-    // $facebookRegex = "/(?:https?:\/\/)?(?:www\.)?facebook\.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[\w\-]*\/)*([\w\-\.]*)/";
-    // $twitterRegex = "/(?:http:\/\/)?(?:www\.)?twitter\.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[\w\-]*\/)*([\w\-]*)/";
-    // $instagramRegex = "/(https?:\/\/www\.)?instagram\.com(\/p\/\w+\/?)/";
 
     $stmtUser = $conn->prepare("SELECT Username FROM Users WHERE Username=?");
     $stmtUser->bind_param("s", $oldUsername);
@@ -72,30 +67,21 @@
     $stmtUser1->close();
 
     if(preg_match('@[^\w]@', $surname))
-        $message = $message.","."Attenzione hai inserito caratteri speciali nel Cognome<br/>";
+        $message = $message." "."Attenzione hai inserito caratteri speciali nel Cognome<br/>";
 
     //controllo che il nome non contegna caratteri speciali
     if(preg_match('@[^\w]@', $name) || preg_match('@[0-9]@', $name))
-        $message = $message.","."Attenzione hai inserito caratteri speciali o numeri nel Nome<br/>";
+        $message = $message." "."Attenzione hai inserito caratteri speciali o numeri nel Nome<br/>";
 
     //controllo che l'username non contegna caratteri speciali1
     if(preg_match('@[^\w]@', $username) || preg_match('@[0-9]@', $surname))
-        $message = $message.","."Attenzione hai inserito caratteri speciali o numeri nel username<br/>";
+        $message = $message." "."Attenzione hai inserito caratteri speciali o numeri nel username<br/>";
     
     if (isset($userResult1) && $userResult1 != $oldUsername)
-        $message = $message.","."Attenzione username già presente nel database";
+        $message = $message." "."Attenzione username già presente nel database";
 
     if ($message1 === "KO") 
-        $message = $message.","."Errore connessione";
-
-    // if (!preg_match($facebookRegex, $facebook))
-    //     $message = $message.","."Errore nell'inserimento del link di facebook";
-    
-    // if (!preg_match($twitterRegex, $twitter))
-    //     $message = $message.","."Errore nell'inserimento del link di twitter";
-    
-    // if (!preg_match($instagramRegex, $instagram))
-    //     $message = $message.","."Errore nell'inserimento del link di instagram";
+        $message = $message." "."Errore connessione";
 
     //se tutti i controlli vengono passati allora posso inserire l'utente nel database
     if($message === "")
@@ -128,7 +114,7 @@
             }
         }
 
-        uploadPhoto($var_name_file, $var_directory, $username, $var_tipo_immagine);
+        uploadPhoto($var_name_file, $var_directory, $username, $var_tipo_immagine, $message);
 
         if($oldUsername === $username)
         {
@@ -139,7 +125,7 @@
                 header("Refresh:0; URL=../error.php");
             $stmt->close();
             $conn->close();
-            $message = $message.", Modifica andata a buon fine"; 
+            $message = $message." Modifica andata a buon fine"; 
         }
         else 
         {
@@ -156,7 +142,7 @@
                         if(rename($var_directory.$oldUsername.".".$arrayType[$i], $var_directory.$username.".".$arrayType[$i]))
                         {
                             $var_flag_foto = 1;
-                            $message = $message.","."Nome aggiornato con successo";
+                            $message = $message." "."Nome aggiornato con successo";
                         }
                     }
                 }
@@ -173,14 +159,14 @@
                     {
                         if(rename($var_directory.$oldUsername.".".$arrayType[$i], $var_directory.$username.".".$arrayType[$i]))
                         {
-                            $message = $message.","."Nome aggiornato con successo";
+                            $message = $message." "."Nome aggiornato con successo";
                         }
                     }
                 }
             }
             $stmt->close();
             $conn->close();
-            $message = $message.","."Nome aggiornato con successo";
+            $message = $message." "."Nome aggiornato con successo";
         }
     }
     
@@ -199,7 +185,7 @@
         }
     }
 
-    function uploadPhoto($var_name_file, $var_directory, $username, $var_tipo_immagine)
+    function uploadPhoto($var_name_file, $var_directory, $username, $var_tipo_immagine, $message)
     {
         if(strlen($var_name_file) > 0)
         {
@@ -207,11 +193,11 @@
             if(file_exists($var_complete_path_new_image))
             {
                 if(unlink($var_complete_path_new_image))
-                    echo "immagine rimossa con successo";
+                    $message = $message." immagine rimossa con successo";
             }
             
             if(move_uploaded_file($_FILES["fileDaCaricare"]["tmp_name"], $var_complete_path_new_image))
-                echo "Il file ".basename($_FILES["fileDaCaricare"]["name"])." è stato caricato con il nome $username.$var_tipo_immagine nella cartella -> $var_directory.";
+                $message = $message." immagine modificata con successo";
             else
                 header("Refresh:0; URL=../error.php");
         }

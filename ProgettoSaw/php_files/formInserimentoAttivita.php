@@ -1,9 +1,10 @@
 <?php 
     include "../db/mysql_credentials.php";
-    ini_set('display_errors','On');
     session_start();
-    if(!isset($_SESSION["username"]))
+    if(!isset($_SESSION["username"])){
         header("Location: ../error.php");
+        exit();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -16,13 +17,13 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="profileStyle.css"/>
     </head>
-    <body class>
+    <body class="bg">
         <nav class="navbar navbar-expand-lg bg-info navbar-light sticky-top">
             <a class="navbar-brand" href="../HomepagePersonale.php">
                 <img src="../Immagini/logo1.png" alt="logo" style="width:60px;">
             </a>
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a class="nav-link" href="../Logout.php">Logout</a></li>
+                <li class="nav-item btn btn-primary"><a class="nav-link" href="../Logout.php">Logout</a></li>
             </ul>
         </nav>
         
@@ -101,7 +102,6 @@
 
                                                     if(!$stmt->execute())
                                                     {
-                                                        echo "<script type='text/javascript'>alert('Execute Error');</script>";
                                                         $stmt->close();
                                                         $conn->close();
                                                         header("Location: ../error.php");
@@ -166,4 +166,10 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+        <script>
+            tinymce.init({
+                selector: "textarea",
+            });
+        </script>
 </html>        
