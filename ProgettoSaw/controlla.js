@@ -1,4 +1,4 @@
-"use strict";
+//"use strict";
 function controlla(input)
 {
     var xhttp = new XMLHttpRequest();
@@ -43,7 +43,7 @@ function controlla(input)
 
     var params = encodeURI(input.name + "=" + input.value);
     xhttp.open("POST", url, true);
-    console.log(input.name + "=" + input.value);
+    console.log(input.name + "="+  input.value);
 
     xhttp.onreadystatechange = function()
     {
