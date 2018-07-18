@@ -2,6 +2,15 @@
     ini_set('display_errors','On');
 ?>
 <?php
+function check_data_valid_and_redirect($validSimbol, $string_to_check)
+{
+    if(!ctype_alnum(str_replace($aValid, '', $string_to_check)))
+    {
+       //header("Location: ../error.php");
+       header("Location: ../error.php");
+       exit;
+    }
+}
     session_start();
     if(!isset($_SESSION["username"]))
         header("Location: ../error.php");
@@ -22,8 +31,25 @@
     $Longitudine = filter_var(htmlspecialchars(trim($_POST['Longitudine'])), FILTER_SANITIZE_STRING);
     $tags = "";
     $regexDate = '/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/';
-    $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
+    
+    
+    
+    $aValid = array(' ', '!','?',);
+    check_data_valid_and_redirect($aValid, $title);
+    check_data_valid_and_redirect($aValid, $description);
+    check_data_valid_and_redirect($aValid, $instrumentation);
 
+    $aValid = array(' ');
+    check_data_valid_and_redirect($aValid, $place);
+
+    if(!ctype_alpha(str_replace($aValid, '', $città)) || !ctype_digit($seats) || !ctype_digit($totalCost) )
+    {
+        header("Location: ../error.php");
+        exit;
+    }
+
+    
+    $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);    
     $stmt = $conn->prepare("SELECT COUNT(*) FROM Tags");
     $count = 0;
     
@@ -31,7 +57,8 @@
     {
         $stmt->close();
         $conn->close();
-        header("Location: error.php");
+        header("Location: ../error.php");
+        exit;
     }
 
     $stmt->bind_result($numberTags);
@@ -58,12 +85,12 @@
             $stmt->close();
             $conn->close();
             header("Location: ../error.php");
+            exit;
         }
         $stmt->close(); 
     }
     $conn->close();
     header("Location: ../HomepagePersonale.php");
-
-    
+    exit;
 ?>
 
