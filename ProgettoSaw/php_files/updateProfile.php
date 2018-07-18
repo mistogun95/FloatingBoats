@@ -81,10 +81,6 @@
         }
     }
 
-    // $facebookRegex = "/(?:https?:\/\/)?(?:www\.)?facebook\.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[\w\-]*\/)*([\w\-\.]*)/";
-    // $twitterRegex = "/(?:http:\/\/)?(?:www\.)?twitter\.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[\w\-]*\/)*([\w\-]*)/";
-    // $instagramRegex = "/(https?:\/\/www\.)?instagram\.com(\/p\/\w+\/?)/";
-
     $stmtUser = $conn->prepare("SELECT Username FROM Users WHERE Username=?");
     $stmtUser->bind_param("s", $oldUsername);
     $stmtUser->execute();
@@ -115,15 +111,6 @@
 
     if ($message1 === "KO") 
         $message = $message.","."Errore connessione";
-
-    // if (!preg_match($facebookRegex, $facebook))
-    //     $message = $message.","."Errore nell'inserimento del link di facebook";
-    
-    // if (!preg_match($twitterRegex, $twitter))
-    //     $message = $message.","."Errore nell'inserimento del link di twitter";
-    
-    // if (!preg_match($instagramRegex, $instagram))
-    //     $message = $message.","."Errore nell'inserimento del link di instagram";
 
     //se tutti i controlli vengono passati allora posso inserire l'utente nel database
     if($message === "")
@@ -266,7 +253,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
-<body class="bg2">
+<body class="bg">
     
     <div class="Data_div">
     <?php
