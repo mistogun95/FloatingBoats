@@ -205,7 +205,7 @@
                                         <div class="form-group row">
                                             <label id="publicinfo" class="col-4 col-form-label">Descrizione</label> 
                                             <div class = "col-8">
-                                                <textarea name = "descrizione" cols = "40" rows = "4" class = "form-control"><?php echo $var_AboutMe ?></textarea>
+                                                <textarea name = "descrizione" cols = "40" rows = "4" class = "form-control" placeholder="Descrizione"><?php echo $var_AboutMe ?></textarea>
                                             </div>
                                         </div>
                                         <div class="form-group row">
