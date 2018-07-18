@@ -50,7 +50,6 @@
         {
             header("Refresh:0; URL=../error.php");
         }
-        //echo "<br>FIN CHECK<br>";
     }
 
     // $facebookRegex = "/(?:https?:\/\/)?(?:www\.)?facebook\.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[\w\-]*\/)*([\w\-\.]*)/";
@@ -136,7 +135,10 @@
             $stmt = $conn->prepare($query);
             $stmt->bind_param("ssissssssss", $name, $surname, $var_flag_foto, $città, $aboutMe, $webSite, $facebook, $instagram, $twitter, $checkBox_to_insert, $userResult);
             if(!$stmt->execute())
+            {
                 header("Refresh:0; URL=../error.php");
+                exit;
+            }
             $stmt->close();
             $conn->close();
             $message = $message.", Modifica andata a buon fine"; 
@@ -162,7 +164,10 @@
                 }
             }
             if(!$stmt->execute())
+            {
                 header("Refresh:0; URL=../error.php");
+                exit;
+            }
             $_SESSION['username'] = $username;
             if ($var_name_file === "")
             {
@@ -210,10 +215,11 @@
                     echo "immagine rimossa con successo";
             }
             
-            if(move_uploaded_file($_FILES["fileDaCaricare"]["tmp_name"], $var_complete_path_new_image))
-                echo "Il file ".basename($_FILES["fileDaCaricare"]["name"])." è stato caricato con il nome $username.$var_tipo_immagine nella cartella -> $var_directory.";
-            else
+            if(!move_uploaded_file($_FILES["fileDaCaricare"]["tmp_name"], $var_complete_path_new_image))
+            {
                 header("Refresh:0; URL=../error.php");
+                exit;
+            }
         }
     }
 ?>
