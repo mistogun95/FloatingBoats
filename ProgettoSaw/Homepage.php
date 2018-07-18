@@ -86,19 +86,19 @@
                 <!-- Modal body -->
                 <div class="modal-body">
                         <label class="nameP"><b>Nome:</b></label><br>
-                        <input class="form" type="text" name="name" id="name" onkeyup="controllaNome()" placeholder="Inserisci Nome" required>
+                        <input class="form" type="text" name="name" id="name" onkeyup="controlla(document.getElementById('name'))" placeholder="Inserisci Nome" required>
                         <label class="Insert" id="nameInsert"></label>
 			            <br>
 			            <label class="surnameP"><b>Cognome:</b></label><br>
-                        <input class="form" type="text" name="surname" id="surname" onkeyup="controllaCognome()" placeholder="Inserisci Cognome" required>
+                        <input class="form" type="text" name="surname" id="surname" onkeyup="controlla(document.getElementById('surname'))" placeholder="Inserisci Cognome" required>
                         <label class="Insert" id="surnameInsert"></label>
 			            <br>
 			            <label class="usernameP"><b>Username:</b></label><br>
-			            <input class="form" name="username" id="username" onmouseout="controllaUsername()" type="text" placeholder="Inserisci Username" required>
+			            <input class="form" name="username" id="username" onmouseout="controlla(document.getElementById('username'))" type="text" placeholder="Inserisci Username" required>
                         <label class="Insert" id="usernameInsert"></label>
                         <br>
 			            <label class="passwordP"><b>Password:</b></label><br>
-                        <input class="form" type="password" name="password" id="password" onkeyup="controllaPassword()" placeholder="Inserisci Password" required>
+                        <input class="form" type="password" name="password" id="password" onkeyup="controlla(document.getElementById('password'))" placeholder="Inserisci Password" required>
                         <label class="Insert" id="passwordInsert"></label>
                         <br>
                         <label class="passwordP"><b>Carica immagine profilo(opzionale):</b></label><br>
@@ -162,11 +162,8 @@
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-        <script src="controllaNome.js"></script>
-        <script src="controllaCognome.js"></script>
-        <script src="controllaUsername.js"></script>
-        <script src="controllaPassword.js"></script>
         <script src="cancellaCampi.js"></script>
         <script src="closeCollapse.js"></script>
+        <script src="controlla.js"></script>
   </body>
 </html>

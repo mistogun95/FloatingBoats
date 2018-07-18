@@ -6,11 +6,10 @@
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="it">
     <head>
         <title>Errore</title>
 	    <meta name ="homepage" content ="homepage here" />
-	    <meta name ="" content ="" />
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="utf-8"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
