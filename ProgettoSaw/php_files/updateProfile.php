@@ -119,16 +119,16 @@
             if($var_tipo_immagine != "jpg" && $var_tipo_immagine != "png" && $var_tipo_immagine != "jpeg")
             {
                 $message = $message.","."<h3>Tipo Sbagliato</h3>";
-                $var_flag_image = 0;
+                $var_flag_foto = 0;
             }
             if($_FILES["fileDaCaricare"]["size"] > 1000000)
             {
                 $message = $message.","."File troppo grande!!";
-                $var_flag_image = 0;
+                $var_flag_foto = 0;
             }
         }
-
-        uploadPhoto($var_name_file, $var_directory, $username, $var_tipo_immagine);
+        if($var_flag_foto === 1)
+            uploadPhoto($var_name_file, $var_directory, $username, $var_tipo_immagine);
 
         if($oldUsername === $username)
         {
