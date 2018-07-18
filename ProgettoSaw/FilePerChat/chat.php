@@ -3,14 +3,20 @@
     error_reporting(E_ALL); 
     session_start();
     if(!isset($_SESSION["username"]))
+    {
         header("Location: ../error.php");
+        exit;
+    }
     else
     {
         $user = stripslashes($_SESSION["username"]);
         $user2 = $_GET['userContact'];
     }
     if($user === $user2)
+    {
         header("Location: ../error.php");
+        exit;
+    }
     include "../db/mysql_credentials.php"; 
 ?>
 
@@ -43,7 +49,8 @@
                     <?php
                         $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
                         if ($conn->connect_error) {
-                            header("Refresh:0; URL=../error.php");
+                            header("Location: ../error.php");
+                            exit;
                         }
                         else
                         {
@@ -83,7 +90,8 @@
         {
             $stmt->close();
             $conn->close();
-            header("Refresh:0; URL=../error.php");
+            header("Location: ../error.php");
+            exit;
         }
         $stmt->bind_result($Id_chat);
         $stmt->fetch();
@@ -94,7 +102,8 @@
         {
             $stmt2->close();
             $conn->close();
-            header("Refresh:0; URL=../error.php");
+            header("Location: ../error.php");
+            exit;
         }
         $stmt2->bind_result($mex, $dataMex, $autor);
         while($stmt2->fetch())
@@ -133,7 +142,8 @@
         {
             $stmt->close();
             $conn->close();
-            header("Refresh:0; URL=../error.php");
+            header("Location: ../error.php");
+            exit;
         }
         $stmt->bind_result($Id_chat);
         $stmt->fetch();
@@ -144,7 +154,8 @@
         {
             $stmt2->close();
             $conn->close();
-            header("Refresh:0; URL=../error.php");
+            header("Location: ../error.php");
+            exit;
         }
         $stmt2->bind_result($mex, $dataMex, $autor);
         while($stmt2->fetch())
@@ -182,7 +193,8 @@
         {
             $stmt->close();
             $conn->close();
-            header("Refresh:0; URL=../error.php");
+            header("Location: ../error.php");
+            exit;
         }
         $stmt->close();
     }

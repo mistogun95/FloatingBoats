@@ -1,9 +1,10 @@
 <?php 
     include "../db/mysql_credentials.php";
     session_start();
-    if(!isset($_SESSION["username"])){
+    if(!isset($_SESSION["username"]))
+    {
         header("Location: ../error.php");
-        exit();
+        exit;
     }
 ?>
 <!DOCTYPE html>
@@ -105,6 +106,7 @@
                                                         $stmt->close();
                                                         $conn->close();
                                                         header("Location: ../error.php");
+                                                        exit;
                                                     }
 
                                                     $stmt->bind_result($nameTags);

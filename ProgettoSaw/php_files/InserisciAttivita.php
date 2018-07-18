@@ -6,14 +6,16 @@ function check_data_valid_and_redirect($validSimbol, $string_to_check)
 {
     if(!ctype_alnum(str_replace($aValid, '', $string_to_check)))
     {
-       //header("Location: ../error.php");
        header("Location: ../error.php");
        exit;
     }
 }
     session_start();
     if(!isset($_SESSION["username"]))
+    {
         header("Location: ../error.php");
+        exit;
+    }
     include "../db/mysql_credentials.php";
     $username = $_SESSION['username'];
     $boat = filter_var(htmlspecialchars(trim($_POST['boatIn'])), FILTER_SANITIZE_STRING);

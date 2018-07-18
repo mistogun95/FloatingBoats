@@ -14,17 +14,20 @@ function check_new_message($user1, $conn)
     {
         if(!$stmt = $conn->prepare($query))
         {
-            header("Refresh:0; URL=../error.php");
+            header("Location: ../error.php");
+            exit;
         }
         if(!$stmt->bind_param("ii", $Id_chat, $b))
         {
             $stmt->close();
-            header("Refresh:0; URL=../error.php");
+            header("Location: ../error.php");
+            exit;
         }
         if(!$stmt->execute())
         {
             $stmt->close();
-            header("Refresh:0; URL=../error.php");
+            header("Location: ../error.php");
+            exit;
         }
         $stmt->bind_result($username);
         $stmt->fetch();

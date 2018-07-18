@@ -49,12 +49,14 @@
 
     if(!isset($array))
     {
-        header("Refresh:0; URL=../error.php");
+        header("Location: ../error.php");
+        exit;
     }
     $var_array_size = count($array);
     if($var_array_size==0)
     {
-        header("Refresh:0; URL=../error.php");
+        header("Location: ../error.php");
+        exit;
     }
     $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
     if ($conn->connect_error) {
@@ -87,7 +89,8 @@
         {
             $stmt->close();
             $conn->close();
-            header("Refresh:0; URL=../error.php");
+            header("Location: ../error.php");
+            exit;
         }
         if($var_array_size == 1)
         {

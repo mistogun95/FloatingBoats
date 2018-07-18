@@ -7,7 +7,10 @@
 <?php
     session_start();
     if(!isset($_SESSION["username"]))
+    {
         header("Location: ../error.php");
+        exit;
+    }
     
     include "../db/mysql_credentials.php"; 
 
@@ -27,6 +30,7 @@
             $stmt->close();
             $conn->close();
             header("Location: ../error.php");
+            exit;
         }
         
         $stmt->bind_result($var_FlagFoto, $var_Citta, $var_AboutMe, $var_LinkWebSite, $var_Facebook, $var_Instagram, $var_Twitter, $var_Name, $var_Surname);
@@ -39,6 +43,7 @@
         else 
         {
             header("Location: ../error.php");
+            exit;
         }
         
         $stmt->close();
@@ -50,6 +55,7 @@
             $stmt->close();
             $conn->close();
             header("Location: ../error.php");
+            exit;
         }
         $stmt->bind_result($var_Name_Tags);
         $array_tags_names = array();

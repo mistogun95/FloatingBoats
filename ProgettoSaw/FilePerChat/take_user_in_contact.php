@@ -18,7 +18,8 @@
             {
                 $stmt->close();
                 $conn->close();
-                header("Refresh:0; URL=../error.php");
+                header("Location: ../error.php");
+                exit;
             }
 
             $stmt->bind_result($userContact);
@@ -38,7 +39,8 @@
             {
                 $stmt->close();
                 $conn->close();
-                header("Refresh:0; URL=../error.php");
+                header("Location: ../error.php");
+                exit;
             }
 
             $stmt->bind_result($userContact);

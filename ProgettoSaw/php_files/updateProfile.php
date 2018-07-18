@@ -48,7 +48,8 @@
         }
         else
         {
-            header("Refresh:0; URL=../error.php");
+            header("Location: ../error.php");
+            exit;
         }
     }
 
@@ -105,16 +106,16 @@
             if($var_tipo_immagine != "jpg" && $var_tipo_immagine != "png" && $var_tipo_immagine != "jpeg")
             {
                 $message = $message.","."<h3>Tipo Sbagliato</h3>";
-                $var_flag_image = 0;
+                $var_flag_foto = 0;
             }
             if($_FILES["fileDaCaricare"]["size"] > 1000000)
             {
                 $message = $message.","."File troppo grande!!";
-                $var_flag_image = 0;
+                $var_flag_foto = 0;
             }
         }
-
-        uploadPhoto($var_name_file, $var_directory, $username, $var_tipo_immagine, $message);
+        if($var_flag_foto === 1)
+            uploadPhoto($var_name_file, $var_directory, $username, $var_tipo_immagine);
 
         if($oldUsername === $username)
         {
@@ -122,7 +123,10 @@
             $stmt = $conn->prepare($query);
             $stmt->bind_param("ssissssssss", $name, $surname, $var_flag_foto, $città, $aboutMe, $webSite, $facebook, $instagram, $twitter, $checkBox_to_insert, $userResult);
             if(!$stmt->execute())
-                header("Refresh:0; URL=../error.php");
+            {
+                header("Location: ../error.php");
+                exit;
+            }
             $stmt->close();
             $conn->close();
             $message = $message." Modifica andata a buon fine"; 
@@ -148,7 +152,10 @@
                 }
             }
             if(!$stmt->execute())
-                header("Refresh:0; URL=../error.php");
+            {
+                header("Location: ../error.php");
+                exit;
+            }
             $_SESSION['username'] = $username;
             if ($var_name_file === "")
             {
@@ -196,10 +203,18 @@
                     $message = $message." immagine rimossa con successo";
             }
             
+<<<<<<< HEAD
             if(move_uploaded_file($_FILES["fileDaCaricare"]["tmp_name"], $var_complete_path_new_image))
                 $message = $message." immagine modificata con successo";
             else
                 header("Refresh:0; URL=../error.php");
+=======
+            if(!move_uploaded_file($_FILES["fileDaCaricare"]["tmp_name"], $var_complete_path_new_image))
+            {
+                header("Location: ../error.php");
+                exit;
+            }
+>>>>>>> 155d462d10066ad5f5689f1e3244a77010f4d277
         }
     }
 ?>
