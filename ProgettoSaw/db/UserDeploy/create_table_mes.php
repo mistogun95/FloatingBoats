@@ -10,7 +10,7 @@
         `Contenuto` varchar(256) NOT NULL,
         `Letto` boolean NOT NULL DEFAULT FALSE,
         PRIMARY KEY (`ID`),
-        FOREIGN KEY (`Username_Autore`) REFERENCES Users(username),
+        FOREIGN KEY (`Username_Autore`) REFERENCES Users(username) on update cascade,
         FOREIGN KEY (`ID_Private_Chat`) REFERENCES private_chat(ID)
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
     

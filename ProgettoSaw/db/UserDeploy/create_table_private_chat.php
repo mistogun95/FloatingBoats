@@ -7,8 +7,8 @@
         `Utente1` varchar(50) NOT NULL,
         `Utente2` varchar(50) NOT NULL,
         PRIMARY KEY (`ID`),
-        FOREIGN KEY (`Utente1`) REFERENCES Users(username),
-        FOREIGN KEY (`Utente2`) REFERENCES Users(username)
+        FOREIGN KEY (`Utente1`) REFERENCES Users(username) on update cascade,
+        FOREIGN KEY (`Utente2`) REFERENCES Users(username) on update cascade
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
     
     if(!$con->query($query))

@@ -253,7 +253,11 @@ button{
 .Data_div{
 	background-color: rgb(180, 180, 180);
     opacity: 0.6;
-    filter: alpha(opacity=60);		
+	filter: alpha(opacity=60);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;		
 }
 
 @media screen and (max-width: 1600px){

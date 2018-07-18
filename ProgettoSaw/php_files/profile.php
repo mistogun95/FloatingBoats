@@ -2,7 +2,6 @@
 <?php 
     include "../db/mysql_credentials.php";
     include_once "../FilePerChat/take_user_profile_imeage.php";
-    ini_set('display_errors','On');
 ?>
 <?php
     session_start();
@@ -100,7 +99,7 @@
                             <div class = "row">
                                 <div class = "col-md-12 text-center">
                                     <img src = <?php echo '"'.$var_complete_path_new_image.'"'?> alt = "avatar" class="mx-auto d-block" style="width:260px;" >
-                                    <h4>Profilo Utente</h4>
+                                    <h4>Profilo Utente di <?php echo $username?></h4>
 		                            <hr>
                                 </div>
                             </div>
@@ -111,12 +110,6 @@
                                             <label id = "immagine" class = "col-4 col-form-label">Cambia immagine di profilo</label>
                                             <div class = "col-8">
                                                 <input type="file" name="fileDaCaricare" id="fileDaCaricare">
-                                            </div> 
-                                        </div>
-                                        <div class = "form-group row">
-                                            <label id = "username" class = "col-4 col-form-label">Username</label>
-                                            <div class = "col-8">
-                                                <input id = "usernameIn" name = "usernameIn" placeholder = "Username" class = "form-control here" type = "text" value = <?php echo '"'.$username.'"'?>>
                                             </div> 
                                         </div>
                                         <div class = "form-group row">

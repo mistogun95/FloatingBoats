@@ -19,7 +19,7 @@
         `UsernameAutore` varchar(50) NOT NULL,
         `Tag` varchar(100),
         PRIMARY KEY (`ID`),
-        FOREIGN KEY (`UsernameAutore`) REFERENCES Users(username)
+        FOREIGN KEY (`UsernameAutore`) REFERENCES Users(username) on update cascade
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
     
     if(!$con->query($query))

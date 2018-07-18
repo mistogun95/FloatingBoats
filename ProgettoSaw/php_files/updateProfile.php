@@ -18,17 +18,16 @@
         {
             if(ctype_alpha($var_mmt))
                 return;
-        }//tanto va nel else
+        }
         if(ctype_alnum($var_mmt))
             return;
         header("Location: ../error.php");
         exit;
     }
-    $oldUsername = $_SESSION['username'];
+    $username = $_SESSION['username'];
     $webSite = filter_var(htmlspecialchars(trim($_POST['webIn'])), FILTER_SANITIZE_STRING);
     $name = filter_var(htmlspecialchars(trim($_POST['nameIn'])), FILTER_SANITIZE_STRING);
     $surname = filter_var(htmlspecialchars(trim($_POST['surnameIn'])), FILTER_SANITIZE_STRING);
-    $username = filter_var(htmlspecialchars(trim($_POST['usernameIn'])), FILTER_SANITIZE_STRING);
     $twitter = filter_var(htmlspecialchars(trim($_POST['twitterIn'])), FILTER_SANITIZE_STRING);
     $instagram = filter_var(htmlspecialchars(trim($_POST['instagramIn'])), FILTER_SANITIZE_STRING);
     $aboutMe = filter_var(htmlspecialchars(trim($_POST['descrizione'])), FILTER_SANITIZE_STRING);
@@ -44,9 +43,6 @@
     check_data_valid_and_redirect($aValid, $surname);
     check_data_valid_and_redirect($aValid, $città,true);
     
-    $aValid = array('');
-    check_data_valid_and_redirect($aValid, $username);
-    
     
     $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
     if ($conn->connect_error) {
@@ -55,7 +51,7 @@
     else $message1 = "OK";
     
     $stmtCheck = $conn->prepare("SELECT Interessi FROM Users WHERE Username=?");
-    $stmtCheck->bind_param("s", $oldUsername);
+    $stmtCheck->bind_param("s", $username);
     $stmtCheck->execute();
     $stmtCheck->bind_result($checkBox);
     $stmtCheck->fetch();
@@ -87,18 +83,11 @@
     }
 
     $stmtUser = $conn->prepare("SELECT Username FROM Users WHERE Username=?");
-    $stmtUser->bind_param("s", $oldUsername);
+    $stmtUser->bind_param("s", $username);
     $stmtUser->execute();
     $stmtUser->bind_result($userResult);
     $stmtUser->fetch();
     $stmtUser->close();
-
-    $stmtUser1 = $conn->prepare("SELECT Username FROM Users WHERE Username=?");
-    $stmtUser1->bind_param("s", $username);
-    $stmtUser1->execute();
-    $stmtUser1->bind_result($userResult1);
-    $stmtUser1->fetch();
-    $stmtUser1->close();
 
     if(preg_match('@[^\w]@', $surname))
         $message = $message.","."Attenzione hai inserito caratteri speciali nel Cognome<br/>";
@@ -110,9 +99,6 @@
     //controllo che l'username non contegna caratteri speciali1
     if(preg_match('@[^\w]@', $username) || preg_match('@[0-9]@', $surname))
         $message = $message.","."Attenzione hai inserito caratteri speciali o numeri nel username<br/>";
-    
-    if (isset($userResult1) && $userResult1 != $oldUsername)
-        $message = $message.","."Attenzione username già presente nel database";
 
     if ($message1 === "KO") 
         $message = $message.","."Errore connessione";
@@ -131,7 +117,7 @@
         $var_name_file = basename($_FILES["fileDaCaricare"]["name"]);
         $var_tipo_immagine = strtolower(pathinfo($var_name_file, PATHINFO_EXTENSION));
 
-        removePhoto($var_flag_foto, $var_name_file, $var_directory, $oldUsername);
+        removePhoto($var_flag_foto, $var_name_file, $var_directory, $username);
 
         if(strlen($var_name_file) > 0)
         {
@@ -149,65 +135,19 @@
         }
         if($var_flag_foto === 1)
             uploadPhoto($var_name_file, $var_directory, $username, $var_tipo_immagine);
-
-        if($oldUsername === $username)
+        
+        $query = "UPDATE Users SET Name=?, Surname=?, FlagFoto=?, Citta=?, AboutMe=?, linkWebSite=?, Facebook=?, Instagram=?, Twitter=?, Interessi=? WHERE Username=?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("ssissssssss", $name, $surname, $var_flag_foto, $città, $aboutMe, $webSite, $facebook, $instagram, $twitter, $checkBox_to_insert, $userResult);
+        if(!$stmt->execute())
         {
-            $query = "UPDATE Users SET Name=?, Surname=?, FlagFoto=?, Citta=?, AboutMe=?, linkWebSite=?, Facebook=?, Instagram=?, Twitter=?, Interessi=? WHERE Username=?";
-            $stmt = $conn->prepare($query);
-            $stmt->bind_param("ssissssssss", $name, $surname, $var_flag_foto, $città, $aboutMe, $webSite, $facebook, $instagram, $twitter, $checkBox_to_insert, $userResult);
-            if(!$stmt->execute())
-            {
-                header("Location: ../error.php");
-                exit;
-            }
-            $stmt->close();
-            $conn->close();
-            $message = $message." Modifica andata a buon fine"; 
+            header("Location: ../error.php");
+            exit;
         }
-        else 
-        {
-            $query = "UPDATE Users SET Username=?, Name=?, Surname=?, FlagFoto=?, Citta=?, AboutMe=?, linkWebSite=?, Facebook=?, Instagram=?, Twitter=?, Interessi=? WHERE Username=?";
-            $stmt = $conn->prepare($query);
-            $stmt->bind_param("sssissssssss",$username, $name, $surname, $var_flag_foto, $città, $aboutMe, $webSite, $facebook, $instagram, $twitter, $checkBox, $userResult);
-            if ($var_name_file === "")
-            {
-                $arrayType = array("jpg", "png", "jpeg");
-                for ($i=0; $i < 3; $i++)
-                {
-                    if(file_exists($var_directory.$oldUsername.".".$arrayType[$i]))
-                    {
-                        if(rename($var_directory.$oldUsername.".".$arrayType[$i], $var_directory.$username.".".$arrayType[$i]))
-                        {
-                            $var_flag_foto = 1;
-                            $message = $message.","."Nome aggiornato con successo";
-                        }
-                    }
-                }
-            }
-            if(!$stmt->execute())
-            {
-                header("Location: ../error.php");
-                exit;
-            }
-            $_SESSION['username'] = $username;
-            if ($var_name_file === "")
-            {
-                $arrayType = array("jpg", "png", "jpeg");
-                for ($i=0; $i < 3; $i++)
-                {
-                    if(file_exists($var_directory.$oldUsername.".".$arrayType[$i]))
-                    {
-                        if(rename($var_directory.$oldUsername.".".$arrayType[$i], $var_directory.$username.".".$arrayType[$i]))
-                        {
-                            $message = $message.","."Nome aggiornato con successo";
-                        }
-                    }
-                }
-            }
-            $stmt->close();
-            $conn->close();
-            $message = $message.","."Nome aggiornato con successo";
-        }
+        $stmt->close();
+        $conn->close();
+        $message = $message." Modifica andata a buon fine";
+        
     }
     
     function removePhoto($var_flag_foto, $var_name_file, $var_directory, $oldUsername)
@@ -238,7 +178,7 @@
             
             if(!move_uploaded_file($_FILES["fileDaCaricare"]["tmp_name"], $var_complete_path_new_image))
             {
-                header("Location: ../error.php");
+                //header("Location: ../error.php");
                 exit;
             }
         }
@@ -248,9 +188,8 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <title></title>
+    <title>Aggiornamento Dati</title>
 	<meta name ="homepage" content ="homepage here" />
-	<meta name ="" content ="" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">

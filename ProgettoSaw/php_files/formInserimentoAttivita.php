@@ -65,13 +65,13 @@
                                         <div class = "form-group row">
                                             <label id = "start" class = "col-4 col-form-label">Data inizio attività</label>
                                             <div class = "col-8">
-                                                <input name = "startIn" placeholder = "Data inizio attività" class = "form-control here" type = "text" required>
+                                                <input name = "startIn" placeholder = "Data inizio attività (yyyy-mm-gg)" class = "form-control here" type = "text" required>
                                             </div> 
                                         </div>
                                         <div class = "form-group row">
                                             <label id = "end" class = "col-4 col-form-label">Data fine attività</label>
                                             <div class = "col-8">
-                                                <input name = "endIn" placeholder = "Data fine attività" class = "form-control here" type = "text" required>
+                                                <input name = "endIn" placeholder = "Data fine attività (yyyy-mm-gg)" class = "form-control here" type = "text" required>
                                             </div> 
                                         </div>
                                         <div class = "form-group row">
