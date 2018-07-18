@@ -4,7 +4,19 @@
     error_reporting(E_ALL);
     session_start();
     if(!isset($_SESSION["username"]))
+    {
         header("Location: ../error.php");
+        exit;
+    }
+
+    function check_data_valid_and_redirect($validSimbol, $string_to_check)
+    {
+        if(!ctype_alnum(str_replace($validSimbol, '', $string_to_check)))
+        {
+            header("Location: ../error.php");
+            exit;
+        }
+    }
     $oldUsername = $_SESSION['username'];
     $webSite = filter_var(htmlspecialchars(trim($_POST['webIn'])), FILTER_SANITIZE_STRING);
     $name = filter_var(htmlspecialchars(trim($_POST['nameIn'])), FILTER_SANITIZE_STRING);
@@ -15,6 +27,22 @@
     $aboutMe = filter_var(htmlspecialchars(trim($_POST['descrizione'])), FILTER_SANITIZE_STRING);
     $città = filter_var(htmlspecialchars(trim($_POST['cittàIn'])), FILTER_SANITIZE_STRING);
     $facebook = filter_var(htmlspecialchars(trim($_POST['faceIn'])), FILTER_SANITIZE_STRING);
+    
+    
+    $aValid = array(' ', '!','?',);
+    check_data_valid_and_redirect($aValid, $aboutMe);
+
+    $aValid = array(' ');
+    check_data_valid_and_redirect($aValid, $name);
+    check_data_valid_and_redirect($aValid, $surname);
+
+    if(!ctype_alpha(str_replace($aValid, '', $città)) || !ctype_alnum($username))
+    {
+        header("Location: ../error.php");
+        exit;
+    }
+    
+    
     $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
     if ($conn->connect_error) {
         $message1 = "KO";
@@ -53,6 +81,10 @@
         }
     }
 
+    // $facebookRegex = "/(?:https?:\/\/)?(?:www\.)?facebook\.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[\w\-]*\/)*([\w\-\.]*)/";
+    // $twitterRegex = "/(?:http:\/\/)?(?:www\.)?twitter\.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[\w\-]*\/)*([\w\-]*)/";
+    // $instagramRegex = "/(https?:\/\/www\.)?instagram\.com(\/p\/\w+\/?)/";
+
     $stmtUser = $conn->prepare("SELECT Username FROM Users WHERE Username=?");
     $stmtUser->bind_param("s", $oldUsername);
     $stmtUser->execute();
@@ -68,21 +100,30 @@
     $stmtUser1->close();
 
     if(preg_match('@[^\w]@', $surname))
-        $message = $message." "."Attenzione hai inserito caratteri speciali nel Cognome<br/>";
+        $message = $message.","."Attenzione hai inserito caratteri speciali nel Cognome<br/>";
 
     //controllo che il nome non contegna caratteri speciali
     if(preg_match('@[^\w]@', $name) || preg_match('@[0-9]@', $name))
-        $message = $message." "."Attenzione hai inserito caratteri speciali o numeri nel Nome<br/>";
+        $message = $message.","."Attenzione hai inserito caratteri speciali o numeri nel Nome<br/>";
 
     //controllo che l'username non contegna caratteri speciali1
     if(preg_match('@[^\w]@', $username) || preg_match('@[0-9]@', $surname))
-        $message = $message." "."Attenzione hai inserito caratteri speciali o numeri nel username<br/>";
+        $message = $message.","."Attenzione hai inserito caratteri speciali o numeri nel username<br/>";
     
     if (isset($userResult1) && $userResult1 != $oldUsername)
-        $message = $message." "."Attenzione username già presente nel database";
+        $message = $message.","."Attenzione username già presente nel database";
 
     if ($message1 === "KO") 
-        $message = $message." "."Errore connessione";
+        $message = $message.","."Errore connessione";
+
+    // if (!preg_match($facebookRegex, $facebook))
+    //     $message = $message.","."Errore nell'inserimento del link di facebook";
+    
+    // if (!preg_match($twitterRegex, $twitter))
+    //     $message = $message.","."Errore nell'inserimento del link di twitter";
+    
+    // if (!preg_match($instagramRegex, $instagram))
+    //     $message = $message.","."Errore nell'inserimento del link di instagram";
 
     //se tutti i controlli vengono passati allora posso inserire l'utente nel database
     if($message === "")
@@ -146,7 +187,7 @@
                         if(rename($var_directory.$oldUsername.".".$arrayType[$i], $var_directory.$username.".".$arrayType[$i]))
                         {
                             $var_flag_foto = 1;
-                            $message = $message." "."Nome aggiornato con successo";
+                            $message = $message.","."Nome aggiornato con successo";
                         }
                     }
                 }
@@ -166,14 +207,14 @@
                     {
                         if(rename($var_directory.$oldUsername.".".$arrayType[$i], $var_directory.$username.".".$arrayType[$i]))
                         {
-                            $message = $message." "."Nome aggiornato con successo";
+                            $message = $message.","."Nome aggiornato con successo";
                         }
                     }
                 }
             }
             $stmt->close();
             $conn->close();
-            $message = $message." "."Nome aggiornato con successo";
+            $message = $message.","."Nome aggiornato con successo";
         }
     }
     
@@ -192,7 +233,7 @@
         }
     }
 
-    function uploadPhoto($var_name_file, $var_directory, $username, $var_tipo_immagine, $message)
+    function uploadPhoto($var_name_file, $var_directory, $username, $var_tipo_immagine)
     {
         if(strlen($var_name_file) > 0)
         {
@@ -200,21 +241,14 @@
             if(file_exists($var_complete_path_new_image))
             {
                 if(unlink($var_complete_path_new_image))
-                    $message = $message." immagine rimossa con successo";
+                    echo "immagine rimossa con successo";
             }
             
-<<<<<<< HEAD
-            if(move_uploaded_file($_FILES["fileDaCaricare"]["tmp_name"], $var_complete_path_new_image))
-                $message = $message." immagine modificata con successo";
-            else
-                header("Refresh:0; URL=../error.php");
-=======
             if(!move_uploaded_file($_FILES["fileDaCaricare"]["tmp_name"], $var_complete_path_new_image))
             {
                 header("Location: ../error.php");
                 exit;
             }
->>>>>>> 155d462d10066ad5f5689f1e3244a77010f4d277
         }
     }
 ?>
