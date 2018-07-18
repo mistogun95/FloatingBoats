@@ -198,7 +198,7 @@ ini_set('display_errors','On');
             <h3 class="margin">Che cosa puoi fare con noi?</h3>
             <p>Condividi la tua passione per il mare e tutto ciò che lo riguarda con la possibilità di metterti in contatto con altri appassionati comincia cercando qualcosa che possa essere di tuo interesse e unisciti a noi!!!</p>
 
-            <form class="example" action="php_files/get_tags_of_search.php" style="margin:auto;max-width:300px" method="POST">
+            <form class="example" action="php_files/search.php" style="margin:auto;max-width:300px" method="POST">
                 <input type="text" placeholder="Search.." name="search2">
                 <button type="submit"><i class="fa fa-search"></i></button>
                 <label class="form-check-label">
