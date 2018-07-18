@@ -1,3 +1,4 @@
+"use strict";
 function cancellaCampi()
 {
     var name = document.getElementById("name");

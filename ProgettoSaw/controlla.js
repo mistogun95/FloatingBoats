@@ -1,3 +1,4 @@
+"use strict";
 function controlla(input)
 {
     var xhttp = new XMLHttpRequest();

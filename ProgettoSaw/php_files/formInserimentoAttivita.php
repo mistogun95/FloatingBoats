@@ -146,7 +146,7 @@
                                         <div class="form-group row">
                                             <label id="descrizione" class="col-4 col-form-label">Descrizione</label> 
                                             <div class = "col-8">
-                                                <textarea name = "descrizione" cols = "40" rows = "4" class = "form-control" placeholder = "Inserisci descrizione attività" required></textarea>
+                                                <textarea name = "descrizione" cols = "40" rows = "4" class = "form-control" placeholder = "Inserisci descrizione attività" ></textarea>
                                             </div>
                                         </div>
                                         <div class="form-group row">
