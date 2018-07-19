@@ -1,5 +1,4 @@
 <?php
-    ini_set('display_errors', 1);
     include "db/mysql_credentials.php";
     $username = $_REQUEST["username"];
     $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
