@@ -82,15 +82,15 @@
         }
     }
 
-    if(preg_match('@[^\w]@', $surname))
+    /*if(preg_match('@[^\w]@', $surname))
         $message = $message.","."Attenzione hai inserito caratteri speciali nel Cognome<br/>";
 
     //controllo che il nome non contegna caratteri speciali
     if(preg_match('@[^\w]@', $name) || preg_match('@[0-9]@', $name))
-        $message = $message.","."Attenzione hai inserito caratteri speciali o numeri nel Nome<br/>";
+        $message = $message.","."Attenzione hai inserito caratteri speciali o numeri nel Nome<br/>";*/
 
     //controllo che l'username non contegna caratteri speciali1
-    if(preg_match('@[^\w]@', $username) || preg_match('@[0-9]@', $surname))
+    if(preg_match('@[^\w]@', $username) || preg_match('@[0-9]@', $username))
         $message = $message.","."Attenzione hai inserito caratteri speciali o numeri nel username<br/>";
 
     if ($message1 === "KO") 
@@ -99,22 +99,23 @@
     //se tutti i controlli vengono passati allora posso inserire l'utente nel database
     if($message === "")
     {
-        $stmtFoto = $conn->prepare("SELECT FlagFoto FROM Users WHERE Username=?");
+        $stmtFoto = $conn->prepare("SELECT FlagFoto, NameImage FROM Users WHERE Username=?");
         $stmtFoto->bind_param("s", $username);
         $stmtFoto->execute();
-        $stmtFoto->bind_result($var_flag_foto);
+        $stmtFoto->bind_result($var_flag_foto_query, $var_name_foto_to_remove);
         $stmtFoto->fetch();
         $stmtFoto->close();
 
         $var_directory = "../ImmaginiCaricate/";
         $var_name_file = basename($_FILES["fileDaCaricare"]["name"]);
         $var_tipo_immagine = strtolower(pathinfo($var_name_file, PATHINFO_EXTENSION));
-        $nameImage = $username.".".$var_tipo_immagine;
+
+        $nameImage = $var_name_foto_to_remove;
         
 
         if(strlen($var_name_file) > 0)
         {
-            $var_flag_foto = 1;
+            $var_flag_foto = 1; //flag che indica se il file caricato risulta cariacabile.
             if($var_tipo_immagine != "jpg" && $var_tipo_immagine != "png" && $var_tipo_immagine != "jpeg")
             {
                 $message = $message.","."<h3>Tipo Sbagliato</h3>";
@@ -125,13 +126,20 @@
                 $message = $message.","."File troppo grande!!";
                 $var_flag_foto = 0;
             }
-            if($var_flag_foto == 1)
+            if($var_flag_foto === 1)//se supero i controlli sull'immagine caricata
             {
-                removePhoto($var_name_file, $var_directory, $nameImage);
-                uploadPhoto($var_name_file, $var_directory, $nameImage);
+                if($var_flag_foto_query===1)//mi chiedo se precedentemente c'era un immagine -> la elimino
+                    removePhoto($var_name_file, $var_directory, $var_name_foto_to_remove);
+                $nameImage = $username.".".$var_tipo_immagine;//il nome(+estensione) dell'immagine le aggiorno il base al username + estensione del file caricato.
             }
             else
-                $nameImage = null;
+                if($var_flag_foto_query === 0)//se precedentemente non c'era un immagine flagfoto e il nome della foto saranno rispettivamente 0 e null
+                    $nameImage = null;
+                else//se precedentemente la foto c'era, allora il nome della foto rimane uguale. e sul db il flag le tengo alto.
+                {
+                    $var_flag_foto = 1;
+                    $var_flag_not_put = 1;//indico alla upload che c'è già un file e quindi di non fare l'upload del nuovo file.
+                }
         }
         
         
@@ -146,6 +154,10 @@
         }
         $stmt->close();
         $conn->close();
+        //se salta il db, non ho ancora caricato l'immagine, quindi partirà quella di default.
+        //se invece arrivo qua posso finalmente salvare l'immagine.
+        if(!isset($var_flag_not_put) && $var_flag_foto===1)
+            uploadPhoto($var_name_file, $var_directory, $nameImage);
         $message = $message." Modifica andata a buon fine";
         
     }
