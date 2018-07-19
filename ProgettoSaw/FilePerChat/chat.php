@@ -10,7 +10,7 @@
     else
     {
         $user = stripslashes($_SESSION["username"]);
-        $user2 = $_GET['userContact'];
+        $user2 = filter_var(htmlspecialchars(trim($_GET['userContact'])));
     }
     if($user === $user2)
     {
