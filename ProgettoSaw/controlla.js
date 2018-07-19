@@ -13,54 +13,44 @@ function controlla(input)
     switch (input.name)
     {
         case "name":
-            message = "Nome non inserito";
-            messageKo = "Attenzione hai inserito un carattere speciale o un numero nel nome";
-            messageOK = "Nome inserito corretto";
             label = document.getElementById("nameInsert");
             if (input.value === "")
             {
                 label.style.color = "red";
-                label.innerHTML = message;
+                label.innerHTML = "Nome non inserito";
             }
             else if (regexNumber.test(input.value) || regexSpecial.test(input.value))
             {
                 label.style.color = "red";
-                label.innerHTML = messageKo;
+                label.innerHTML = "Attenzione hai inserito un carattere speciale o un numero nel nome";
             }
             else
             {
                 label.style.color = "green";
-                label.innerHTML = messageOK;
+                label.innerHTML = "Nome inserito corretto";
             }
             break;
         case "surname":
-            message = "Cognome non inserito";
-            messageKo = "Attenzione hai inserito un carattere speciale o un numero nel cognome";
-            messageOK = "Cognome inserito corretto";
             label = document.getElementById("surnameInsert");
             if (input.value === "")
             {
                 label.style.color = "red";
-                label.innerHTML = message;
+                label.innerHTML = "Cognome non inserito";
             }
             else if (regexNumber.test(input.value) || regexSpecial.test(input.value))
             {
                 label.style.color = "red";
-                label.innerHTML = messageKo;
+                label.innerHTML = "Attenzione hai inserito un carattere speciale o un numero nel cognome";
             }
             else
             {
                 label.style.color = "green";
-                label.innerHTML = messageOK;
+                label.innerHTML = "Cognome inserito corretto";
             }
             break;
         case "username":
             var xhttp = new XMLHttpRequest();
             var url = "controllaUsername.php";
-            message = "Username non inserito";
-            messageKo = "Attenzione lo username non rispetta i parametri richiesti";
-            messageOK = "Username inserito corretto";
-            var messagePresent = "Username già utilizzato si prega di sceglierne un altro";
             label = document.getElementById("usernameInsert");
             var params = encodeURI(input.name + "=" + input.value);
             xhttp.open("POST", url, true);
@@ -72,22 +62,22 @@ function controlla(input)
                     if (xhttp.responseText === "")
                     {
                         label.style.color = "red";
-                        label.innerHTML = message;
+                        label.innerHTML = "Username non inserito";
                     }
                     else if (xhttp.responseText === "KO")
                     {
                         label.style.color = "red";
-                        label.innerHTML = messageKo;
+                        label.innerHTML = "Attenzione lo username non rispetta i parametri richiesti";
                     }
                     else if (xhttp.responseText === "OK")
                     {
                         label.style.color = "green";
-                        label.innerHTML = messageOK;
+                        label.innerHTML = "Username inserito corretto";
                     }
                     else if (xhttp.responseText === "UserPresente")
                     {
                         label.style.color = "red";
-                        label.innerHTML = messagePresent;
+                        label.innerHTML = "Username già utilizzato si prega di sceglierne un altro";
                     }
                 }
             }
@@ -95,24 +85,21 @@ function controlla(input)
             xhttp.send(params);
             break;
         case "password":
-            message = "Password non inserita";
-            messageKo = "Password non corretta deve avere almeno 8 caratteri e contenere almeno una lettera maiuscola, una minuscola, un numero e un carattere speciale";
-            messageOK = "Password inserita rispetta i parametri richiesti";
             label = document.getElementById("passwordInsert");
             if (input.value === "")
             {
                 label.style.color = "red";
-                label.innerHTML = message;
+                label.innerHTML = "Password non inserita";
             }
             else if (!regexNumber.test(input.value) || !regexSpecial.test(input.value) || !regexUppercase.test(input.value) || !regexLowercase.test(input.value) || input.value.lenght < 8)
             {
                 label.style.color = "red";
-                label.innerHTML = messageKo;
+                label.innerHTML = "Password non corretta deve avere almeno 8 caratteri e contenere almeno una lettera maiuscola, una minuscola, un numero e un carattere speciale";
             }
             else
             {
                 label.style.color = "green";
-                label.innerHTML = messageOK;
+                label.innerHTML = "Password inserita rispetta i parametri richiesti";
             }
             break;
     }
