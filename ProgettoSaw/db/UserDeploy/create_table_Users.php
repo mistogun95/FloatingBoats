@@ -8,6 +8,7 @@
         `Surname` varchar(100) NOT NULL,
         `Password` varchar(256) NOT NULL,
         `FlagFoto` BOOLEAN NOT NULL DEFAULT FALSE,
+        `NameImage` varchar(115),
         `Citta` varchar(100),
         `AboutMe` varchar(256),
         `linkWebSite` varchar(256),
