@@ -10,7 +10,7 @@
     else
     {
         $user = stripslashes($_SESSION["username"]);
-        $user2 = $_GET['userContact'];
+        $user2 = filter_var(htmlspecialchars(trim($_GET['userContact'])));
     }
     if($user === $user2)
     {
@@ -111,8 +111,9 @@
             if($autor === $user1)
             {
                 echo "<div class=\"container\">";
-                $imagePath = take_user_profile_image($autor, "../ImmaginiCaricate/");
-                echo "<img src=\"".$imagePath."\" alt=\"Avatar\" style=\"width:40px;\">";
+                if(!isset($imagePath1))
+                    $imagePath1 = take_user_profile_image($autor, "../ImmaginiCaricate/");//NON SERVE PIU'
+                echo "<img src=\"".$imagePath1."\" alt=\"Avatar\" style=\"width:40px;\">";
                 echo "<p>"."<b>".$autor." scrive "."</b>".$mex."</p>";
                 echo "<span class=\"time-right\">".$dataMex."</span>";
                 echo "</div>";
@@ -120,8 +121,9 @@
             else
             {
                 echo "<div class=\"container darker\">";
-                $imagePath = take_user_profile_image($autor, "../ImmaginiCaricate/");
-                echo "<img src=\"".$imagePath."\" alt=\"Avatar\" class=\"right\" style=\"width:40px;\">";
+                if(!isset($imagePath2))
+                    $imagePath2 = take_user_profile_image($autor, "../ImmaginiCaricate/");
+                echo "<img src=\"".$imagePath2."\" alt=\"Avatar\" class=\"right\" style=\"width:40px;\">";
                 echo "<p>"."<b>".$autor." scrive "."</b>".$mex."</p>";
                 echo "<span class=\"time-left\">".$dataMex."</span>";
                 echo "</div>";
@@ -163,8 +165,9 @@
             if($autor === $user1)
             {
                 echo "<div class=\"container\">";
-                $imagePath = take_user_profile_image($autor, "../ImmaginiCaricate/");
-                echo "<img src=\"".$imagePath."\" alt=\"Avatar\"  style=\"width:40px;\">";
+                if(!isset($imagePath1))
+                    $imagePath1 = take_user_profile_image($autor, "../ImmaginiCaricate/");
+                echo "<img src=\"".$imagePath1."\" alt=\"Avatar\"  style=\"width:40px;\">";
                 echo "<p>"."<b>".$autor." scrive "."</b>".$mex."</p>";
                 echo "<span class=\"time-right\">".$dataMex."</span>";
                 echo "</div>";
@@ -172,8 +175,9 @@
             else
             {
                 echo "<div class=\"container darker\">";
-                $imagePath = take_user_profile_image($autor, "../ImmaginiCaricate/");
-                echo "<img src=\"".$imagePath."\" alt=\"Avatar\" class=\"right\" style=\"width:40px;\">";
+                if(!isset($imagePath2))
+                    $imagePath2 = take_user_profile_image($autor, "../ImmaginiCaricate/");
+                echo "<img src=\"".$imagePath2."\" alt=\"Avatar\" class=\"right\" style=\"width:40px;\">";
                 echo "<p>"."<b>".$autor." scrive "."</b>".$mex."</p>";
                 echo "<span class=\"time-left\">".$dataMex."</span>";
                 echo "</div>";
