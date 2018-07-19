@@ -136,9 +136,9 @@
         if($var_flag_foto === 1)
             uploadPhoto($var_name_file, $var_directory, $username, $var_tipo_immagine);
         
-        $query = "UPDATE Users SET Name=?, Surname=?, FlagFoto=?, Citta=?, AboutMe=?, linkWebSite=?, Facebook=?, Instagram=?, Twitter=?, Interessi=? WHERE Username=?";
+        $query = "UPDATE Users SET Name=?, Surname=?, FlagFoto=?, NameImage=?, Citta=?, AboutMe=?, linkWebSite=?, Facebook=?, Instagram=?, Twitter=?, Interessi=? WHERE Username=?";
         $stmt = $conn->prepare($query);
-        $stmt->bind_param("ssissssssss", $name, $surname, $var_flag_foto, $città, $aboutMe, $webSite, $facebook, $instagram, $twitter, $checkBox_to_insert, $userResult);
+        $stmt->bind_param("ssissssssss", $name, $surname, $var_flag_foto, $username.".".$var_tipo_immagine, $città, $aboutMe, $webSite, $facebook, $instagram, $twitter, $checkBox_to_insert, $userResult);
         if(!$stmt->execute())
         {
             header("Location: ../error.php");
