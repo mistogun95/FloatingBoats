@@ -82,13 +82,6 @@
         }
     }
 
-    $stmtUser = $conn->prepare("SELECT Username FROM Users WHERE Username=?");
-    $stmtUser->bind_param("s", $username);
-    $stmtUser->execute();
-    $stmtUser->bind_result($userResult);
-    $stmtUser->fetch();
-    $stmtUser->close();
-
     if(preg_match('@[^\w]@', $surname))
         $message = $message.","."Attenzione hai inserito caratteri speciali nel Cognome<br/>";
 
@@ -116,8 +109,8 @@
         $var_directory = "../ImmaginiCaricate/";
         $var_name_file = basename($_FILES["fileDaCaricare"]["name"]);
         $var_tipo_immagine = strtolower(pathinfo($var_name_file, PATHINFO_EXTENSION));
-
-        removePhoto($var_flag_foto, $var_name_file, $var_directory, $username);
+        $nameImage = $username.".".$var_tipo_immagine;
+        
 
         if(strlen($var_name_file) > 0)
         {
@@ -132,16 +125,23 @@
                 $message = $message.","."File troppo grande!!";
                 $var_flag_foto = 0;
             }
+            if($var_flag_foto == 1)
+            {
+                removePhoto($var_name_file, $var_directory, $nameImage);
+                uploadPhoto($var_name_file, $var_directory, $nameImage);
+            }
+            else
+                $nameImage = null;
         }
-        if($var_flag_foto === 1)
-            uploadPhoto($var_name_file, $var_directory, $username, $var_tipo_immagine);
+        
         
         $query = "UPDATE Users SET Name=?, Surname=?, FlagFoto=?, NameImage=?, Citta=?, AboutMe=?, linkWebSite=?, Facebook=?, Instagram=?, Twitter=?, Interessi=? WHERE Username=?";
         $stmt = $conn->prepare($query);
-        $stmt->bind_param("ssissssssss", $name, $surname, $var_flag_foto, $username.".".$var_tipo_immagine, $città, $aboutMe, $webSite, $facebook, $instagram, $twitter, $checkBox_to_insert, $userResult);
+        $stmt->bind_param("ssisssssssss", $name, $surname, $var_flag_foto, $nameImage, $città, $aboutMe, $webSite, $facebook, $instagram, $twitter, $checkBox_to_insert, $username);
         if(!$stmt->execute())
         {
-            header("Location: ../error.php");
+            //header("Location: ../error.php");
+            echo "EXECUTE!!";
             exit;
         }
         $stmt->close();
@@ -150,26 +150,21 @@
         
     }
     
-    function removePhoto($var_flag_foto, $var_name_file, $var_directory, $oldUsername)
+    function removePhoto($var_name_file, $var_directory, $nameImage)
     {
-        if($var_flag_foto === 1 && isset($var_name_file) && strlen($var_name_file)>0)
+        if(isset($var_name_file) && strlen($var_name_file)>0)
         {
-            $arrayType = array("jpg", "png", "jpeg");
-            for ($i=0; $i < 3; $i++)
-            {
-                if(file_exists($var_directory.$oldUsername.".".$arrayType[$i])){
-                    unlink($var_directory.$oldUsername.".".$arrayType[$i]);
-                    break;
-                }
+            if(file_exists($var_directory.$nameImage)){
+                unlink($var_directory.$nameImage);
             }
         }
     }
 
-    function uploadPhoto($var_name_file, $var_directory, $username, $var_tipo_immagine)
+    function uploadPhoto($var_name_file, $var_directory, $nameImage)
     {
         if(strlen($var_name_file) > 0)
         {
-            $var_complete_path_new_image = $var_directory.$username.".".$var_tipo_immagine;
+            $var_complete_path_new_image = $var_directory.$nameImage;
             if(file_exists($var_complete_path_new_image))
             {
                 if(unlink($var_complete_path_new_image))
