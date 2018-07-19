@@ -18,12 +18,7 @@
         if ($conn->connect_error) {
             $message1 = "KO";
         }
-        $stmtUser = $conn->prepare("SELECT Username FROM Users WHERE Username=?");
-        $stmtUser->bind_param("s", $username);
-        $stmtUser->execute();
-        $stmtUser->bind_result($userResult);
-        $stmtUser->fetch();
-
+        
         //controllo della password
         if(!$uppercase || !$lowercase || !$number || !$specialChars || strlen($password) < 8)
             $message= $message." "."Password non corretta deve avere almeno 8 caratteri e contenere almeno una lettera maiuscola, una minuscola, un numero e un carattere speciale<br/>";
@@ -71,8 +66,9 @@
 
             
                 $passwordSha1 = sha1($password);
-                $stmt = $conn->prepare("INSERT INTO Users (Username, Name, Surname, Password, FlagFoto) VALUES (?, ?, ?, ?, ?)");
-                $stmt->bind_param("ssssi",$username,$name, $surname, $passwordSha1, $var_flag_foto);
+                $nameImage = $username.".".$var_tipo_immagine;
+                $stmt = $conn->prepare("INSERT INTO Users (Username, Name, Surname, Password, FlagFoto, NameImage) VALUES (?, ?, ?, ?, ?, ?)");
+                $stmt->bind_param("ssssis",$username,$name, $surname, $passwordSha1, $var_flag_foto, $nameImage);
                 if(!$stmt->execute())
                     $message = "Errore inserimento dati";
                 else
@@ -81,7 +77,7 @@
                     {
                         if(strlen($var_name_file) > 0)
                         {
-                            $var_complete_path_new_image = $var_directory.$username.".".$var_tipo_immagine;
+                            $var_complete_path_new_image = $var_directory.$nameImage;
                             if(file_exists($var_complete_path_new_image))
                             {
                                 $message = $message." "."Error il file Esiste<br>";
