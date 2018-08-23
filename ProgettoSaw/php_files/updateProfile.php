@@ -1,7 +1,5 @@
 <?php
     include "../db/mysql_credentials.php";
-    ini_set('display_errors','On');
-    error_reporting(E_ALL);
     session_start();
     if(!isset($_SESSION["username"]))
     {
@@ -82,16 +80,16 @@
         }
     }
 
-    /*if(preg_match('@[^\w]@', $surname))
+    if(preg_match('@[^\w]@', $surname) || preg_match('@[0-9]@', $surname))
         $message = $message.","."Attenzione hai inserito caratteri speciali nel Cognome<br/>";
 
     //controllo che il nome non contegna caratteri speciali
     if(preg_match('@[^\w]@', $name) || preg_match('@[0-9]@', $name))
-        $message = $message.","."Attenzione hai inserito caratteri speciali o numeri nel Nome<br/>";*/
+        $message = $message.","."Attenzione hai inserito caratteri speciali o numeri nel Nome<br/>";
 
-    //controllo che l'username non contegna caratteri speciali1
-    if(preg_match('@[^\w]@', $username) || preg_match('@[0-9]@', $username))
-        $message = $message.","."Attenzione hai inserito caratteri speciali o numeri nel username<br/>";
+    // //controllo che l'username non contegna caratteri speciali1
+    // if(preg_match('@[^\w]@', $username))
+    //     $message = $message.","."Attenzione hai inserito caratteri speciali o numeri nel username<br/>";
 
     if ($message1 === "KO") 
         $message = $message.","."Errore connessione";
@@ -185,7 +183,7 @@
             
             if(!move_uploaded_file($_FILES["fileDaCaricare"]["tmp_name"], $var_complete_path_new_image))
             {
-                //header("Location: ../error.php");
+                header("Location: ../error.php");
                 exit;
             }
         }
