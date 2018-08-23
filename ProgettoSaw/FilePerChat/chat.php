@@ -37,7 +37,7 @@
                 <img src="../Immagini/logo1.png" alt="logo" style="width:60px;">
             </a>
             <ul class="navbar-nav">
-            <li class="nav-item"><p><b>Benvenuta <?php echo $user ?></b></p></li>
+            <li class="nav-item"><p><b>Benvenuto <?php echo $user ?></b></p></li>
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link" href="../Logout.php">Logout</a></li>
