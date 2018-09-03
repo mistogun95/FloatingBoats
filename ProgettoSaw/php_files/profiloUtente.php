@@ -15,7 +15,7 @@
 
     include "../db/mysql_credentials.php";
     include "take_user_date.php";
-    include "../FilePerChat/take_user_profile_imeage.php";
+    include_once "../FilePerChat/take_user_profile_image.php";
     $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
     if ($conn->connect_error) {
         header("Location: ../error.php");
