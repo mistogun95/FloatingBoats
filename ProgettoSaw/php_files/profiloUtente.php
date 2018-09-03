@@ -1,6 +1,5 @@
 <?php
     session_start();
-    ini_set('display_errors','On');
     if(!isset($_SESSION["username"]))
     {
         header("Location: ../error.php");

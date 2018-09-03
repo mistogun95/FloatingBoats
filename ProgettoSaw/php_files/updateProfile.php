@@ -56,38 +56,22 @@
     $message = "";
     if(isset($_POST['check']))
     {
-        include "get_in_array_data_strings.php";
-        $var_name_attribute="Name";
-        $var_name_table="Tags";
-        $var_array_of_all_tags=get_in_array_data_strings($conn, $var_name_attribute, $var_name_table, false);//false per non fare la close su $conn
-        if($var_array_of_all_tags)
+        $var_checks = $_POST['check'];
+        $query = "SELECT Name FROM Tags WHERE Name=?";
+        $checkBox_to_insert="";
+        foreach($var_checks as $value)
         {
-            $var_checks = $_POST['check'];
-            $checkBox_to_insert="";
-            foreach($var_checks as $value)
+            $stmt = $conn->prepare($query);
+            $var_tmp = filter_var(htmlspecialchars(trim($value)));
+            $stmt->bind_param("s", $var_tmp);
+            if($stmt->execute())
             {
-                $var_tmp = filter_var(htmlspecialchars(trim($value)));
-                if(in_array($var_tmp,$var_array_of_all_tags))//evito che qulacuno mi mandi valori non giusti.
+                if($stmt->fetch())
                     $checkBox_to_insert =$checkBox_to_insert.$var_tmp.",";
             }
-        }
-        else
-        {
-            header("Location: ../error.php");
-            exit;
-        }
-    }
-
-    /*if(preg_match('@[^\w]@', $surname) || preg_match('@[0-9]@', $surname))
-        $message = $message.","."Attenzione hai inserito caratteri speciali nel Cognome<br/>";
-
-    //controllo che il nome non contegna caratteri speciali
-    if(preg_match('@[^\w]@', $name) || preg_match('@[0-9]@', $name))
-        $message = $message.","."Attenzione hai inserito caratteri speciali o numeri nel Nome<br/>";*/
-
-    // //controllo che l'username non contegna caratteri speciali1
-    // if(preg_match('@[^\w]@', $username))
-    //     $message = $message.","."Attenzione hai inserito caratteri speciali o numeri nel username<br/>";
+            $stmt->close();
+        }      
+        //non chiudo la conn perchè verrà usata dopo.
 
     if ($message1 === "KO") 
         $message = $message.","."Errore connessione";
