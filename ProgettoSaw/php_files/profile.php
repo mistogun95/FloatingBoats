@@ -1,7 +1,7 @@
 
 <?php 
     include "../db/mysql_credentials.php";
-    include_once "../FilePerChat/take_user_profile_imeage.php";
+    include_once "../FilePerChat/take_user_profile_image.php";
 ?>
 <?php
     session_start();
@@ -9,9 +9,7 @@
     {
         header("Location: ../error.php");
         exit;
-    }
-    
-    include "../db/mysql_credentials.php"; 
+    } 
 
     $username = $_SESSION['username'];
     
@@ -21,7 +19,7 @@
     }
     else
     {
-        $stmt = $conn->prepare("SELECT FlagFoto, Citta, AboutMe, LinkWebSite, Facebook, Instagram, Twitter, Name, Surname FROM Users WHERE Username=?");
+        $stmt = $conn->prepare("SELECT FlagFoto, NameImage, Citta, AboutMe, LinkWebSite, Facebook, Instagram, Twitter, Name, Surname FROM Users WHERE Username=?");
         $stmt->bind_param("s",$username);
         
         if(!$stmt->execute())
@@ -32,12 +30,13 @@
             exit;
         }
         
-        $stmt->bind_result($var_FlagFoto, $var_Citta, $var_AboutMe, $var_LinkWebSite, $var_Facebook, $var_Instagram, $var_Twitter, $var_Name, $var_Surname);
+        $stmt->bind_result($var_FlagFoto, $var_image, $var_Citta, $var_AboutMe, $var_LinkWebSite, $var_Facebook, $var_Instagram, $var_Twitter, $var_Name, $var_Surname);
         $stmt->fetch();
+        $var_directory = "../ImmaginiCaricate/";
         
         if(isset($var_Name) && isset($var_Surname) )
         {
-            $var_complete_path_new_image = take_user_profile_image($username, "../ImmaginiCaricate/");
+            $var_complete_path_new_image = take_user_profile_image($var_image, $var_directory, $var_FlagFoto);
         }
         else 
         {
@@ -98,7 +97,7 @@
                         <div class = "card-body">
                             <div class = "row">
                                 <div class = "col-md-12 text-center">
-                                    <img src = <?php echo '"'.$var_complete_path_new_image.'"'?> alt = "avatar" class="mx-auto d-block" style="width:260px;" >
+                                    <img src = <?php echo '"'. $var_complete_path_new_image.'"'?> alt = "avatar" class="mx-auto d-block" style="width:260px;" >
                                     <h4>Profilo Utente di <?php echo $username?></h4>
 		                            <hr>
                                 </div>

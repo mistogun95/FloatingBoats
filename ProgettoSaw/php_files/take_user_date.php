@@ -2,7 +2,7 @@
     function take_user_date($username, $conn, $var_directory)
     {
         $arrayDate = array();
-        $stmt = $conn->prepare("SELECT FlagFoto, Citta, AboutMe, LinkWebSite, Facebook, Instagram, Twitter, Name, Surname, Interessi FROM Users WHERE Username=?");
+        $stmt = $conn->prepare("SELECT FlagFoto, NameImage, Citta, AboutMe, linkWebSite, Facebook, Instagram, Twitter, Name, Surname, Interessi FROM Users WHERE Username=?");
         $stmt->bind_param("s",$username);
         
         if(!$stmt->execute())
@@ -13,7 +13,7 @@
             exit;
         }
         
-        $stmt->bind_result($var_FlagFoto, $var_Citta, $var_AboutMe, $var_LinkWebSite, $var_Facebook, $var_Instagram, $var_Twitter, $var_Name, $var_Surname, $var_interessi);
+        $stmt->bind_result($var_FlagFoto, $var_image, $var_Citta, $var_AboutMe, $var_LinkWebSite, $var_Facebook, $var_Instagram, $var_Twitter, $var_Name, $var_Surname, $var_interessi);
         $stmt->fetch();
         $arrayDate[] = $var_FlagFoto;
         $arrayDate[] = $var_Citta;
@@ -25,17 +25,7 @@
         $arrayDate[] = $var_Name;
         $arrayDate[] = $var_Surname;
         $arrayDate[] = $var_interessi;
-        
-        if(isset($var_Name) && isset($var_Surname) )
-        {
-            $var_complete_path_new_image = take_user_profile_image($username, $var_directory);
-        }
-        else 
-        {
-            header("Location: ../error.php");
-            exit;
-        }
-        $arrayDate[] = $var_complete_path_new_image;
+        $arrayDate[] = take_user_profile_image($var_image, $var_directory);
         
         $stmt->close();
         return $arrayDate;

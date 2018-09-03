@@ -83,7 +83,13 @@
 <?php
     function show_message_user1($user1, $user2, $conn)
     {
-        include_once "take_user_profile_imeage.php";
+        include_once "take_user_profile_image.php";
+        include_once "../php_files/take_user_date.php";
+        $var_directory = "../ImmaginiCaricate/";
+        $array = array();
+        $array = take_user_date($user2, $conn, $var_directory);
+        $array2 = array();
+        $array2 = take_user_date($user1, $conn, $var_directory);
         $stmt = $conn->prepare("SELECT ID FROM private_chat WHERE Utente1=? AND Utente2=?");
         $stmt->bind_param("ss", $user1, $user2);
         if(!$stmt->execute())
@@ -111,9 +117,7 @@
             if($autor === $user1)
             {
                 echo "<div class=\"container\">";
-                if(!isset($imagePath1))
-                    $imagePath1 = take_user_profile_image($autor, "../ImmaginiCaricate/");//NON SERVE PIU'
-                echo "<img src=\"".$imagePath1."\" alt=\"Avatar\" style=\"width:40px;\">";
+                echo "<img src=\"".$array2[10]."\" alt=\"Avatar\" style=\"width:40px;\">";
                 echo "<p>"."<b>".$autor." scrive "."</b>".$mex."</p>";
                 echo "<span class=\"time-right\">".$dataMex."</span>";
                 echo "</div>";
@@ -121,9 +125,7 @@
             else
             {
                 echo "<div class=\"container darker\">";
-                if(!isset($imagePath2))
-                    $imagePath2 = take_user_profile_image($autor, "../ImmaginiCaricate/");
-                echo "<img src=\"".$imagePath2."\" alt=\"Avatar\" class=\"right\" style=\"width:40px;\">";
+                echo "<img src=\"".$array[10]."\" alt=\"Avatar\" class=\"right\" style=\"width:40px;\">";
                 echo "<p>"."<b>".$autor." scrive "."</b>".$mex."</p>";
                 echo "<span class=\"time-left\">".$dataMex."</span>";
                 echo "</div>";
@@ -137,13 +139,19 @@
     }
     function show_message_user2($user1, $user2, $conn)
     {
-        include_once "take_user_profile_imeage.php";
+        include_once "take_user_profile_image.php";
+        include_once "../php_files/take_user_date.php";
+        $var_directory = "../ImmaginiCaricate/";
+        $array = array();
+        $array = take_user_date($user2, $conn, $var_directory);
+        $array2 = array();
+        $array2 = take_user_date($user1, $conn, $var_directory);
         $stmt = $conn->prepare("SELECT ID FROM private_chat WHERE Utente1=? AND Utente2=?");
         $stmt->bind_param("ss", $user2, $user1);
         if(!$stmt->execute())
         {
             $stmt->close();
-            $conn->close();
+            $conn2->close();
             header("Location: ../error.php");
             exit;
         }
@@ -155,7 +163,7 @@
         if(!$stmt2->execute())
         {
             $stmt2->close();
-            $conn->close();
+            $conn2->close();
             header("Location: ../error.php");
             exit;
         }
@@ -165,9 +173,7 @@
             if($autor === $user1)
             {
                 echo "<div class=\"container\">";
-                if(!isset($imagePath1))
-                    $imagePath1 = take_user_profile_image($autor, "../ImmaginiCaricate/");
-                echo "<img src=\"".$imagePath1."\" alt=\"Avatar\"  style=\"width:40px;\">";
+                echo "<img src=\"".$array2[10]."\" alt=\"Avatar\"  style=\"width:40px;\">";
                 echo "<p>"."<b>".$autor." scrive "."</b>".$mex."</p>";
                 echo "<span class=\"time-right\">".$dataMex."</span>";
                 echo "</div>";
@@ -175,9 +181,7 @@
             else
             {
                 echo "<div class=\"container darker\">";
-                if(!isset($imagePath2))
-                    $imagePath2 = take_user_profile_image($autor, "../ImmaginiCaricate/");
-                echo "<img src=\"".$imagePath2."\" alt=\"Avatar\" class=\"right\" style=\"width:40px;\">";
+                echo "<img src=\"".$array[10]."\" alt=\"Avatar\" class=\"right\" style=\"width:40px;\">";
                 echo "<p>"."<b>".$autor." scrive "."</b>".$mex."</p>";
                 echo "<span class=\"time-left\">".$dataMex."</span>";
                 echo "</div>";

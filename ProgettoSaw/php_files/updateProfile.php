@@ -1,7 +1,11 @@
 <?php
     include "../db/mysql_credentials.php";
+
+    /***DA TOGLIRE**/
     ini_set('display_errors','On');
     error_reporting(E_ALL);
+    /***RCIORDAA***/
+    
     session_start();
     if(!isset($_SESSION["username"]))
     {
@@ -24,6 +28,7 @@
         header("Location: ../error.php");
         exit;
     }
+
     $username = $_SESSION['username'];
     $webSite = filter_var(htmlspecialchars(trim($_POST['webIn'])), FILTER_SANITIZE_STRING);
     $name = filter_var(htmlspecialchars(trim($_POST['nameIn'])), FILTER_SANITIZE_STRING);
@@ -33,17 +38,14 @@
     $aboutMe = filter_var(htmlspecialchars(trim($_POST['descrizione'])), FILTER_SANITIZE_STRING);
     $città = filter_var(htmlspecialchars(trim($_POST['cittàIn'])), FILTER_SANITIZE_STRING);
     $facebook = filter_var(htmlspecialchars(trim($_POST['faceIn'])), FILTER_SANITIZE_STRING);
-    
-    
+
     $aValid = array(' ', '!','?',);
     check_data_valid_and_redirect($aValid, $aboutMe,true);
-
     $aValid = array(' ');
     check_data_valid_and_redirect($aValid, $name);
     check_data_valid_and_redirect($aValid, $surname);
     check_data_valid_and_redirect($aValid, $città,true);
-    
-    
+
     $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
     if ($conn->connect_error) {
         $message1 = "KO";
@@ -82,16 +84,16 @@
         }
     }
 
-    /*if(preg_match('@[^\w]@', $surname))
+    /*if(preg_match('@[^\w]@', $surname) || preg_match('@[0-9]@', $surname))
         $message = $message.","."Attenzione hai inserito caratteri speciali nel Cognome<br/>";
 
     //controllo che il nome non contegna caratteri speciali
     if(preg_match('@[^\w]@', $name) || preg_match('@[0-9]@', $name))
         $message = $message.","."Attenzione hai inserito caratteri speciali o numeri nel Nome<br/>";*/
 
-    //controllo che l'username non contegna caratteri speciali1
-    if(preg_match('@[^\w]@', $username) || preg_match('@[0-9]@', $username))
-        $message = $message.","."Attenzione hai inserito caratteri speciali o numeri nel username<br/>";
+    // //controllo che l'username non contegna caratteri speciali1
+    // if(preg_match('@[^\w]@', $username))
+    //     $message = $message.","."Attenzione hai inserito caratteri speciali o numeri nel username<br/>";
 
     if ($message1 === "KO") 
         $message = $message.","."Errore connessione";
@@ -112,7 +114,7 @@
 
         $nameImage = $var_name_foto_to_remove;
         
-
+        $var_flag_foto = 0;
         if(strlen($var_name_file) > 0)
         {
             $var_flag_foto = 1; //flag che indica se il file caricato risulta cariacabile.
@@ -142,14 +144,14 @@
                 }
         }
         
-        
         $query = "UPDATE Users SET Name=?, Surname=?, FlagFoto=?, NameImage=?, Citta=?, AboutMe=?, linkWebSite=?, Facebook=?, Instagram=?, Twitter=?, Interessi=? WHERE Username=?";
         $stmt = $conn->prepare($query);
         $stmt->bind_param("ssisssssssss", $name, $surname, $var_flag_foto, $nameImage, $città, $aboutMe, $webSite, $facebook, $instagram, $twitter, $checkBox_to_insert, $username);
         if(!$stmt->execute())
         {
-            //header("Location: ../error.php");
-            echo "EXECUTE!!";
+            //da TOGLIERE echo
+            echo "EXECUTE!!\n";
+            header("Location: ../error.php");
             exit;
         }
         $stmt->close();
@@ -185,7 +187,7 @@
             
             if(!move_uploaded_file($_FILES["fileDaCaricare"]["tmp_name"], $var_complete_path_new_image))
             {
-                //header("Location: ../error.php");
+                header("Location: ../error.php");
                 exit;
             }
         }
