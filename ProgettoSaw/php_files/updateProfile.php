@@ -1,11 +1,5 @@
 <?php
     include "../db/mysql_credentials.php";
-
-    /***DA TOGLIRE**/
-    ini_set('display_errors','On');
-    error_reporting(E_ALL);
-    /***RCIORDAA***/
-    
     session_start();
     if(!isset($_SESSION["username"]))
     {
