@@ -72,7 +72,7 @@
             $stmt->close();
         }      
         //non chiudo la conn perchè verrà usata dopo.
-
+    }
     if ($message1 === "KO") 
         $message = $message.","."Errore connessione";
 
@@ -127,8 +127,6 @@
         $stmt->bind_param("ssisssssssss", $name, $surname, $var_flag_foto, $nameImage, $città, $aboutMe, $webSite, $facebook, $instagram, $twitter, $checkBox_to_insert, $username);
         if(!$stmt->execute())
         {
-            //da TOGLIERE echo
-            echo "EXECUTE!!\n";
             header("Location: ../error.php");
             exit;
         }
