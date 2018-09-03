@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL | E_STRICT);
     include "../db/mysql_credentials.php";
     session_start();
     if(!isset($_SESSION["username"]))
@@ -72,7 +75,7 @@
             $stmt->close();
         }      
         //non chiudo la conn perchè verrà usata dopo.
-
+    }
     if ($message1 === "KO") 
         $message = $message.","."Errore connessione";
 
@@ -196,4 +199,3 @@
 	
 </body>
 </html>
-
